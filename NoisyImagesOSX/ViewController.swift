@@ -38,7 +38,7 @@ class ViewController: NSViewController {
     }
 
     @IBAction func buttonPressed(sender: AnyObject) {
-        OmniGLView2d.globalContext?.makeCurrentContext()
+        self.glView.framebufferStack.internalContext?.makeCurrentContext()
         let sprite = GLSSprite(size: NSSize(square: 128.0), texture: "White Tile")
         let x = Int(arc4random() % UInt32(self.glView.frame.width))
         let y = Int(arc4random() % UInt32(self.glView.frame.height))
@@ -52,15 +52,21 @@ class ViewController: NSViewController {
         ns.position = ns.contentSize.center
         ns.noiseSize = NSSize(square: 8.0)
         glViewport(0, 0, GLsizei(self.glView.frame.width), GLsizei(self.glView.frame.height))
+        let ns2 = GLSPerlinNoiseSprite(size: NSSize(square: 128.0), texture: "White Tile", noise: nt, gradient: GLGradientTexture2D(gradient: gradient))
+        ns2.position = ns.contentSize.center + NSPoint(x: ns2.contentSize.width)
+        ns2.noiseSize = NSSize(square: 8.0)
+        ns2.noiseType = .Fractal
+        self.glView.addChild(ns)
+        self.glView.addChild(ns2)
         ns.renderToTexture()
+        ns2.renderToTexture()
         glFinish()
-        let im = ns.buffer.getImage()
+        /*let im = ns.buffer.getImage()
         let imV = NSImageView(frame: NSRect(size: ns.contentSize))
         imV.image = im
         imV.frame.origin = NSPoint(x: 0.0, y: self.view.frame.size.height - ns.contentSize.height)
-        self.view.addSubview(imV)
+        self.view.addSubview(imV)*/
         self.glView.openGLContext?.makeCurrentContext()
-        self.glView.addChild(ns)
     }
 
 }

@@ -17,7 +17,6 @@ public class OmniGLView2d: NSOpenGLView {
     public private(set) var container = GLSNode(position: NSPoint.zero, size: NSSize.zero)
     private(set) lazy var framebufferStack:GLSFramebufferStack = GLSFramebufferStack(initialBuffer: self)
     
-    public static var globalContext:NSOpenGLContext? = nil
     // MARK: - Setup
     
     public required init?(coder: NSCoder) {
@@ -47,8 +46,7 @@ public class OmniGLView2d: NSOpenGLView {
         self.openGLContext?.makeCurrentContext()
         context.view = self
         
-        OmniGLView2d.globalContext = NSOpenGLContext(format: pixelFormat, shareContext: context)
-//        self.container.framebufferStack = self.framebufferStack
+        self.container.framebufferStack = self.framebufferStack
     }
     
     private static var onceToken:dispatch_once_t = 0
