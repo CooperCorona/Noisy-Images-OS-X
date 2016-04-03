@@ -11,7 +11,28 @@
 		DC3438021CA78BDB007EFEE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3438011CA78BDB007EFEE8 /* ViewController.swift */; };
 		DC3438041CA78BDB007EFEE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC3438031CA78BDB007EFEE8 /* Assets.xcassets */; };
 		DC3438071CA78BDB007EFEE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3438051CA78BDB007EFEE8 /* Main.storyboard */; };
+		DC5F0B9C1CAB21E90055B6C9 /* OmniGLView2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F0B9B1CAB21E90055B6C9 /* OmniGLView2d.swift */; };
+		DC5F0B9F1CAB229A0055B6C9 /* Atlases.xml in Resources */ = {isa = PBXBuildFile; fileRef = DC5F0B9E1CAB229A0055B6C9 /* Atlases.xml */; };
+		DC8A94631CA9757700049118 /* GLSColorSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A94621CA9757700049118 /* GLSColorSprite.swift */; };
+		DC8A946A1CA9BD9E00049118 /* ColorShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DC8A94691CA9BD9E00049118 /* ColorShader.vsh */; };
+		DC8A946C1CA9BDA700049118 /* ColorShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DC8A946B1CA9BDA700049118 /* ColorShader.fsh */; };
+		DCC9B7011CA8403A00743E2C /* WhiteTile.png in Resources */ = {isa = PBXBuildFile; fileRef = DCC9B7001CA8403A00743E2C /* WhiteTile.png */; };
+		DCDCEB8E1CA873C7001FD451 /* OmniSwiftX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC9B6FF1CA83FF900743E2C /* OmniSwiftX.framework */; };
+		DCDCEB901CA873CC001FD451 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDCEB8F1CA873CC001FD451 /* AVFoundation.framework */; };
+		DCDCEB921CA873D0001FD451 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDCEB911CA873D0001FD451 /* CloudKit.framework */; };
+		DCDCEB951CA87700001FD451 /* BasicShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DCDCEB931CA87700001FD451 /* BasicShader.fsh */; };
+		DCDCEB9E1CA88D9B001FD451 /* BasicShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DCDCEB9D1CA88D9B001FD451 /* BasicShader.vsh */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DCC9B6FE1CA83FF900743E2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCC9B69F1CA8368400743E2C /* OmniSwiftX.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC3438181CA78D78007EFEE8;
+			remoteInfo = OmniSwiftX;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		DC3437FC1CA78BDB007EFEE8 /* NoisyImagesOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoisyImagesOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -20,6 +41,17 @@
 		DC3438031CA78BDB007EFEE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC3438061CA78BDB007EFEE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC3438081CA78BDB007EFEE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC5F0B9B1CAB21E90055B6C9 /* OmniGLView2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmniGLView2d.swift; sourceTree = "<group>"; };
+		DC5F0B9E1CAB229A0055B6C9 /* Atlases.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Atlases.xml; sourceTree = "<group>"; };
+		DC8A94621CA9757700049118 /* GLSColorSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLSColorSprite.swift; sourceTree = "<group>"; };
+		DC8A94691CA9BD9E00049118 /* ColorShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorShader.vsh; sourceTree = "<group>"; };
+		DC8A946B1CA9BDA700049118 /* ColorShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorShader.fsh; sourceTree = "<group>"; };
+		DCC9B69F1CA8368400743E2C /* OmniSwiftX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OmniSwiftX.xcodeproj; path = ../OmniSwiftX/OmniSwiftX.xcodeproj; sourceTree = "<group>"; };
+		DCC9B7001CA8403A00743E2C /* WhiteTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteTile.png; sourceTree = "<group>"; };
+		DCDCEB8F1CA873CC001FD451 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DCDCEB911CA873D0001FD451 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		DCDCEB931CA87700001FD451 /* BasicShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BasicShader.fsh; sourceTree = "<group>"; };
+		DCDCEB9D1CA88D9B001FD451 /* BasicShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BasicShader.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCDCEB921CA873D0001FD451 /* CloudKit.framework in Frameworks */,
+				DCDCEB901CA873CC001FD451 /* AVFoundation.framework in Frameworks */,
+				DCDCEB8E1CA873C7001FD451 /* OmniSwiftX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +71,9 @@
 		DC3437F31CA78BDB007EFEE8 = {
 			isa = PBXGroup;
 			children = (
+				DCDCEB911CA873D0001FD451 /* CloudKit.framework */,
+				DCDCEB8F1CA873CC001FD451 /* AVFoundation.framework */,
+				DCC9B69F1CA8368400743E2C /* OmniSwiftX.xcodeproj */,
 				DC3437FE1CA78BDB007EFEE8 /* NoisyImagesOSX */,
 				DC3437FD1CA78BDB007EFEE8 /* Products */,
 			);
@@ -52,13 +90,37 @@
 		DC3437FE1CA78BDB007EFEE8 /* NoisyImagesOSX */ = {
 			isa = PBXGroup;
 			children = (
+				DC5F0B9E1CAB229A0055B6C9 /* Atlases.xml */,
+				DCDCEB9D1CA88D9B001FD451 /* BasicShader.vsh */,
+				DCDCEB931CA87700001FD451 /* BasicShader.fsh */,
+				DC8A94691CA9BD9E00049118 /* ColorShader.vsh */,
+				DC8A946B1CA9BDA700049118 /* ColorShader.fsh */,
+				DCC9B7021CA8403D00743E2C /* Images */,
 				DC3437FF1CA78BDB007EFEE8 /* AppDelegate.swift */,
+				DC8A94621CA9757700049118 /* GLSColorSprite.swift */,
+				DC5F0B9B1CAB21E90055B6C9 /* OmniGLView2d.swift */,
 				DC3438011CA78BDB007EFEE8 /* ViewController.swift */,
 				DC3438031CA78BDB007EFEE8 /* Assets.xcassets */,
 				DC3438051CA78BDB007EFEE8 /* Main.storyboard */,
 				DC3438081CA78BDB007EFEE8 /* Info.plist */,
 			);
 			path = NoisyImagesOSX;
+			sourceTree = "<group>";
+		};
+		DCC9B6FB1CA83FF900743E2C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCC9B6FF1CA83FF900743E2C /* OmniSwiftX.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCC9B7021CA8403D00743E2C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DCC9B7001CA8403A00743E2C /* WhiteTile.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +169,12 @@
 			mainGroup = DC3437F31CA78BDB007EFEE8;
 			productRefGroup = DC3437FD1CA78BDB007EFEE8 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = DCC9B6FB1CA83FF900743E2C /* Products */;
+					ProjectRef = DCC9B69F1CA8368400743E2C /* OmniSwiftX.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				DC3437FB1CA78BDB007EFEE8 /* NoisyImagesOSX */,
@@ -114,13 +182,29 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		DCC9B6FF1CA83FF900743E2C /* OmniSwiftX.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OmniSwiftX.framework;
+			remoteRef = DCC9B6FE1CA83FF900743E2C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		DC3437FA1CA78BDB007EFEE8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC8A946C1CA9BDA700049118 /* ColorShader.fsh in Resources */,
+				DCDCEB9E1CA88D9B001FD451 /* BasicShader.vsh in Resources */,
+				DC5F0B9F1CAB229A0055B6C9 /* Atlases.xml in Resources */,
 				DC3438041CA78BDB007EFEE8 /* Assets.xcassets in Resources */,
+				DC8A946A1CA9BD9E00049118 /* ColorShader.vsh in Resources */,
+				DCC9B7011CA8403A00743E2C /* WhiteTile.png in Resources */,
 				DC3438071CA78BDB007EFEE8 /* Main.storyboard in Resources */,
+				DCDCEB951CA87700001FD451 /* BasicShader.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,8 +215,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC5F0B9C1CAB21E90055B6C9 /* OmniGLView2d.swift in Sources */,
 				DC3438021CA78BDB007EFEE8 /* ViewController.swift in Sources */,
 				DC3438001CA78BDB007EFEE8 /* AppDelegate.swift in Sources */,
+				DC8A94631CA9757700049118 /* GLSColorSprite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +325,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = NoisyImagesOSX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "Corona-Corporation.NoisyImagesOSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -251,6 +338,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = NoisyImagesOSX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "Corona-Corporation.NoisyImagesOSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -275,6 +363,7 @@
 				DC34380D1CA78BDB007EFEE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

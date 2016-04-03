@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Atlases>
+
+    <WhiteTile data="WhiteTile, png, 1, 1" keys="White Tile" size="{1, 1}"/>
+    <!-- WhiteCircle data="WhiteCircle, pdf, 512, 512" keys="White Circle" size="{512, 512}"/ -->
+
+</Atlases>
