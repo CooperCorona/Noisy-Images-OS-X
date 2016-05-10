@@ -38,7 +38,7 @@ public class OmniGLView2d: NSOpenGLView {
         self.pixelFormat = pixelFormat
         
         //  Create a context with our pixel format (we have no other context, so nil)
-        guard let context = NSOpenGLContext(format: pixelFormat, shareContext: nil) else {
+        guard let context = NSOpenGLContext(format: pixelFormat, shareContext: GLSFrameBuffer.globalContext) else {
             Swift.print("context could not be constructed")
             return
         }
@@ -60,6 +60,9 @@ public class OmniGLView2d: NSOpenGLView {
     
     public override func prepareOpenGL() {
         super.prepareOpenGL()
+        
+        glEnable(GLenum(GL_BLEND))
+        glBlendFunc(GLenum(GL_SRC_ALPHA), GLenum(GL_ONE_MINUS_SRC_ALPHA))
     }
     
     public override func reshape() {

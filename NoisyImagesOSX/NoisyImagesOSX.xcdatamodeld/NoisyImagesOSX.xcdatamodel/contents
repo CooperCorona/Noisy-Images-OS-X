@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+    <entity name="Gradient" representedClassName=".Gradient" syncable="YES">
+        <attribute name="color1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color6" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color7" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color8" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color9" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color10" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color11" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color12" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color13" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color14" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color15" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color16" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="overlay" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="smoothed" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="universalId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SizeSet" representedClassName=".SizeSet" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SizeSetMember" syncable="YES"/>
+    </entity>
+    <entity name="SizeSetMember" representedClassName=".SizeSetMember" syncable="YES">
+        <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="suffix" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="width" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Gradient" positionX="-54" positionY="-9" width="128" height="330"/>
+        <element name="SizeSet" positionX="133" positionY="-9" width="128" height="73"/>
+        <element name="SizeSetMember" positionX="331" positionY="117" width="128" height="90"/>
+    </elements>
+</model>

@@ -7,21 +7,62 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC021A411CB7FCBC00070B5A /* GradientTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC021A401CB7FCBC00070B5A /* GradientTableCellView.swift */; };
+		DC021A441CB7FDEC00070B5A /* GradientTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC021A431CB7FDEC00070B5A /* GradientTableViewDelegate.swift */; };
+		DC021A461CB83A7500070B5A /* GradientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC021A451CB83A7500070B5A /* GradientViewController.swift */; };
+		DC021A481CB849AE00070B5A /* GradientTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC021A471CB849AE00070B5A /* GradientTableCellView.xib */; };
+		DC021A4A1CB8BFF500070B5A /* ColorTrackSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC021A491CB8BFF500070B5A /* ColorTrackSlider.swift */; };
+		DC0E5E7F1CD66B31005CF255 /* Large Dark Noise 128.png in Resources */ = {isa = PBXBuildFile; fileRef = DC0E5E7E1CD66B31005CF255 /* Large Dark Noise 128.png */; };
+		DC0E5E811CD67299005CF255 /* NoiseDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC0E5E801CD67299005CF255 /* NoiseDocument.xib */; };
+		DC0E5E841CD678EB005CF255 /* Document.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC0E5E821CD678EB005CF255 /* Document.storyboard */; };
+		DC0E5EA31CD696ED005CF255 /* NoiseDocumentWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5EA21CD696ED005CF255 /* NoiseDocumentWindowController.swift */; };
+		DC0E5EA51CD6B3EC005CF255 /* ColorControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5EA41CD6B3EC005CF255 /* ColorControl.swift */; };
+		DC0E5EA71CD6E882005CF255 /* GradientContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5EA61CD6E882005CF255 /* GradientContainer.swift */; };
+		DC18C1A61CDFEFEC00CABF1B /* AddSizeSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18C1A51CDFEFEC00CABF1B /* AddSizeSetViewController.swift */; };
+		DC18C1A91CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC18C1A81CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib */; };
+		DC24847C1CB1A92100F7946E /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24847B1CB1A92100F7946E /* MenuController.swift */; };
+		DC2654B61CE172D20012A74B /* KeyInterceptingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2654B51CE172D20012A74B /* KeyInterceptingTableView.swift */; };
+		DC33B7771CB2197C0085EC6E /* NoiseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33B7761CB2197C0085EC6E /* NoiseState.swift */; };
 		DC3438001CA78BDB007EFEE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3437FF1CA78BDB007EFEE8 /* AppDelegate.swift */; };
 		DC3438021CA78BDB007EFEE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3438011CA78BDB007EFEE8 /* ViewController.swift */; };
 		DC3438041CA78BDB007EFEE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC3438031CA78BDB007EFEE8 /* Assets.xcassets */; };
 		DC3438071CA78BDB007EFEE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3438051CA78BDB007EFEE8 /* Main.storyboard */; };
+		DC343FA61CBB053A0052F46E /* NSMultiSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC343FA51CBB053A0052F46E /* NSMultiSlider.swift */; };
 		DC5F0B9C1CAB21E90055B6C9 /* OmniGLView2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F0B9B1CAB21E90055B6C9 /* OmniGLView2d.swift */; };
 		DC5F0B9F1CAB229A0055B6C9 /* Atlases.xml in Resources */ = {isa = PBXBuildFile; fileRef = DC5F0B9E1CAB229A0055B6C9 /* Atlases.xml */; };
-		DC8A94631CA9757700049118 /* GLSColorSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A94621CA9757700049118 /* GLSColorSprite.swift */; };
 		DC8A946A1CA9BD9E00049118 /* ColorShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DC8A94691CA9BD9E00049118 /* ColorShader.vsh */; };
 		DC8A946C1CA9BDA700049118 /* ColorShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DC8A946B1CA9BDA700049118 /* ColorShader.fsh */; };
 		DCC9B7011CA8403A00743E2C /* WhiteTile.png in Resources */ = {isa = PBXBuildFile; fileRef = DCC9B7001CA8403A00743E2C /* WhiteTile.png */; };
+		DCD6B3E01CD5697B006C5871 /* GradientTableViewCellMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD6B3DF1CD5697B006C5871 /* GradientTableViewCellMenu.xib */; };
+		DCD6B3E21CD5BE6F006C5871 /* NoiseDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD6B3E11CD5BE6F006C5871 /* NoiseDocument.swift */; };
+		DCDBBFD61CDD9E3300212E20 /* ExportImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDBBFD51CDD9E3300212E20 /* ExportImageViewController.swift */; };
+		DCDCC0481CB9D058008F6012 /* BigCheckeredBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDCC0451CB9D058008F6012 /* BigCheckeredBackground.png */; };
+		DCDCC0491CB9D058008F6012 /* BigCheckeredBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDCC0461CB9D058008F6012 /* BigCheckeredBackground@2x.png */; };
+		DCDCC04A1CB9D058008F6012 /* BigCheckeredBackground@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDCC0471CB9D058008F6012 /* BigCheckeredBackground@3x.png */; };
+		DCDCC04D1CB9D815008F6012 /* ColorSliderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC04C1CB9D815008F6012 /* ColorSliderContainer.swift */; };
+		DCDCC05A1CBA1473008F6012 /* NoisyImagesOSX.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC0581CBA1473008F6012 /* NoisyImagesOSX.xcdatamodeld */; };
+		DCDCC05D1CBA178A008F6012 /* Gradient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC05B1CBA178A008F6012 /* Gradient+CoreDataProperties.swift */; };
+		DCDCC05E1CBA178A008F6012 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC05C1CBA178A008F6012 /* Gradient.swift */; };
 		DCDCEB8E1CA873C7001FD451 /* OmniSwiftX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC9B6FF1CA83FF900743E2C /* OmniSwiftX.framework */; };
 		DCDCEB901CA873CC001FD451 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDCEB8F1CA873CC001FD451 /* AVFoundation.framework */; };
 		DCDCEB921CA873D0001FD451 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDCEB911CA873D0001FD451 /* CloudKit.framework */; };
 		DCDCEB951CA87700001FD451 /* BasicShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DCDCEB931CA87700001FD451 /* BasicShader.fsh */; };
 		DCDCEB9E1CA88D9B001FD451 /* BasicShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DCDCEB9D1CA88D9B001FD451 /* BasicShader.vsh */; };
+		DCE38FA31CB75739008DA462 /* ColorGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE38FA21CB75739008DA462 /* ColorGradientView.swift */; };
+		DCEBACD81CDE70CF00487CD8 /* ExportImageAdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEBACD61CDE70CF00487CD8 /* ExportImageAdvancedViewController.swift */; };
+		DCEBACDE1CDE7A1C00487CD8 /* ExportImageAdvancedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEBACDD1CDE7A1C00487CD8 /* ExportImageAdvancedTableViewCell.xib */; };
+		DCFA23401CDC029D00669667 /* CheckerShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DCFA233F1CDC029D00669667 /* CheckerShader.vsh */; };
+		DCFA23431CDC02A400669667 /* CheckerShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DCFA23421CDC02A400669667 /* CheckerShader.fsh */; };
+		DCFA23451CDC041D00669667 /* GLSCheckerSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFA23441CDC041D00669667 /* GLSCheckerSprite.swift */; };
+		DCFC5E361CDFCF6C00094E30 /* SizeSetMember+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E321CDFCF6C00094E30 /* SizeSetMember+CoreDataProperties.swift */; };
+		DCFC5E371CDFCF6C00094E30 /* SizeSetMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E331CDFCF6C00094E30 /* SizeSetMember.swift */; };
+		DCFC5E381CDFCF6C00094E30 /* SizeSet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E341CDFCF6C00094E30 /* SizeSet+CoreDataProperties.swift */; };
+		DCFC5E391CDFCF6C00094E30 /* SizeSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E351CDFCF6C00094E30 /* SizeSet.swift */; };
+		DCFC5E3C1CDFD1CE00094E30 /* EditSizeSetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E3A1CDFD1CE00094E30 /* EditSizeSetsViewController.swift */; };
+		DCFC5E3F1CDFD43600094E30 /* EditSizeSetsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E3E1CDFD43600094E30 /* EditSizeSetsTableViewDelegate.swift */; };
+		DCFC5E451CDFEB9B00094E30 /* EditSizeSets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCFC5E441CDFEB9B00094E30 /* EditSizeSets.storyboard */; };
+		DCFF413C1CDD27E5004D57E9 /* WhiteCircle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DCFF413B1CDD27E5004D57E9 /* WhiteCircle.pdf */; };
+		DCFF413F1CDD55C3004D57E9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DCFF413E1CDD55C3004D57E9 /* Icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,23 +76,64 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC021A401CB7FCBC00070B5A /* GradientTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientTableCellView.swift; sourceTree = "<group>"; };
+		DC021A431CB7FDEC00070B5A /* GradientTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientTableViewDelegate.swift; sourceTree = "<group>"; };
+		DC021A451CB83A7500070B5A /* GradientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientViewController.swift; sourceTree = "<group>"; };
+		DC021A471CB849AE00070B5A /* GradientTableCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GradientTableCellView.xib; sourceTree = "<group>"; };
+		DC021A491CB8BFF500070B5A /* ColorTrackSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTrackSlider.swift; sourceTree = "<group>"; };
+		DC0E5E7E1CD66B31005CF255 /* Large Dark Noise 128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Large Dark Noise 128.png"; sourceTree = "<group>"; };
+		DC0E5E801CD67299005CF255 /* NoiseDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoiseDocument.xib; sourceTree = "<group>"; };
+		DC0E5E831CD678EB005CF255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = NoisyImagesOSX/Base.lproj/Document.storyboard; sourceTree = "<group>"; };
+		DC0E5EA21CD696ED005CF255 /* NoiseDocumentWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseDocumentWindowController.swift; sourceTree = "<group>"; };
+		DC0E5EA41CD6B3EC005CF255 /* ColorControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorControl.swift; sourceTree = "<group>"; };
+		DC0E5EA61CD6E882005CF255 /* GradientContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientContainer.swift; sourceTree = "<group>"; };
+		DC18C1A51CDFEFEC00CABF1B /* AddSizeSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSizeSetViewController.swift; sourceTree = "<group>"; };
+		DC18C1A81CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditSizeSetsTableViewCell.xib; sourceTree = "<group>"; };
+		DC24847B1CB1A92100F7946E /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		DC2654B51CE172D20012A74B /* KeyInterceptingTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyInterceptingTableView.swift; sourceTree = "<group>"; };
+		DC33B7761CB2197C0085EC6E /* NoiseState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseState.swift; sourceTree = "<group>"; };
 		DC3437FC1CA78BDB007EFEE8 /* NoisyImagesOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoisyImagesOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3437FF1CA78BDB007EFEE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC3438011CA78BDB007EFEE8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DC3438031CA78BDB007EFEE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC3438061CA78BDB007EFEE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC3438081CA78BDB007EFEE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC343FA51CBB053A0052F46E /* NSMultiSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMultiSlider.swift; sourceTree = "<group>"; };
 		DC5F0B9B1CAB21E90055B6C9 /* OmniGLView2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmniGLView2d.swift; sourceTree = "<group>"; };
 		DC5F0B9E1CAB229A0055B6C9 /* Atlases.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Atlases.xml; sourceTree = "<group>"; };
-		DC8A94621CA9757700049118 /* GLSColorSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLSColorSprite.swift; sourceTree = "<group>"; };
 		DC8A94691CA9BD9E00049118 /* ColorShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorShader.vsh; sourceTree = "<group>"; };
 		DC8A946B1CA9BDA700049118 /* ColorShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorShader.fsh; sourceTree = "<group>"; };
 		DCC9B69F1CA8368400743E2C /* OmniSwiftX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OmniSwiftX.xcodeproj; path = ../OmniSwiftX/OmniSwiftX.xcodeproj; sourceTree = "<group>"; };
 		DCC9B7001CA8403A00743E2C /* WhiteTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteTile.png; sourceTree = "<group>"; };
+		DCD6B3DF1CD5697B006C5871 /* GradientTableViewCellMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GradientTableViewCellMenu.xib; sourceTree = "<group>"; };
+		DCD6B3E11CD5BE6F006C5871 /* NoiseDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseDocument.swift; sourceTree = "<group>"; };
+		DCDBBFD51CDD9E3300212E20 /* ExportImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportImageViewController.swift; sourceTree = "<group>"; };
+		DCDCC0451CB9D058008F6012 /* BigCheckeredBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BigCheckeredBackground.png; sourceTree = "<group>"; };
+		DCDCC0461CB9D058008F6012 /* BigCheckeredBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BigCheckeredBackground@2x.png"; sourceTree = "<group>"; };
+		DCDCC0471CB9D058008F6012 /* BigCheckeredBackground@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BigCheckeredBackground@3x.png"; sourceTree = "<group>"; };
+		DCDCC04C1CB9D815008F6012 /* ColorSliderContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSliderContainer.swift; sourceTree = "<group>"; };
+		DCDCC0591CBA1473008F6012 /* NoisyImagesOSX.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoisyImagesOSX.xcdatamodel; sourceTree = "<group>"; };
+		DCDCC05B1CBA178A008F6012 /* Gradient+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gradient+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DCDCC05C1CBA178A008F6012 /* Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		DCDCEB8F1CA873CC001FD451 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DCDCEB911CA873D0001FD451 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		DCDCEB931CA87700001FD451 /* BasicShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BasicShader.fsh; sourceTree = "<group>"; };
 		DCDCEB9D1CA88D9B001FD451 /* BasicShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BasicShader.vsh; sourceTree = "<group>"; };
+		DCE38FA21CB75739008DA462 /* ColorGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorGradientView.swift; sourceTree = "<group>"; };
+		DCEBACD61CDE70CF00487CD8 /* ExportImageAdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportImageAdvancedViewController.swift; sourceTree = "<group>"; };
+		DCEBACDD1CDE7A1C00487CD8 /* ExportImageAdvancedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExportImageAdvancedTableViewCell.xib; path = ../ExportImageAdvancedTableViewCell.xib; sourceTree = "<group>"; };
+		DCFA233F1CDC029D00669667 /* CheckerShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CheckerShader.vsh; sourceTree = "<group>"; };
+		DCFA23421CDC02A400669667 /* CheckerShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CheckerShader.fsh; sourceTree = "<group>"; };
+		DCFA23441CDC041D00669667 /* GLSCheckerSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLSCheckerSprite.swift; sourceTree = "<group>"; };
+		DCFC5E321CDFCF6C00094E30 /* SizeSetMember+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SizeSetMember+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DCFC5E331CDFCF6C00094E30 /* SizeSetMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeSetMember.swift; sourceTree = "<group>"; };
+		DCFC5E341CDFCF6C00094E30 /* SizeSet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SizeSet+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DCFC5E351CDFCF6C00094E30 /* SizeSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeSet.swift; sourceTree = "<group>"; };
+		DCFC5E3A1CDFD1CE00094E30 /* EditSizeSetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSizeSetsViewController.swift; sourceTree = "<group>"; };
+		DCFC5E3E1CDFD43600094E30 /* EditSizeSetsTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSizeSetsTableViewDelegate.swift; sourceTree = "<group>"; };
+		DCFC5E441CDFEB9B00094E30 /* EditSizeSets.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = EditSizeSets.storyboard; path = ../EditSizeSets.storyboard; sourceTree = "<group>"; };
+		DCFF413B1CDD27E5004D57E9 /* WhiteCircle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = WhiteCircle.pdf; sourceTree = "<group>"; };
+		DCFF413E1CDD55C3004D57E9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,15 +175,45 @@
 				DC5F0B9E1CAB229A0055B6C9 /* Atlases.xml */,
 				DCDCEB9D1CA88D9B001FD451 /* BasicShader.vsh */,
 				DCDCEB931CA87700001FD451 /* BasicShader.fsh */,
+				DCFA233F1CDC029D00669667 /* CheckerShader.vsh */,
+				DCFA23421CDC02A400669667 /* CheckerShader.fsh */,
 				DC8A94691CA9BD9E00049118 /* ColorShader.vsh */,
 				DC8A946B1CA9BDA700049118 /* ColorShader.fsh */,
 				DCC9B7021CA8403D00743E2C /* Images */,
+				DC18C1A51CDFEFEC00CABF1B /* AddSizeSetViewController.swift */,
 				DC3437FF1CA78BDB007EFEE8 /* AppDelegate.swift */,
-				DC8A94621CA9757700049118 /* GLSColorSprite.swift */,
+				DC0E5EA41CD6B3EC005CF255 /* ColorControl.swift */,
+				DCE38FA21CB75739008DA462 /* ColorGradientView.swift */,
+				DCDCC04C1CB9D815008F6012 /* ColorSliderContainer.swift */,
+				DC021A491CB8BFF500070B5A /* ColorTrackSlider.swift */,
+				DC18C1A81CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib */,
+				DCFC5E3E1CDFD43600094E30 /* EditSizeSetsTableViewDelegate.swift */,
+				DCFC5E3A1CDFD1CE00094E30 /* EditSizeSetsViewController.swift */,
+				DCEBACD61CDE70CF00487CD8 /* ExportImageAdvancedViewController.swift */,
+				DCEBACDD1CDE7A1C00487CD8 /* ExportImageAdvancedTableViewCell.xib */,
+				DCDBBFD51CDD9E3300212E20 /* ExportImageViewController.swift */,
+				DCFA23441CDC041D00669667 /* GLSCheckerSprite.swift */,
+				DC0E5EA61CD6E882005CF255 /* GradientContainer.swift */,
+				DC021A451CB83A7500070B5A /* GradientViewController.swift */,
+				DC021A401CB7FCBC00070B5A /* GradientTableCellView.swift */,
+				DC021A471CB849AE00070B5A /* GradientTableCellView.xib */,
+				DCD6B3DF1CD5697B006C5871 /* GradientTableViewCellMenu.xib */,
+				DC021A431CB7FDEC00070B5A /* GradientTableViewDelegate.swift */,
+				DC2654B51CE172D20012A74B /* KeyInterceptingTableView.swift */,
+				DC24847B1CB1A92100F7946E /* MenuController.swift */,
+				DCFC5E201CDFCD8A00094E30 /* Models */,
+				DCD6B3E11CD5BE6F006C5871 /* NoiseDocument.swift */,
+				DC0E5E801CD67299005CF255 /* NoiseDocument.xib */,
+				DC0E5EA21CD696ED005CF255 /* NoiseDocumentWindowController.swift */,
+				DC33B7761CB2197C0085EC6E /* NoiseState.swift */,
+				DC343FA51CBB053A0052F46E /* NSMultiSlider.swift */,
 				DC5F0B9B1CAB21E90055B6C9 /* OmniGLView2d.swift */,
 				DC3438011CA78BDB007EFEE8 /* ViewController.swift */,
 				DC3438031CA78BDB007EFEE8 /* Assets.xcassets */,
+				DC0E5E821CD678EB005CF255 /* Document.storyboard */,
+				DCFC5E441CDFEB9B00094E30 /* EditSizeSets.storyboard */,
 				DC3438051CA78BDB007EFEE8 /* Main.storyboard */,
+				DCDCC0581CBA1473008F6012 /* NoisyImagesOSX.xcdatamodeld */,
 				DC3438081CA78BDB007EFEE8 /* Info.plist */,
 			);
 			path = NoisyImagesOSX;
@@ -118,9 +230,28 @@
 		DCC9B7021CA8403D00743E2C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DCDCC0451CB9D058008F6012 /* BigCheckeredBackground.png */,
+				DCDCC0461CB9D058008F6012 /* BigCheckeredBackground@2x.png */,
+				DCDCC0471CB9D058008F6012 /* BigCheckeredBackground@3x.png */,
+				DCFF413E1CDD55C3004D57E9 /* Icon.png */,
+				DC0E5E7E1CD66B31005CF255 /* Large Dark Noise 128.png */,
+				DCFF413B1CDD27E5004D57E9 /* WhiteCircle.pdf */,
 				DCC9B7001CA8403A00743E2C /* WhiteTile.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		DCFC5E201CDFCD8A00094E30 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DCFC5E321CDFCF6C00094E30 /* SizeSetMember+CoreDataProperties.swift */,
+				DCFC5E331CDFCF6C00094E30 /* SizeSetMember.swift */,
+				DCFC5E341CDFCF6C00094E30 /* SizeSet+CoreDataProperties.swift */,
+				DCFC5E351CDFCF6C00094E30 /* SizeSet.swift */,
+				DCDCC05B1CBA178A008F6012 /* Gradient+CoreDataProperties.swift */,
+				DCDCC05C1CBA178A008F6012 /* Gradient.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,14 +328,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC18C1A91CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib in Resources */,
 				DC8A946C1CA9BDA700049118 /* ColorShader.fsh in Resources */,
+				DCEBACDE1CDE7A1C00487CD8 /* ExportImageAdvancedTableViewCell.xib in Resources */,
 				DCDCEB9E1CA88D9B001FD451 /* BasicShader.vsh in Resources */,
+				DCFA23401CDC029D00669667 /* CheckerShader.vsh in Resources */,
 				DC5F0B9F1CAB229A0055B6C9 /* Atlases.xml in Resources */,
+				DC021A481CB849AE00070B5A /* GradientTableCellView.xib in Resources */,
+				DCDCC0491CB9D058008F6012 /* BigCheckeredBackground@2x.png in Resources */,
+				DC0E5E7F1CD66B31005CF255 /* Large Dark Noise 128.png in Resources */,
 				DC3438041CA78BDB007EFEE8 /* Assets.xcassets in Resources */,
+				DCDCC0481CB9D058008F6012 /* BigCheckeredBackground.png in Resources */,
+				DCD6B3E01CD5697B006C5871 /* GradientTableViewCellMenu.xib in Resources */,
+				DCFF413C1CDD27E5004D57E9 /* WhiteCircle.pdf in Resources */,
+				DCFC5E451CDFEB9B00094E30 /* EditSizeSets.storyboard in Resources */,
+				DCFA23431CDC02A400669667 /* CheckerShader.fsh in Resources */,
+				DCFF413F1CDD55C3004D57E9 /* Icon.png in Resources */,
+				DC0E5E841CD678EB005CF255 /* Document.storyboard in Resources */,
+				DCDCC04A1CB9D058008F6012 /* BigCheckeredBackground@3x.png in Resources */,
 				DC8A946A1CA9BD9E00049118 /* ColorShader.vsh in Resources */,
 				DCC9B7011CA8403A00743E2C /* WhiteTile.png in Resources */,
 				DC3438071CA78BDB007EFEE8 /* Main.storyboard in Resources */,
 				DCDCEB951CA87700001FD451 /* BasicShader.fsh in Resources */,
+				DC0E5E811CD67299005CF255 /* NoiseDocument.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,16 +361,51 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCFC5E3F1CDFD43600094E30 /* EditSizeSetsTableViewDelegate.swift in Sources */,
+				DC2654B61CE172D20012A74B /* KeyInterceptingTableView.swift in Sources */,
+				DC24847C1CB1A92100F7946E /* MenuController.swift in Sources */,
+				DCDCC05A1CBA1473008F6012 /* NoisyImagesOSX.xcdatamodeld in Sources */,
+				DCDCC04D1CB9D815008F6012 /* ColorSliderContainer.swift in Sources */,
+				DCDCC05E1CBA178A008F6012 /* Gradient.swift in Sources */,
+				DCDBBFD61CDD9E3300212E20 /* ExportImageViewController.swift in Sources */,
+				DC343FA61CBB053A0052F46E /* NSMultiSlider.swift in Sources */,
+				DC0E5EA71CD6E882005CF255 /* GradientContainer.swift in Sources */,
 				DC5F0B9C1CAB21E90055B6C9 /* OmniGLView2d.swift in Sources */,
+				DCFC5E361CDFCF6C00094E30 /* SizeSetMember+CoreDataProperties.swift in Sources */,
+				DC18C1A61CDFEFEC00CABF1B /* AddSizeSetViewController.swift in Sources */,
+				DCFA23451CDC041D00669667 /* GLSCheckerSprite.swift in Sources */,
+				DC0E5EA31CD696ED005CF255 /* NoiseDocumentWindowController.swift in Sources */,
+				DCFC5E3C1CDFD1CE00094E30 /* EditSizeSetsViewController.swift in Sources */,
+				DCFC5E391CDFCF6C00094E30 /* SizeSet.swift in Sources */,
+				DC33B7771CB2197C0085EC6E /* NoiseState.swift in Sources */,
 				DC3438021CA78BDB007EFEE8 /* ViewController.swift in Sources */,
+				DCFC5E371CDFCF6C00094E30 /* SizeSetMember.swift in Sources */,
 				DC3438001CA78BDB007EFEE8 /* AppDelegate.swift in Sources */,
-				DC8A94631CA9757700049118 /* GLSColorSprite.swift in Sources */,
+				DC021A461CB83A7500070B5A /* GradientViewController.swift in Sources */,
+				DCEBACD81CDE70CF00487CD8 /* ExportImageAdvancedViewController.swift in Sources */,
+				DCDCC05D1CBA178A008F6012 /* Gradient+CoreDataProperties.swift in Sources */,
+				DCD6B3E21CD5BE6F006C5871 /* NoiseDocument.swift in Sources */,
+				DCFC5E381CDFCF6C00094E30 /* SizeSet+CoreDataProperties.swift in Sources */,
+				DC021A411CB7FCBC00070B5A /* GradientTableCellView.swift in Sources */,
+				DC021A441CB7FDEC00070B5A /* GradientTableViewDelegate.swift in Sources */,
+				DC021A4A1CB8BFF500070B5A /* ColorTrackSlider.swift in Sources */,
+				DCE38FA31CB75739008DA462 /* ColorGradientView.swift in Sources */,
+				DC0E5EA51CD6B3EC005CF255 /* ColorControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		DC0E5E821CD678EB005CF255 /* Document.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC0E5E831CD678EB005CF255 /* Base */,
+			);
+			name = Document.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		DC3438051CA78BDB007EFEE8 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -366,6 +547,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DCDCC0581CBA1473008F6012 /* NoisyImagesOSX.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DCDCC0591CBA1473008F6012 /* NoisyImagesOSX.xcdatamodel */,
+			);
+			currentVersion = DCDCC0591CBA1473008F6012 /* NoisyImagesOSX.xcdatamodel */;
+			path = NoisyImagesOSX.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DC3437F41CA78BDB007EFEE8 /* Project object */;
 }
