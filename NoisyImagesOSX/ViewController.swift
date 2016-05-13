@@ -52,17 +52,15 @@ class ViewController: NSViewController {
     weak var menuController:MenuController? = nil
     private var isTiled = false
     
+    private var zoomLevels:[CGFloat] = [1.0 / 16.0, 1.0 / 8.0, 1.0 / 4.0, 1.0 / 3.0, 1.0 / 2.0, 1.0, 2.0, 3.0, 4.0, 8.0, 16.0]
+    private var zoomLevelIndex = 5
+    private var zoomLevel:CGFloat { return self.zoomLevels[self.zoomLevelIndex] }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         OmniGLView2d.setupOpenGL()
         self.glView.clearColor = SCVector4.blackColor
-        
-//        NSRunLoop.mainRunLoop().addTimer(self.timer, forMode: NSRunLoopCommonModes)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, name: NSViewGlobalFrameDidChangeNotification, selector: #selector(self.windowSizeChanged))
-        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ExportImageItemClickedNotification, selector: #selector(self.exportImageItemClicked(_:)))
-        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ExportImageAdvancedItemClickedNotification, selector: #selector(self.exportImagesAdvancedItemClicked(_:)))
     }
     
     override func viewWillAppear() {
@@ -78,6 +76,12 @@ class ViewController: NSViewController {
         menu?.seed = self.noiseSprite.noiseTexture.noise.seed
         self.menuController = menu
         
+        NSNotificationCenter.defaultCenter().addObserver(self, name: NSViewGlobalFrameDidChangeNotification, selector: #selector(self.windowSizeChanged))
+        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ExportImageItemClickedNotification, selector: #selector(self.exportImageItemClicked(_:)))
+        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ExportImageAdvancedItemClickedNotification, selector: #selector(self.exportImagesAdvancedItemClicked(_:)))
+        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ZoomInItemClickedNotification, selector: #selector(self.zoomInItemClicked(_:)))
+        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ZoomOutItemClickedNotification, selector: #selector(self.zoomOutItemClicked(_:)))
+        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ResetZoomItemClickedNotification, selector: #selector(self.resetZoomItemClicked(_:)))
     }
 
     override func viewDidAppear() {
@@ -156,12 +160,43 @@ class ViewController: NSViewController {
         }
         */
         let exportController = NSStoryboard(name: "Document", bundle: nil).instantiateControllerWithIdentifier("exportImageViewController") as! ExportImageViewController
-        self.presentViewControllerAsModalWindow(exportController)
+        exportController.noiseSprite = self.noiseSprite
+//        self.presentViewControllerAsModalWindow(exportController)
+        self.presentViewControllerAsSheet(exportController)
     }
     
     func exportImagesAdvancedItemClicked(sender:NSNotification) {
         let exportController = NSStoryboard(name: "Document", bundle: nil).instantiateControllerWithIdentifier("exportImageAdvancedViewController") as! ExportImageAdvancedViewController
-        self.presentViewControllerAsModalWindow(exportController)
+        exportController.noiseSprite = self.noiseSprite
+//        self.presentViewControllerAsModalWindow(exportController)
+        self.presentViewControllerAsSheet(exportController)
+    }
+    
+    func zoomInItemClicked(notification:NSNotification?) {
+        guard self.zoomLevelIndex < self.zoomLevels.count - 1 else {
+            return
+        }
+        self.zoomLevelIndex += 1
+        self.zoomChanged()
+    }
+    
+    func zoomOutItemClicked(notification:NSNotification?) {
+        guard self.zoomLevelIndex > 0 else {
+            return
+        }
+        self.zoomLevelIndex -= 1
+        self.zoomChanged()
+    }
+    
+    func resetZoomItemClicked(notification:NSNotification?) {
+        self.zoomLevelIndex = self.zoomLevels.count / 2
+        self.zoomChanged()
+    }
+    
+    private func zoomChanged() {
+        self.noiseSprite.scale = self.zoomLevel
+        self.checkerSprite.checkerSize = 32.0 * self.zoomLevel
+        self.render()
     }
     
 }
@@ -171,11 +206,13 @@ extension ViewController: MenuControllerDelegate {
     func widthChanged(width: CGFloat) {
         self.noiseSprite.contentSize.width = width
         self.renderToTexture()
+        self.resetZoomItemClicked(nil)
     }
     
     func heightChanged(height: CGFloat) {
         self.noiseSprite.contentSize.height = height
         self.renderToTexture()
+        self.resetZoomItemClicked(nil)
     }
     
     func noiseWidthChanged(noiseWidth: CGFloat) {
@@ -264,6 +301,7 @@ extension ViewController: MenuControllerDelegate {
     func stateChanged(state: NoiseState) {
         self.setState(state)
         self.renderToTexture()
+        self.resetZoomItemClicked(nil)
     }
     
     class func setViewportTo(size:NSSize) {

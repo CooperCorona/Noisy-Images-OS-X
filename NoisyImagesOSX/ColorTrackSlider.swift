@@ -21,6 +21,8 @@ class ColorTrackSlider: NSSlider {
     @IBInspectable var maxTrackTintColor:NSColor    = NSColor.grayColor()
     @IBInspectable var thumbTrackTintColor:NSColor  = NSColor.whiteColor()
     
+    var mouseDownExecutedHandler:((ColorTrackSlider) -> Void)? = nil
+    
     override func drawRect(dirtyRect: NSRect) {
 //        super.drawRect(dirtyRect)
         
@@ -71,4 +73,8 @@ class ColorTrackSlider: NSSlider {
         context.restoreGraphicsState()
     }
     
+    override func mouseDown(theEvent: NSEvent) {
+        super.mouseDown(theEvent)
+        self.mouseDownExecutedHandler?(self)
+    }
 }

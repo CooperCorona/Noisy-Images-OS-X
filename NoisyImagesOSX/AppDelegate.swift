@@ -69,10 +69,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: - Logic
     
-    static let SaveGradientItemClickedNotification      = "Save Gradient Item Clicked Notification"
-    static let SaveNewGradientItemClickedNotification   = "Save New Gradient Item Clicked Notification"
-    static let ExportImageItemClickedNotification       = "com.coopercorona.NoisyImagesOSX.ExportImageItemClicked"
-    static let ExportImageAdvancedItemClickedNotification = "com.coopercorona.NoisyImagesOSX.ExportImageAdvancedItemClicked"
+    static let SaveGradientItemClickedNotification          = "Save Gradient Item Clicked Notification"
+    static let SaveNewGradientItemClickedNotification       = "Save New Gradient Item Clicked Notification"
+    static let ExportImageItemClickedNotification           = "com.coopercorona.NoisyImagesOSX.ExportImageItemClicked"
+    static let ExportImageAdvancedItemClickedNotification   = "com.coopercorona.NoisyImagesOSX.ExportImageAdvancedItemClicked"
+    static let ZoomInItemClickedNotification                = "com.coopercorona.NoisyImagesOSX.ZoomInItemClicked"
+    static let ZoomOutItemClickedNotification               = "com.coopercorona.NoisyImagesOSX.ZoomOutItemClicked"
+    static let ResetZoomItemClickedNotification             = "com.coopercorona.NoisyImagesOSX.ResetZoomItemClicked"
     
     @IBAction func saveItemClicked(sender: AnyObject) {
         print("Save item clicked...")
@@ -103,6 +106,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     class func presentEditSizeSetsController() {
         (NSApplication.sharedApplication().delegate! as! AppDelegate).editSizeSetsItemClicked(nil)
+    }
+    
+    @IBAction func zoomInItemClicked(sender: AnyObject) {
+        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.ZoomInItemClickedNotification, object: self)
+    }
+    
+    @IBAction func zoomOutItemClicked(sender: AnyObject) {
+        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.ZoomOutItemClickedNotification, object: self)
+    }
+    
+    @IBAction func resetZoomItemClicked(sender: AnyObject) {
+        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.ResetZoomItemClickedNotification, object: self)
     }
     
 }

@@ -38,7 +38,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="T87-we-gVv" viewBased="YES" id="nOa-5o-d0r">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="185"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="299.5" height="185"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -161,7 +161,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="T87-we-gVv">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="299.5" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>

@@ -90,6 +90,13 @@ public class NSMultiSlider: NSControl {
         self.setNeedsDisplay()
     }
     
+    func setThumb(thumb:CGFloat, atIndex index:Int) {
+        guard 0 <= index && index < self.thumbs.count else {
+            return
+        }
+        self.thumbs[index] = thumb
+    }
+    
     subscript(index:Int) -> CGFloat {
         get {
             return self.thumbs[index]

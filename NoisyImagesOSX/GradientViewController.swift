@@ -36,11 +36,15 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
     
     var currentThumbIndex:Int? = nil
     var colors:[NSColor] = []
+    private var undoColors:[NSColor] = []
+    private var lastSliderValue:CGFloat = 0.0
+    var undoingEnabled = true
     
     var gradientContainer = GradientContainer()
     
     @IBOutlet weak var smoothButton: NSButton!
     @IBOutlet weak var trackSlider: NSMultiSlider!
+    
     
     // MARK: - Setup
     
@@ -77,6 +81,17 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
             self.setupTrackSliderFor(grad)
         }
         
+        let mouseDownHandler:(ColorTrackSlider) -> Void = { [unowned self] slider in
+            guard let thumbIndex = self.currentThumbIndex else {
+                return
+            }
+            self.changeColor(self.colorSliderContainer.color, atThumbIndex: thumbIndex, registerUndo: true)
+        }
+        self.redSlider.mouseDownExecutedHandler     = mouseDownHandler
+        self.greenSlider.mouseDownExecutedHandler   = mouseDownHandler
+        self.blueSlider.mouseDownExecutedHandler    = mouseDownHandler
+        self.alphaSlider.mouseDownExecutedHandler   = mouseDownHandler
+        
         NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.SaveGradientItemClickedNotification, selector: #selector(saveGradient))
         NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.SaveNewGradientItemClickedNotification, selector: #selector(saveNewGradient))
     }
@@ -93,6 +108,7 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
     
     func setupTrackSliderFor(gradient:ColorGradient1D) {
         self.colors = gradient.anchors.map() { NSColor(vector4: $0.0) }
+        self.undoColors = self.colors
         self.trackSlider.thumbCount = gradient.anchors.count
         for (i, anchor) in gradient.anchors.enumerate() {
             self.trackSlider[i] = anchor.weight
@@ -131,16 +147,34 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
         }
     }
     
-    @IBAction func colorSliderChanged(sender: AnyObject) {
+    @IBAction func colorSliderChanged(sender: ColorTrackSlider) {
         guard let thumbIndex = self.currentThumbIndex else {
             return
         }
-        self.colors[thumbIndex] = self.colorSliderContainer.color
+        
+        self.changeColor(self.colorSliderContainer.color, atThumbIndex: thumbIndex, registerUndo: false)
+    }
+    
+    func changeColor(color:NSColor, atThumbIndex thumbIndex:Int, registerUndo:Bool = true) {
+        if registerUndo {
+            self.registerUndo() { [value = self.undoColors[thumbIndex]] target in
+                target.changeColor(value, atThumbIndex: thumbIndex)
+            }
+            self.undoColors[thumbIndex] = color
+        }
+        self.colors[thumbIndex] = color
         self.trackSlider.colorsNeedDisplay([thumbIndex])
         self.calculateGradient()
     }
     
     @IBAction func overlayColorSliderChanged(sender: AnyObject) {
+        self.changeOverlayColor(self.overlayColorSliderContainer.color)
+    }
+    
+    func changeOverlayColor(color:NSColor) {
+        self.registerUndo() { [value = self.gradientContainer.overlay] target in
+            target.changeOverlayColor(value)
+        }
         let color = self.overlayColorSliderContainer.color
         self.overlayView.layer?.backgroundColor = color.CGColor
         self.gradientContainer.overlay = color
@@ -152,7 +186,15 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
             return
         }
         let value = self.trackSlider.convertWindowCoordinatesToSliderValue(location)
+        self.addThumbAt(value)
+    }
+    
+    func addThumbAt(value:CGFloat) {
+        self.registerUndo() { [index = self.trackSlider.thumbs.count] target in
+            target.deleteThumbAtIndex(index)
+        }
         self.colors.append(NSColor(vector4: self.gradientView.gradient![value]))
+        self.undoColors = self.colors
         self.trackSlider.addThumbAt(value)
         
         self.trackSlider.setNeedsDisplay()
@@ -163,11 +205,13 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
             return
         }
         self.colorSliderContainer.color = color
-        if let index = self.currentThumbIndex {
-            self.colors[index] = color
-            self.trackSlider.colorsNeedDisplay()
-            self.calculateGradient()
+        guard let index = self.currentThumbIndex else {
+            return
         }
+        self.changeColor(color, atThumbIndex: index)
+//            self.colors[index] = color
+//            self.trackSlider.colorsNeedDisplay()
+//            self.calculateGradient()
     }
     
     @IBAction func overlayColorBarClicked(sender: NSClickGestureRecognizer) {
@@ -182,6 +226,16 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
     }
     
     @IBAction func normalizeButtonPressed(sender: AnyObject) {
+        self.registerUndo() { [values = self.trackSlider.thumbs] target in
+            for (i, value) in values.enumerate() {
+                target.trackSlider.setThumb(value, atIndex: i)
+            }
+            target.trackSlider.setNeedsDisplay()
+            target.calculateGradient()
+            target.registerUndo() { subTarget in
+                subTarget.normalizeButtonPressed(sender)
+            }
+        }
         var j = 0
         for (i, _) in self.trackSlider.thumbs.enumerate().sort({ $0.1 < $1.1 }) {
             self.trackSlider[i] = self.trackSlider.length * CGFloat(j) / CGFloat(self.trackSlider.thumbs.count - 1) + self.trackSlider.minValue
@@ -192,17 +246,31 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
     }
     
     @IBAction func smoothButtonChanged(sender: AnyObject) {
+        self.registerUndo() { target in
+            target.smoothButton.boolValue.flip()
+            target.smoothButtonChanged(sender)
+        }
         self.calculateGradient()
     }
     
     @IBAction func deleteButtonPressed(sender: AnyObject) {
-        guard self.trackSlider.thumbCount > 2 else {
-            return
-        }
         guard let index = self.trackSlider.selectedIndex else {
             return
         }
+        self.deleteThumbAtIndex(index)
+    }
+    
+    func deleteThumbAtIndex(index:Int) {
+        guard self.trackSlider.thumbCount > 2 else {
+            return
+        }
+        
+        self.registerUndo() { [value = self.trackSlider.thumbs[index]] target in
+            target.addThumbAt(value)
+        }
+        
         self.colors.removeAtIndex(index)
+        self.undoColors.removeAtIndex(index)
         self.trackSlider.removeThumbAtIndex(index)
         self.calculateGradient()
     }
@@ -236,6 +304,7 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
     func thumbSlider(slider: NSMultiSlider, selectedThumbAt thumbIndex: Int) {
         self.currentThumbIndex = thumbIndex
         self.colorSliderContainer.color = self.colors[thumbIndex]
+        self.lastSliderValue = slider.thumbs[thumbIndex]
     }
     
     func thumbSlider(slider: NSMultiSlider, movedThumbAt thumbIndex: Int, to value: CGFloat) {
@@ -244,10 +313,43 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
     
     func thumbSlider(slider:NSMultiSlider, stoppedMovingThumbAt thumbIndex:Int) {
         self.gradientContainer.gradient = self.gradientView.gradient!
+        self.moveThumbAtIndex(thumbIndex, to: self.lastSliderValue, undoing: false)
+    }
+    
+    func moveThumbAtIndex(thumbIndex:Int, to value:CGFloat, undoing:Bool) {
+        let newValue = (undoing ? self.trackSlider.thumbs[thumbIndex] : value)
+        self.registerUndo() { target in
+            self.moveThumbAtIndex(thumbIndex, to: newValue, undoing: true)
+        }
+        if undoing {
+            self.trackSlider.setThumb(value, atIndex: thumbIndex)
+            self.calculateGradient(false)
+            self.trackSlider.setNeedsDisplay()
+        }
     }
     
     func postGradientChangedNotification(gradient:Gradient) {
         NSNotificationCenter.defaultCenter().postNotificationName(GradientViewController.GradientChangedNotification, object: self, userInfo: ["Gradient":gradient])
+    }
+    
+    // MARK: - Undo
+    
+    func registerUndo(closure:(GradientViewController) -> Void) {
+        guard self.undoingEnabled else {
+            return
+        }
+        guard let undoManager = self.undoManager else {
+            return
+        }
+        undoManager.registerUndoWithTarget(self, handler: closure)
+    }
+    
+    func undo(sender:AnyObject) {
+        self.undoManager?.undo()
+    }
+    
+    func redo(sender:AnyObject) {
+        self.undoManager?.redo()
     }
     
 }

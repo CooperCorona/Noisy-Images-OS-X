@@ -94,6 +94,13 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var width:CGFloat {
         get { return self.internalWidth }
         set {
+            guard self.width != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.width] target in
+                target.width = value
+                target.delegate?.widthChanged(value)
+            }
             self.internalWidth = newValue
             self.widthTextField.CGFloatValue = newValue
         }
@@ -101,6 +108,13 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var height:CGFloat {
         get { return self.internalHeight }
         set {
+            guard self.height != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.height] target in
+                target.height = value
+                target.delegate?.heightChanged(value)
+            }
             self.internalHeight = newValue
             self.heightTextField.CGFloatValue = newValue
         }
@@ -108,6 +122,14 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var noiseWidth:CGFloat {
         get { return self.internalNoiseWidth }
         set {
+            guard self.noiseWidth != newValue else {
+                return
+            }
+            let value = self.noiseWidth
+            self.registerUndo() { target in
+                target.noiseWidth = value
+                target.delegate?.noiseWidthChanged(value)
+            }
             self.internalNoiseWidth = newValue
             self.noiseWidthTextField.CGFloatValue = newValue
             self.noiseWidthStepper.CGFloatValue = newValue
@@ -116,6 +138,14 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var noiseHeight:CGFloat {
         get { return self.internalNoiseHeight }
         set {
+            guard self.noiseHeight != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.noiseHeight] target in
+                target.noiseHeight = value
+                target.delegate?.noiseHeightChanged(value)
+            }
+            
             self.internalNoiseHeight = newValue
             self.noiseHeightTextField.CGFloatValue = newValue
             self.noiseHeightStepper.CGFloatValue = newValue
@@ -124,6 +154,13 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var xOffset:CGFloat {
         get { return self.internalXOffset }
         set {
+            guard self.xOffset != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.xOffset] target in
+                target.xOffset = value
+                target.delegate?.xOffsetChanged(value)
+            }
             self.internalXOffset = newValue
             self.xOffsetTextField.CGFloatValue = newValue
             self.xOffsetStepper.CGFloatValue = newValue
@@ -132,6 +169,13 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var yOffset:CGFloat {
         get { return self.internalYOffset }
         set {
+            guard self.yOffset != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.yOffset] target in
+                target.yOffset = value
+                target.delegate?.yOffsetChanged(value)
+            }
             self.internalYOffset = newValue
             self.yOffsetTextField.CGFloatValue = newValue
             self.yOffsetStepper.CGFloatValue = newValue
@@ -140,6 +184,13 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var zOffset:CGFloat {
         get { return self.internalZOffset }
         set {
+            guard self.zOffset != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.zOffset] target in
+                target.zOffset = value
+                target.delegate?.zOffsetChanged(value)
+            }
             self.internalZOffset = newValue
             self.zOffsetTextField.CGFloatValue = newValue
             self.zOffsetStepper.CGFloatValue = newValue
@@ -148,6 +199,14 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var noiseType:GLSPerlinNoiseSprite.NoiseType {
         get { return self.internalNoiseType }
         set {
+            guard self.noiseType != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.noiseType] target in
+                target.noiseType = value
+                target.delegate?.noiseTypeChanged(value)
+            }
+            
             self.internalNoiseType = newValue
             switch self.internalNoiseType {
             case .Default:
@@ -164,6 +223,14 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var seed:UInt32 {
         get { return self.internalSeed }
         set {
+            guard self.seed != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.seed] target in
+                target.seed = value
+                target.delegate?.seedChanged(value)
+            }
+            
             self.internalSeed = newValue
             self.seedTextField.stringValue = "\(newValue)"
         }
@@ -171,6 +238,13 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var noiseDivisor:CGFloat {
         get { return self.internalNoiseDivisor }
         set {
+            guard self.noiseDivisor != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.noiseDivisor] target in
+                target.noiseDivisor = value
+                target.delegate?.noiseDivisorChanged(value)
+            }
             self.internalNoiseDivisor = newValue
             self.noiseDivisorSlider.CGFloatValue = MenuController.convertDivisorToSlider(newValue)
         }
@@ -178,6 +252,13 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var isTiled:Bool {
         get { return self.internalIsTiled }
         set {
+            guard self.isTiled != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.isTiled] target in
+                target.isTiled = value
+                target.delegate?.isTiledChanged(value)
+            }
             self.internalIsTiled = newValue
             self.isTiledCheckBox.intValue = newValue ? 1 : 0
         }
@@ -185,6 +266,13 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     var noiseAngle:CGFloat {
         get { return self.internalNoiseAngle }
         set {
+            guard self.noiseAngle != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.noiseAngle] target in
+                target.noiseAngle = value
+                target.delegate?.noiseAngleChanged(value)
+            }
             self.internalNoiseAngle = newValue
         }
     }
@@ -209,6 +297,7 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     }
     
     weak var delegate:MenuControllerDelegate? = nil
+    var undoingEnabled = true
     
     var gradientContainer = GradientContainer()
     
@@ -338,8 +427,8 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     }
     
     func seedTextFieldChanged(sender: AnyObject) {
-        self.internalSeed = UInt32(self.seedTextField.intValue)
-        self.delegate?.seedChanged(self.internalSeed)
+        self.seed = UInt32(self.seedTextField.intValue)
+        self.delegate?.seedChanged(self.seed)
     }
     
     
@@ -379,9 +468,9 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     }
     
     @IBAction func scrambleButtonPressed(sender: AnyObject) {
-        self.internalSeed = arc4random()
-        self.seedTextField.stringValue = "\(self.internalSeed)"
-        self.delegate?.seedChanged(self.internalSeed)
+        self.seed = arc4random()
+        self.seedTextField.stringValue = "\(self.seed)"
+        self.delegate?.seedChanged(self.seed)
     }
 
     @IBAction func noiseDivisorSliderChanged(sender: AnyObject) {
@@ -491,6 +580,26 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         default:
             break
         }
+    }
+    
+    // MARK: - Undo
+    
+    func registerUndo(closure:(MenuController) -> Void) {
+        guard self.undoingEnabled else {
+            return
+        }
+        guard let undoManager = self.undoManager else {
+            return
+        }
+        undoManager.registerUndoWithTarget(self, handler: closure)
+    }
+    
+    func undo(sender:AnyObject) {
+        self.undoManager?.undo()
+    }
+    
+    func redo(sender:AnyObject) {
+        self.undoManager?.redo()
     }
     
 }

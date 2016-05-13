@@ -126,8 +126,10 @@ public class NoiseDocument: NSDocument {
     
     public override func makeWindowControllers() {
         let wc = NSStoryboard(name: "Document", bundle: nil).instantiateInitialController()! as! NoiseDocumentWindowController
+        wc.menuController.undoingEnabled = false
         wc.menuController.state = self.state
         wc.viewController.setState(self.state)
+        wc.menuController.undoingEnabled = true
         wc.menuController.delegate = wc
         wc.menuController.gradientContainer = self.gradientContainer
         wc.menuController.gradientContainer.delegate = wc.menuController
