@@ -529,7 +529,7 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     @IBAction func imageButtonPressed(sender: AnyObject) {
         let op = NSOpenPanel()
         op.treatsFilePackagesAsDirectories = false
-        op.allowedFileTypes = ["noise"]
+        op.allowedFileTypes = ["png", "jpg", "pdf"]
         switch op.runModal() {
         case NSModalResponseOK:
             self.imageURL = op.URL
