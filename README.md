@@ -147,4 +147,4 @@ Instead of running Noisy Images OS X from Xcode, you can export it to your deskt
 If you are getting a message that says Noisy Images OS X could not be opened (and prompts you to contact the developer or update it), make sure you have the OmniSwiftX.framework file in ~/Library/Frameworks directory.
 
 ## Conclusion
-Thank you for using at Noisy Images OS X! If you'd like to contribute to the project, fork the repository and submit a pull request. Take a look at the [issues page](https://github.com/CooperCorona/Noisy-Images-OS-X/issues) to see what needs to be done or add an issue that's been missed or a request for useful functionality.
+Thank you for using at Noisy Images OS X! If you'd like to contribute to the project, fork the repository and submit a pull request. Take a look at the [issues page](https://github.com/CooperCorona/Noisy-Images-OS-X/issues) to see what needs to be done, add an issue that's been missed, or a request for useful functionality.
