@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D43AE73CFE08E7A8DAD4B75D7DF822AB30901157",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D43AE73CFE08E7A8DAD4B75D7DF822AB30901157" : 0,
+    "13FD3D40E606AA96789CD7B221B4D89C16F084D7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "36A69D34-A59F-4FC6-B8B8-DE011D9AB2F7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D43AE73CFE08E7A8DAD4B75D7DF822AB30901157" : "NoisyImagesOSX\/",
+    "13FD3D40E606AA96789CD7B221B4D89C16F084D7" : "OmniSwiftX\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "NoisyImagesOSX",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "NoisyImagesOSX.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/CooperCorona\/OmniSwiftX.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "13FD3D40E606AA96789CD7B221B4D89C16F084D7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/CooperCorona\/Noisy-Images-OS-X.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D43AE73CFE08E7A8DAD4B75D7DF822AB30901157"
+    }
+  ]
+}
