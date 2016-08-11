@@ -54,6 +54,7 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     
     private static let minDivisor:CGFloat = 0.35
     private static let maxDivisor:CGFloat = 1.05
+    private static let maxNoiseAngleSlider:CGFloat = 100.0
     
     let integerFormatter = NSNumberFormatter()
     let floatFormatter = NSNumberFormatter()
@@ -73,6 +74,8 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     @IBOutlet weak var noiseTypePopUp: NSPopUpButton!
     @IBOutlet weak var seedTextField: NSTextField!
     @IBOutlet weak var noiseDivisorSlider: NSSlider!
+    @IBOutlet weak var noiseAngleTextField: NSTextField!
+    @IBOutlet weak var noiseAngleSlider: NSSlider!
     @IBOutlet weak var isTiledCheckBox: NSButton!
     @IBOutlet weak var gradientView: ColorGradientView!
     
@@ -249,6 +252,21 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
             self.noiseDivisorSlider.CGFloatValue = MenuController.convertDivisorToSlider(newValue)
         }
     }
+    var noiseAngle:CGFloat {
+        get { return self.internalNoiseAngle }
+        set {
+            guard self.noiseAngle != newValue else {
+                return
+            }
+            self.registerUndo() { [value = self.noiseAngle] target in
+                target.noiseAngle = value
+                target.delegate?.noiseAngleChanged(value)
+            }
+            self.internalNoiseAngle = newValue
+            self.noiseAngleSlider.CGFloatValue = MenuController.convertNoiseAngleToSlider(newValue)
+            self.noiseAngleTextField.CGFloatValue = newValue
+        }
+    }
     var isTiled:Bool {
         get { return self.internalIsTiled }
         set {
@@ -261,19 +279,6 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
             }
             self.internalIsTiled = newValue
             self.isTiledCheckBox.intValue = newValue ? 1 : 0
-        }
-    }
-    var noiseAngle:CGFloat {
-        get { return self.internalNoiseAngle }
-        set {
-            guard self.noiseAngle != newValue else {
-                return
-            }
-            self.registerUndo() { [value = self.noiseAngle] target in
-                target.noiseAngle = value
-                target.delegate?.noiseAngleChanged(value)
-            }
-            self.internalNoiseAngle = newValue
         }
     }
     var state:NoiseState {
@@ -326,11 +331,30 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         self.xOffsetTextField.formatter     = self.floatFormatter.copy() as! NSNumberFormatter
         self.yOffsetTextField.formatter     = self.floatFormatter.copy() as! NSNumberFormatter
         self.zOffsetTextField.formatter     = self.floatFormatter.copy() as! NSNumberFormatter
+        self.noiseAngleTextField.formatter  = self.floatFormatter.copy() as! NSNumberFormatter
         
         self.noiseTypePopUp.addItemsWithTitles(["Default", "Fractal", "Abs", "Sin"])
         self.gradientView.gradient = ColorGradient1D.grayscaleGradient
         
         self.gradientContainer.delegate = self
+        /*
+        let tests:[(CGFloat, CGFloat)] = [
+            (0.0, CGFloat(M_PI) / 2.0),
+            (25.0, 0.0),
+            (87.5, CGFloat(M_PI) * 3.0 / 4.0),
+            (100.0, CGFloat(M_PI) / 2.0)
+        ]
+        for (start, end) in tests {
+            let angle = MenuController.convertSliderToNoiseAngle(start)
+            let slider = MenuController.convertNoiseAngleToSlider(angle)
+            if (end ~= angle) && (start ~= slider) {
+                print("\(start) -> \(end) passed.")
+            } else {
+                print("\(start) -> \(end) failed.\n\t\(angle) <- \(slider)")
+            }
+        }
+        print("")
+        */
     }
     
     override func viewWillAppear() {
@@ -344,6 +368,8 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(yOffsetTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.yOffsetTextField)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(zOffsetTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.zOffsetTextField)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(seedTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.seedTextField)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(seedTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.seedTextField)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(noiseAngleTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.noiseAngleTextField)
     }
     
     override func viewWillDisappear() {
@@ -360,6 +386,24 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     
     class func convertDivisorToSlider(divisor:CGFloat) -> CGFloat {
         return (divisor - MenuController.minDivisor) / (MenuController.maxDivisor - MenuController.minDivisor)
+    }
+    
+    class func convertSliderToNoiseAngle(slider:CGFloat) -> CGFloat {
+        /*
+         *  The slider considers 0.0 to be the top, goes clockwise, and ends
+         *  at 100.0. The noise angle starts at the right, goes counterclockwise,
+         *  and ends at 2π.
+         *      ((MenuController.maxNoiseAngleSlider - slider)
+         *      - MenuController.maxNoiseAngleSlider / 4.0)
+         *      / MenuController.maxNoiseAngleSlider
+         *      * 2π
+         */
+        
+        return (0.25 - slider / MenuController.maxNoiseAngleSlider) * 2 * CGFloat(M_PI)
+    }
+    
+    class func convertNoiseAngleToSlider(noiseAngle:CGFloat) -> CGFloat {
+        return (0.25 - noiseAngle / (2.0 * CGFloat(M_PI))) * MenuController.maxNoiseAngleSlider
     }
     
     override func controlTextDidEndEditing(obj: NSNotification) {
@@ -431,6 +475,11 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         self.delegate?.seedChanged(self.seed)
     }
     
+    func noiseAngleTextFieldChanged(sender: AnyObject) {
+        self.noiseAngle = self.noiseAngleTextField.CGFloatValue
+        self.delegate?.noiseAngleChanged(self.noiseAngle)
+    }
+    
     
     @IBAction func noiseWidthStepperChanged(sender: AnyObject) {
         self.noiseWidth = self.noiseWidthStepper.CGFloatValue
@@ -476,6 +525,13 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     @IBAction func noiseDivisorSliderChanged(sender: AnyObject) {
         self.internalNoiseDivisor = MenuController.convertSliderToDivisor(self.noiseDivisorSlider.CGFloatValue)
         self.delegate?.noiseDivisorChanged(self.internalNoiseDivisor)
+    }
+    
+    @IBAction func noiseAngleSliderChanged(sender: NSSlider) {
+        self.internalNoiseAngle = MenuController.convertSliderToNoiseAngle(sender.CGFloatValue)
+        self.noiseAngleTextField.CGFloatValue = self.internalNoiseAngle
+        self.delegate?.noiseAngleChanged(self.internalNoiseAngle)
+        print(self.internalNoiseAngle)
     }
     
     @IBAction func isTiledCheckBoxChanged(sender: AnyObject) {

@@ -273,6 +273,7 @@ extension ViewController: MenuControllerDelegate {
     
     func noiseAngleChanged(noiseAngle: CGFloat) {
         self.noiseSprite.noiseAngle = noiseAngle
+        self.renderToTexture()
     }
     
     func gradientChanged(gradient: ColorGradient1D) {

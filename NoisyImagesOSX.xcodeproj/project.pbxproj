@@ -12,6 +12,7 @@
 		DC021A461CB83A7500070B5A /* GradientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC021A451CB83A7500070B5A /* GradientViewController.swift */; };
 		DC021A481CB849AE00070B5A /* GradientTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC021A471CB849AE00070B5A /* GradientTableCellView.xib */; };
 		DC021A4A1CB8BFF500070B5A /* ColorTrackSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC021A491CB8BFF500070B5A /* ColorTrackSlider.swift */; };
+		DC074DCB1D16FA840037EE24 /* Icons.icns in Resources */ = {isa = PBXBuildFile; fileRef = DC074DCA1D16FA840037EE24 /* Icons.icns */; };
 		DC0E5E7F1CD66B31005CF255 /* Large Dark Noise 128.png in Resources */ = {isa = PBXBuildFile; fileRef = DC0E5E7E1CD66B31005CF255 /* Large Dark Noise 128.png */; };
 		DC0E5E811CD67299005CF255 /* NoiseDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC0E5E801CD67299005CF255 /* NoiseDocument.xib */; };
 		DC0E5E841CD678EB005CF255 /* Document.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC0E5E821CD678EB005CF255 /* Document.storyboard */; };
@@ -81,6 +82,7 @@
 		DC021A451CB83A7500070B5A /* GradientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientViewController.swift; sourceTree = "<group>"; };
 		DC021A471CB849AE00070B5A /* GradientTableCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GradientTableCellView.xib; sourceTree = "<group>"; };
 		DC021A491CB8BFF500070B5A /* ColorTrackSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTrackSlider.swift; sourceTree = "<group>"; };
+		DC074DCA1D16FA840037EE24 /* Icons.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icons.icns; sourceTree = "<group>"; };
 		DC0E5E7E1CD66B31005CF255 /* Large Dark Noise 128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Large Dark Noise 128.png"; sourceTree = "<group>"; };
 		DC0E5E801CD67299005CF255 /* NoiseDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoiseDocument.xib; sourceTree = "<group>"; };
 		DC0E5E831CD678EB005CF255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = NoisyImagesOSX/Base.lproj/Document.storyboard; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				DCDCC0461CB9D058008F6012 /* BigCheckeredBackground@2x.png */,
 				DCDCC0471CB9D058008F6012 /* BigCheckeredBackground@3x.png */,
 				DCFF413E1CDD55C3004D57E9 /* Icon.png */,
+				DC074DCA1D16FA840037EE24 /* Icons.icns */,
 				DC0E5E7E1CD66B31005CF255 /* Large Dark Noise 128.png */,
 				DCFF413B1CDD27E5004D57E9 /* WhiteCircle.pdf */,
 				DCC9B7001CA8403A00743E2C /* WhiteTile.png */,
@@ -286,6 +289,7 @@
 				TargetAttributes = {
 					DC3437FB1CA78BDB007EFEE8 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = ULGC99Z6NQ;
 					};
 				};
 			};
@@ -329,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC18C1A91CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib in Resources */,
+				DC074DCB1D16FA840037EE24 /* Icons.icns in Resources */,
 				DC8A946C1CA9BDA700049118 /* ColorShader.fsh in Resources */,
 				DCEBACDE1CDE7A1C00487CD8 /* ExportImageAdvancedTableViewCell.xib in Resources */,
 				DCDCEB9E1CA88D9B001FD451 /* BasicShader.vsh in Resources */,
