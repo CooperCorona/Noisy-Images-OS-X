@@ -337,24 +337,6 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         self.gradientView.gradient = ColorGradient1D.grayscaleGradient
         
         self.gradientContainer.delegate = self
-        /*
-        let tests:[(CGFloat, CGFloat)] = [
-            (0.0, CGFloat(M_PI) / 2.0),
-            (25.0, 0.0),
-            (87.5, CGFloat(M_PI) * 3.0 / 4.0),
-            (100.0, CGFloat(M_PI) / 2.0)
-        ]
-        for (start, end) in tests {
-            let angle = MenuController.convertSliderToNoiseAngle(start)
-            let slider = MenuController.convertNoiseAngleToSlider(angle)
-            if (end ~= angle) && (start ~= slider) {
-                print("\(start) -> \(end) passed.")
-            } else {
-                print("\(start) -> \(end) failed.\n\t\(angle) <- \(slider)")
-            }
-        }
-        print("")
-        */
     }
     
     override func viewWillAppear() {
@@ -531,7 +513,6 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         self.internalNoiseAngle = MenuController.convertSliderToNoiseAngle(sender.CGFloatValue)
         self.noiseAngleTextField.CGFloatValue = self.internalNoiseAngle
         self.delegate?.noiseAngleChanged(self.internalNoiseAngle)
-        print(self.internalNoiseAngle)
     }
     
     @IBAction func isTiledCheckBoxChanged(sender: AnyObject) {
