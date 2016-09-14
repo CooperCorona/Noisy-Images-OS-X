@@ -7,7 +7,9 @@
 //
 
 import Cocoa
-import OmniSwiftX
+import CoronaConvenience
+import CoronaStructures
+import CoronaGL
 import GLKit
 
 enum NoiseDocumentError: ErrorType {

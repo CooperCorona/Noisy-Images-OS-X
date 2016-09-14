@@ -7,7 +7,9 @@
 //
 
 import Foundation
-import OmniSwiftX
+import CoronaConvenience
+import CoronaStructures
+import CoronaGL
 
 struct NoiseState {
     

@@ -8,7 +8,9 @@
 
 import AppKit
 import GLKit
-import OmniSwiftX
+import CoronaConvenience
+import CoronaStructures
+import CoronaGL
 import OpenGL
 
 public class OmniGLView2d: NSOpenGLView {

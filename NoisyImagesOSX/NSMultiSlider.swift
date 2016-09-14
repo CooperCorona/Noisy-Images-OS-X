@@ -7,7 +7,9 @@
 //
 
 import Cocoa
-import OmniSwiftX
+import CoronaConvenience
+import CoronaStructures
+import CoronaGL
 
 protocol NSMultiSliderDelegate: class {
     

@@ -8,7 +8,9 @@
 
 import AppKit
 import CoreData
-import OmniSwiftX
+import CoronaConvenience
+import CoronaStructures
+import CoronaGL
 
 struct ColorAnchor {
     var color:NSColor
