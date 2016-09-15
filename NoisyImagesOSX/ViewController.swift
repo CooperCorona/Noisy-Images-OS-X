@@ -57,7 +57,7 @@ class ViewController: NSViewController {
     private var zoomLevels:[CGFloat] = [1.0 / 16.0, 1.0 / 8.0, 1.0 / 4.0, 1.0 / 3.0, 1.0 / 2.0, 1.0, 2.0, 3.0, 4.0, 8.0, 16.0]
     private var zoomLevelIndex = 5
     private var zoomLevel:CGFloat { return self.zoomLevels[self.zoomLevelIndex] }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -74,6 +74,7 @@ class ViewController: NSViewController {
         self.noiseSprite.position = self.glView.frame.size.center
         self.glView.addChild(self.noiseSprite)
         self.renderToTexture()
+
         let menu = (self.parentViewController?.childViewControllers.first as? MenuController)
         menu?.seed = self.noiseSprite.noiseTexture.noise.seed
         self.menuController = menu
