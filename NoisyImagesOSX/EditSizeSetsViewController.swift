@@ -13,11 +13,11 @@ class EditSizeSetsViewController: NSViewController {
     // MARK: - Types
     
     enum SuffixValidationResult {
-        case Valid
-        case AlreadyExists
-        case MissingWidth
-        case MissingHeight
-        case OnlyWhitespace
+        case valid
+        case alreadyExists
+        case missingWidth
+        case missingHeight
+        case onlyWhitespace
     }
     
     // MARK: - Properties
@@ -30,7 +30,7 @@ class EditSizeSetsViewController: NSViewController {
     @IBOutlet weak var suffixTextField: NSTextField!
     @IBOutlet weak var addSizeSetMemberButton: NSButton!
     
-    let integerFormatter = NSNumberFormatter()
+    let integerFormatter = NumberFormatter()
     
     // MARK: - Setup
     
@@ -43,15 +43,15 @@ class EditSizeSetsViewController: NSViewController {
         self.widthTextField.formatter       = self.integerFormatter
         self.heightTextField.formatter      = self.integerFormatter
         
-        self.sizeTableView.registerNib(NSNib(nibNamed: "EditSizeSetsTableViewCell", bundle: NSBundle.mainBundle()), forIdentifier: "EditSizeSetsTableViewCell")
+        self.sizeTableView.register(NSNib(nibNamed: "EditSizeSetsTableViewCell", bundle: Bundle.main), forIdentifier: "EditSizeSetsTableViewCell")
         
         self.tableDelegate.loadSizeSets()
         self.tableDelegate.configurePopupButton(self.sizeSetPopupButton, selectTitle: nil)
         if self.sizeSetPopupButton.integerValue != 0 {
             self.tableDelegate.loadMembersForSet(self.sizeSetPopupButton.titleOfSelectedItem!)
         }
-        self.sizeTableView.setDelegate(self.tableDelegate)
-        self.sizeTableView.setDataSource(self.tableDelegate)
+        self.sizeTableView.delegate = self.tableDelegate
+        self.sizeTableView.dataSource = self.tableDelegate
         
         self.enableOrDisableTextFields()
     }
@@ -60,45 +60,45 @@ class EditSizeSetsViewController: NSViewController {
     
     func enableOrDisableTextFields() {
         if self.sizeSetPopupButton.integerValue == 0 {
-            self.widthTextField.enabled         = false
-            self.heightTextField.enabled        = false
-            self.suffixTextField.enabled        = false
-            self.addSizeSetMemberButton.enabled = false
+            self.widthTextField.isEnabled         = false
+            self.heightTextField.isEnabled        = false
+            self.suffixTextField.isEnabled        = false
+            self.addSizeSetMemberButton.isEnabled = false
         } else {
-            self.widthTextField.enabled         = true
-            self.heightTextField.enabled        = true
-            self.suffixTextField.enabled        = true
-            self.addSizeSetMemberButton.enabled = true
+            self.widthTextField.isEnabled         = true
+            self.heightTextField.isEnabled        = true
+            self.suffixTextField.isEnabled        = true
+            self.addSizeSetMemberButton.isEnabled = true
         }
     }
     
-    @IBAction func sizeSetPopupButtonChanged(sender: AnyObject) {
+    @IBAction func sizeSetPopupButtonChanged(_ sender: AnyObject) {
         self.enableOrDisableTextFields()
     }
     
-    @IBAction func addButtonPressed(sender: AnyObject) {
+    @IBAction func addButtonPressed(_ sender: AnyObject) {
     
     }
     
-    @IBAction func doneButtonPressed(sender: AnyObject) {
+    @IBAction func doneButtonPressed(_ sender: AnyObject) {
         
     }
     
-    @IBAction func widthTextFieldEndedEditing(sender: AnyObject) {
+    @IBAction func widthTextFieldEndedEditing(_ sender: AnyObject) {
         self.heightTextField.becomeFirstResponder()
     }
     
-    @IBAction func heightTextFieldEndedEditing(sender: AnyObject) {
+    @IBAction func heightTextFieldEndedEditing(_ sender: AnyObject) {
         self.suffixTextField.becomeFirstResponder()
     }
     
-    @IBAction func suffixTextFieldEndedEditing(sender: AnyObject) {
+    @IBAction func suffixTextFieldEndedEditing(_ sender: AnyObject) {
         self.addSizeSetMemberButtonPressed(sender)
     }
     
-    @IBAction func addSizeSetMemberButtonPressed(sender: AnyObject) {
+    @IBAction func addSizeSetMemberButtonPressed(_ sender: AnyObject) {
         switch self.validateMemberData(self.suffixTextField.stringValue) {
-        case .Valid:
+        case .valid:
             let setName = self.sizeSetPopupButton.titleOfSelectedItem!
             let width   = self.widthTextField.integerValue
             let height  = self.heightTextField.integerValue
@@ -106,13 +106,13 @@ class EditSizeSetsViewController: NSViewController {
             self.tableDelegate.addMemberTo(setName, width: width, height: height, suffix: suffix)
             self.sizeTableView.reloadData()
             self.clearTextFields()
-        case .AlreadyExists:
+        case .alreadyExists:
             self.presentAlert("That suffix already exists!")
-        case .MissingWidth:
+        case .missingWidth:
             self.presentAlert("The width must not be empty!")
-        case .MissingHeight:
+        case .missingHeight:
             self.presentAlert("The height must not be empty!")
-        case .OnlyWhitespace:
+        case .onlyWhitespace:
 //            self.presentAlert("The suffix must not be empty!")
             // For now, we don't present an alert, because clicking
             // into the text field and clicking out presents it, which is weird.
@@ -120,24 +120,24 @@ class EditSizeSetsViewController: NSViewController {
         }
     }
     
-    func validateMemberData(suffix:String) -> SuffixValidationResult {
+    func validateMemberData(_ suffix:String) -> SuffixValidationResult {
         if suffix.removeAllWhiteSpace() == "" {
-            return .OnlyWhitespace
+            return .onlyWhitespace
         }
         
         if self.widthTextField.stringValue.characterCount == 0 {
-            return .MissingWidth
+            return .missingWidth
         }
         if self.heightTextField.stringValue.characterCount == 0 {
-            return .MissingHeight
+            return .missingHeight
         }
         
         for member in self.tableDelegate.sizeSetMembers {
             if member.suffix == suffix {
-                return .AlreadyExists
+                return .alreadyExists
             }
         }
-        return .Valid
+        return .valid
     }
     
     func clearTextFields() {
@@ -146,15 +146,15 @@ class EditSizeSetsViewController: NSViewController {
         self.suffixTextField.stringValue = ""
     }
     
-    func presentAlert(message:String) {
+    func presentAlert(_ message:String) {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.WarningAlertStyle
+        alert.alertStyle = NSAlertStyle.warning
         alert.messageText = message
-        alert.addButtonWithTitle("Ok")
+        alert.addButton(withTitle: "Ok")
         alert.runModal()
     }
     
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "AddSizeSetSegue"?:
             guard let dest = segue.destinationController as? AddSizeSetViewController else {
@@ -173,11 +173,11 @@ class EditSizeSetsViewController: NSViewController {
         }
     }
 
-    @IBAction func deleteItemClicked(sender: NSMenuItem) {
+    @IBAction func deleteItemClicked(_ sender: NSMenuItem) {
         self.deleteBackward(sender)
     }
     
-    override func deleteBackward(sender: AnyObject?) {
+    override func deleteBackward(_ sender: Any?) {
         let index = self.sizeTableView.selectedRow
         if self.sizeTableView.isRowSelected(index) {
             self.tableDelegate.removeMemberAtIndex(index)
@@ -185,7 +185,7 @@ class EditSizeSetsViewController: NSViewController {
         }
     }
     
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         self.interpretKeyEvents([theEvent])
     }
     

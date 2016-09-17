@@ -20,7 +20,7 @@ class ExportImageViewController: NSViewController {
         // Do view setup here.
     }
     
-    @IBAction func exportButtonPressed(sender: AnyObject) {
+    @IBAction func exportButtonPressed(_ sender: AnyObject) {
         guard let noiseSprite = self.noiseSprite else {
             return
         }
@@ -30,7 +30,7 @@ class ExportImageViewController: NSViewController {
         panel.allowedFileTypes = ["png"]
         switch panel.runModal() {
         case NSModalResponseOK:
-            guard let url = panel.URL else {
+            guard let url = panel.url else {
                 return
             }
             ExportImageViewController.writeNoiseSprite(noiseSprite, toURL: url)
@@ -38,21 +38,21 @@ class ExportImageViewController: NSViewController {
             break
         }
         
-        self.presentingViewController?.dismissViewController(self)
+        self.presenting?.dismissViewController(self)
     }
     
-    @IBAction func cancelButtonPressed(sender: AnyObject) {
-        self.presentingViewController?.dismissViewController(self)
+    @IBAction func cancelButtonPressed(_ sender: AnyObject) {
+        self.presenting?.dismissViewController(self)
     }
     
-    class func writeNoiseSprite(noiseSprite:GLSPerlinNoiseSprite, toURL url:NSURL) {
+    class func writeNoiseSprite(_ noiseSprite:GLSPerlinNoiseSprite, toURL url:URL) {
         let image = noiseSprite.buffer.getImage()
-        let cgImage = image.CGImageForProposedRect(nil, context: nil, hints: nil)!
-        let bitmap = NSBitmapImageRep(CGImage: cgImage)
+        let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+        let bitmap = NSBitmapImageRep(cgImage: cgImage)
         bitmap.size = image.size
-        let data = bitmap.representationUsingType(.NSPNGFileType, properties: [:])
+        let data = bitmap.representation(using: NSBitmapImageFileType.PNG, properties: [:])
         do {
-            try data?.writeToURL(url, options: .DataWritingAtomic)
+            try data?.write(to: url, options: .atomic)
         } catch {
             print(error)
         }

@@ -15,25 +15,25 @@ class ColorGradientView: NSView {
 
     var gradient:ColorGradient1D? = ColorGradient1D.rainbowGradient {
         didSet {
-            self.setNeedsDisplayInRect(self.bounds)
+            self.setNeedsDisplay(self.bounds)
         }
     }
     
-    override func drawRect(dirtyRect: NSRect) {
-        super.drawRect(dirtyRect)
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
 
-        if let context = NSGraphicsContext.currentContext(), gradient = self.gradient {
+        if let context = NSGraphicsContext.current(), let gradient = self.gradient {
             context.saveGraphicsState()
             
             let w = dirtyRect.width / 256.0
-            CGContextScaleCTM(context.CGContext, w, 1.0)
+            context.cgContext.scaleBy(x: w, y: 1.0)
             for iii in 0..<gradient.size {
                 let percent = CGFloat(iii) / CGFloat(gradient.size - 1)
                 let vector = gradient[percent]
                 NSColor(red: vector.r, green: vector.g, blue: vector.b, alpha: vector.a).setFill()
                 //Instead of calculating the width of each bar of color, we scale the drawings.
                 //Instead of using 1 as the width, we use 2 to prevent weird errors from showing up.
-                CGContextFillRect(context.CGContext, CGRect(x: CGFloat(iii), y: 0.0, width: 2.0, height: dirtyRect.height))
+                context.cgContext.fill(CGRect(x: CGFloat(iii), y: 0.0, width: 2.0, height: dirtyRect.height))
             }
  
             /*

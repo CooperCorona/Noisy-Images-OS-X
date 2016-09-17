@@ -30,23 +30,23 @@ extension NSControl {
 
 protocol MenuControllerDelegate: class {
     
-    func widthChanged(width:CGFloat)
-    func heightChanged(height:CGFloat)
-    func noiseWidthChanged(noiseWidth:CGFloat)
-    func noiseHeightChanged(noiseHeight:CGFloat)
-    func xOffsetChanged(xOffset:CGFloat)
-    func yOffsetChanged(yOffset:CGFloat)
-    func zOffsetChanged(zOffset:CGFloat)
-    func noiseTypeChanged(noiseType:GLSPerlinNoiseSprite.NoiseType)
-    func seedChanged(seed:UInt32)
-    func noiseDivisorChanged(noiseDivisor:CGFloat)
-    func isTiledChanged(isTiled:Bool)
-    func noiseAngleChanged(noiseAngle:CGFloat)
-    func gradientChanged(gradient:ColorGradient1D)
+    func widthChanged(_ width:CGFloat)
+    func heightChanged(_ height:CGFloat)
+    func noiseWidthChanged(_ noiseWidth:CGFloat)
+    func noiseHeightChanged(_ noiseHeight:CGFloat)
+    func xOffsetChanged(_ xOffset:CGFloat)
+    func yOffsetChanged(_ yOffset:CGFloat)
+    func zOffsetChanged(_ zOffset:CGFloat)
+    func noiseTypeChanged(_ noiseType:GLSPerlinNoiseSprite.NoiseType)
+    func seedChanged(_ seed:UInt32)
+    func noiseDivisorChanged(_ noiseDivisor:CGFloat)
+    func isTiledChanged(_ isTiled:Bool)
+    func noiseAngleChanged(_ noiseAngle:CGFloat)
+    func gradientChanged(_ gradient:ColorGradient1D)
     
-    func textureChanged(texture:CCTexture, withData data:NSData?)
+    func textureChanged(_ texture:CCTexture, withData data:Data?)
     
-    func stateChanged(state:NoiseState)
+    func stateChanged(_ state:NoiseState)
     
 }
 
@@ -54,12 +54,12 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
 
     // MARK: - Properties
     
-    private static let minDivisor:CGFloat = 0.35
-    private static let maxDivisor:CGFloat = 1.05
-    private static let maxNoiseAngleSlider:CGFloat = 100.0
+    fileprivate static let minDivisor:CGFloat = 0.35
+    fileprivate static let maxDivisor:CGFloat = 1.05
+    fileprivate static let maxNoiseAngleSlider:CGFloat = 100.0
     
-    let integerFormatter = NSNumberFormatter()
-    let floatFormatter = NSNumberFormatter()
+    let integerFormatter = NumberFormatter()
+    let floatFormatter = NumberFormatter()
     
     @IBOutlet weak var widthTextField: NSTextField!
     @IBOutlet weak var heightTextField: NSTextField!
@@ -83,18 +83,18 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     
     // MARK: - Computed Properties
     
-    private var internalWidth:CGFloat       = 256.0
-    private var internalHeight:CGFloat      = 256.0
-    private var internalNoiseWidth:CGFloat  = 4.0
-    private var internalNoiseHeight:CGFloat = 4.0
-    private var internalXOffset:CGFloat     = 0.0
-    private var internalYOffset:CGFloat     = 0.0
-    private var internalZOffset:CGFloat     = 0.0
-    private var internalNoiseType           = GLSPerlinNoiseSprite.NoiseType.Default
-    private var internalSeed:UInt32         = 0
-    private var internalNoiseDivisor:CGFloat = 0.7
-    private var internalIsTiled             = false
-    private var internalNoiseAngle:CGFloat  = 0.0
+    fileprivate var internalWidth:CGFloat       = 256.0
+    fileprivate var internalHeight:CGFloat      = 256.0
+    fileprivate var internalNoiseWidth:CGFloat  = 4.0
+    fileprivate var internalNoiseHeight:CGFloat = 4.0
+    fileprivate var internalXOffset:CGFloat     = 0.0
+    fileprivate var internalYOffset:CGFloat     = 0.0
+    fileprivate var internalZOffset:CGFloat     = 0.0
+    fileprivate var internalNoiseType           = GLSPerlinNoiseSprite.NoiseType.Default
+    fileprivate var internalSeed:UInt32         = 0
+    fileprivate var internalNoiseDivisor:CGFloat = 0.7
+    fileprivate var internalIsTiled             = false
+    fileprivate var internalNoiseAngle:CGFloat  = 0.0
     
     var width:CGFloat {
         get { return self.internalWidth }
@@ -215,13 +215,13 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
             self.internalNoiseType = newValue
             switch self.internalNoiseType {
             case .Default:
-                self.noiseTypePopUp.selectItemAtIndex(0)
+                self.noiseTypePopUp.selectItem(at: 0)
             case .Fractal:
-                self.noiseTypePopUp.selectItemAtIndex(1)
+                self.noiseTypePopUp.selectItem(at: 1)
             case .Abs:
-                self.noiseTypePopUp.selectItemAtIndex(2)
+                self.noiseTypePopUp.selectItem(at: 2)
             case .Sin:
-                self.noiseTypePopUp.selectItemAtIndex(3)
+                self.noiseTypePopUp.selectItem(at: 3)
             }
         }
     }
@@ -308,8 +308,8 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     
     var gradientContainer = GradientContainer()
     
-    var imageURL:NSURL?     = nil
-    var textureData:NSData? = nil
+    var imageURL:URL?     = nil
+    var textureData:Data? = nil
     var texture:CCTexture?  = nil
     
     // MARK: - Setup
@@ -326,16 +326,16 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         self.floatFormatter.minimumFractionDigits = 0
         self.floatFormatter.maximumFractionDigits = 4
         
-        self.widthTextField.formatter       = self.integerFormatter.copy() as! NSNumberFormatter
-        self.heightTextField.formatter      = self.integerFormatter.copy() as! NSNumberFormatter
-        self.noiseWidthTextField.formatter  = self.floatFormatter.copy() as! NSNumberFormatter
-        self.noiseHeightTextField.formatter = self.floatFormatter.copy() as! NSNumberFormatter
-        self.xOffsetTextField.formatter     = self.floatFormatter.copy() as! NSNumberFormatter
-        self.yOffsetTextField.formatter     = self.floatFormatter.copy() as! NSNumberFormatter
-        self.zOffsetTextField.formatter     = self.floatFormatter.copy() as! NSNumberFormatter
-        self.noiseAngleTextField.formatter  = self.floatFormatter.copy() as! NSNumberFormatter
+        self.widthTextField.formatter       = self.integerFormatter.copy() as! NumberFormatter
+        self.heightTextField.formatter      = self.integerFormatter.copy() as! NumberFormatter
+        self.noiseWidthTextField.formatter  = self.floatFormatter.copy() as! NumberFormatter
+        self.noiseHeightTextField.formatter = self.floatFormatter.copy() as! NumberFormatter
+        self.xOffsetTextField.formatter     = self.floatFormatter.copy() as! NumberFormatter
+        self.yOffsetTextField.formatter     = self.floatFormatter.copy() as! NumberFormatter
+        self.zOffsetTextField.formatter     = self.floatFormatter.copy() as! NumberFormatter
+        self.noiseAngleTextField.formatter  = self.floatFormatter.copy() as! NumberFormatter
         
-        self.noiseTypePopUp.addItemsWithTitles(["Default", "Fractal", "Abs", "Sin"])
+        self.noiseTypePopUp.addItems(withTitles: ["Default", "Fractal", "Abs", "Sin"])
         self.gradientView.gradient = ColorGradient1D.grayscaleGradient
         
         self.gradientContainer.delegate = self
@@ -344,35 +344,35 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(widthTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.widthTextField)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(heightTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.heightTextField)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(noiseWidthTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.noiseWidthTextField)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(noiseHeightTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.noiseHeightTextField)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(xOffsetTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.xOffsetTextField)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(yOffsetTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.yOffsetTextField)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(zOffsetTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.zOffsetTextField)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(seedTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.seedTextField)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(seedTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.seedTextField)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(noiseAngleTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.noiseAngleTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(widthTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.widthTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(heightTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.heightTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(noiseWidthTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.noiseWidthTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(noiseHeightTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.noiseHeightTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(xOffsetTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.xOffsetTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(yOffsetTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.yOffsetTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(zOffsetTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.zOffsetTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(seedTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.seedTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(seedTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.seedTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(noiseAngleTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.noiseAngleTextField)
     }
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Logic
     
-    class func convertSliderToDivisor(slider:CGFloat) -> CGFloat {
+    class func convertSliderToDivisor(_ slider:CGFloat) -> CGFloat {
         return linearlyInterpolate(slider, left: self.minDivisor, right: self.maxDivisor)
     }
     
-    class func convertDivisorToSlider(divisor:CGFloat) -> CGFloat {
+    class func convertDivisorToSlider(_ divisor:CGFloat) -> CGFloat {
         return (divisor - MenuController.minDivisor) / (MenuController.maxDivisor - MenuController.minDivisor)
     }
     
-    class func convertSliderToNoiseAngle(slider:CGFloat) -> CGFloat {
+    class func convertSliderToNoiseAngle(_ slider:CGFloat) -> CGFloat {
         /*
          *  The slider considers 0.0 to be the top, goes clockwise, and ends
          *  at 100.0. The noise angle starts at the right, goes counterclockwise,
@@ -386,15 +386,15 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         return (0.25 - slider / MenuController.maxNoiseAngleSlider) * 2 * CGFloat(M_PI)
     }
     
-    class func convertNoiseAngleToSlider(noiseAngle:CGFloat) -> CGFloat {
+    class func convertNoiseAngleToSlider(_ noiseAngle:CGFloat) -> CGFloat {
         return (0.25 - noiseAngle / (2.0 * CGFloat(M_PI))) * MenuController.maxNoiseAngleSlider
     }
     
-    override func controlTextDidEndEditing(obj: NSNotification) {
-        self.noiseWidthTextFieldChanged(obj)
+    override func controlTextDidEndEditing(_ obj: Notification) {
+        self.noiseWidthTextFieldChanged(obj as AnyObject)
     }
     
-    func widthTextFieldChanged(sender: AnyObject) {
+    func widthTextFieldChanged(_ sender: AnyObject) {
         self.width = self.widthTextField.CGFloatValue
         self.widthTextField.window?.makeFirstResponder(nil)
         
@@ -408,7 +408,7 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         self.delegate?.widthChanged(self.width)
     }
     
-    func heightTextFieldChanged(sender: AnyObject) {
+    func heightTextFieldChanged(_ sender: AnyObject) {
         self.height = self.heightTextField.CGFloatValue
         
         /*
@@ -422,75 +422,75 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     }
     
     
-    func noiseWidthTextFieldChanged(sender: AnyObject) {
+    func noiseWidthTextFieldChanged(_ sender: AnyObject) {
         self.noiseWidth = self.noiseWidthTextField.CGFloatValue
         self.noiseWidthTextField.window?.makeFirstResponder(nil)
         
         self.delegate?.noiseWidthChanged(self.noiseWidth)
     }
     
-    func noiseHeightTextFieldChanged(sender: AnyObject) {
+    func noiseHeightTextFieldChanged(_ sender: AnyObject) {
         self.noiseHeight = self.noiseHeightTextField.CGFloatValue
         self.noiseHeightTextField.window?.makeFirstResponder(nil)
         
         self.delegate?.noiseHeightChanged(self.noiseHeight)
     }
     
-    func xOffsetTextFieldChanged(sender: AnyObject) {
+    func xOffsetTextFieldChanged(_ sender: AnyObject) {
         self.xOffset = self.xOffsetTextField.CGFloatValue
         
         self.delegate?.xOffsetChanged(self.xOffset)
     }
     
-    func yOffsetTextFieldChanged(sender: AnyObject) {
+    func yOffsetTextFieldChanged(_ sender: AnyObject) {
         self.yOffset = self.yOffsetTextField.CGFloatValue
         
         self.delegate?.yOffsetChanged(self.yOffset)
     }
     
-    func zOffsetTextFieldChanged(sender: AnyObject) {
+    func zOffsetTextFieldChanged(_ sender: AnyObject) {
         self.zOffset = self.zOffsetTextField.CGFloatValue
         
         self.delegate?.zOffsetChanged(self.zOffset)
     }
     
-    func seedTextFieldChanged(sender: AnyObject) {
+    func seedTextFieldChanged(_ sender: AnyObject) {
         self.seed = UInt32(self.seedTextField.intValue)
         self.delegate?.seedChanged(self.seed)
     }
     
-    func noiseAngleTextFieldChanged(sender: AnyObject) {
+    func noiseAngleTextFieldChanged(_ sender: AnyObject) {
         self.noiseAngle = self.noiseAngleTextField.CGFloatValue
         self.delegate?.noiseAngleChanged(self.noiseAngle)
     }
     
     
-    @IBAction func noiseWidthStepperChanged(sender: AnyObject) {
+    @IBAction func noiseWidthStepperChanged(_ sender: AnyObject) {
         self.noiseWidth = self.noiseWidthStepper.CGFloatValue
         self.delegate?.noiseWidthChanged(self.noiseWidth)
     }
     
-    @IBAction func noiseHeightStepperChanged(sender: AnyObject) {
+    @IBAction func noiseHeightStepperChanged(_ sender: AnyObject) {
         self.noiseHeight = self.noiseHeightStepper.CGFloatValue
         self.delegate?.noiseHeightChanged(self.noiseHeight)
     }
     
-    @IBAction func xOffsetStepperChanged(sender: AnyObject) {
+    @IBAction func xOffsetStepperChanged(_ sender: AnyObject) {
         self.xOffset = self.xOffsetStepper.CGFloatValue
         self.delegate?.xOffsetChanged(self.xOffset)
     }
     
-    @IBAction func yOffsetStepperChanged(sender: AnyObject) {
+    @IBAction func yOffsetStepperChanged(_ sender: AnyObject) {
         self.yOffset = self.yOffsetStepper.CGFloatValue
         self.delegate?.yOffsetChanged(self.yOffset)
     }
     
-    @IBAction func zOffsetStepperChanged(sender: AnyObject) {
+    @IBAction func zOffsetStepperChanged(_ sender: AnyObject) {
         self.zOffset = self.zOffsetStepper.CGFloatValue
         self.delegate?.zOffsetChanged(self.zOffset)
     }
 
-    @IBAction func noiseTypePopUpChanged(sender: AnyObject) {
+    @IBAction func noiseTypePopUpChanged(_ sender: AnyObject) {
         
         guard let title = self.noiseTypePopUp.selectedItem?.title, let noiseType = GLSPerlinNoiseSprite.NoiseType(rawValue: title) else {
             return
@@ -500,42 +500,42 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         self.delegate?.noiseTypeChanged(noiseType)
     }
     
-    @IBAction func scrambleButtonPressed(sender: AnyObject) {
+    @IBAction func scrambleButtonPressed(_ sender: AnyObject) {
         self.seed = arc4random()
         self.seedTextField.stringValue = "\(self.seed)"
         self.delegate?.seedChanged(self.seed)
     }
 
-    @IBAction func noiseDivisorSliderChanged(sender: AnyObject) {
+    @IBAction func noiseDivisorSliderChanged(_ sender: AnyObject) {
         self.internalNoiseDivisor = MenuController.convertSliderToDivisor(self.noiseDivisorSlider.CGFloatValue)
         self.delegate?.noiseDivisorChanged(self.internalNoiseDivisor)
     }
     
-    @IBAction func noiseAngleSliderChanged(sender: NSSlider) {
+    @IBAction func noiseAngleSliderChanged(_ sender: NSSlider) {
         self.internalNoiseAngle = MenuController.convertSliderToNoiseAngle(sender.CGFloatValue)
         self.noiseAngleTextField.CGFloatValue = self.internalNoiseAngle
         self.delegate?.noiseAngleChanged(self.internalNoiseAngle)
     }
     
-    @IBAction func isTiledCheckBoxChanged(sender: AnyObject) {
+    @IBAction func isTiledCheckBoxChanged(_ sender: AnyObject) {
         self.internalIsTiled = self.isTiledCheckBox.boolValue
         self.delegate?.isTiledChanged(self.internalIsTiled)
     }
     
-    @IBAction func flipButtonPressed(sender: AnyObject) {
+    @IBAction func flipButtonPressed(_ sender: AnyObject) {
         swap(&self.width, &self.height)
         swap(&self.noiseWidth, &self.noiseHeight)
         self.delegate?.stateChanged(self.state)
     }
 
-    @IBAction func imageButtonPressed(sender: AnyObject) {
+    @IBAction func imageButtonPressed(_ sender: AnyObject) {
         let op = NSOpenPanel()
         op.treatsFilePackagesAsDirectories = false
         op.allowedFileTypes = ["png", "jpg", "pdf"]
         switch op.runModal() {
         case NSModalResponseOK:
-            self.imageURL = op.URL
-            guard let url = op.URL else {
+            self.imageURL = op.url
+            guard let url = op.url else {
                 return
             }
             self.loadTextureFromURL(url)
@@ -544,25 +544,26 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         }
     }
     
-    @IBAction func squareButtonPressed(sender: AnyObject) {
+    @IBAction func squareButtonPressed(_ sender: AnyObject) {
         let texture         = CCTextureOrganizer.textureForString("White Tile")!
         self.textureData    = nil
         self.texture        = texture
         self.delegate?.textureChanged(texture, withData: nil)
     }
     
-    @IBAction func circleButtonPressed(sender: AnyObject) {
+    @IBAction func circleButtonPressed(_ sender: AnyObject) {
         let texture         = CCTextureOrganizer.textureForString("White Circle")!
         self.textureData    = nil
         self.texture        = texture
         self.delegate?.textureChanged(texture, withData: nil)
     }
     
-    func loadTextureFromURL(url:NSURL) {
-        guard let path = url.path else {
-            self.presentImageErrorAlert()
-            return
-        }
+    func loadTextureFromURL(_ url:URL) {
+//        guard let path = url.path else {
+//            self.presentImageErrorAlert()
+//            return
+//        }
+        let path = url.path
         
         if let texture = self.texture {
             var name = texture.name
@@ -571,20 +572,20 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
         do {
             let tex:GLKTextureInfo
             if path.hasSuffix("pdf") {
-                guard let image = NSImage.imageWithPDFURL(url, size: NSSize(width: width, height: height)) else {
+                guard let image = NSImage.imageWithPDFURL(url as NSURL, size: NSSize(width: width, height: height)) else {
                     self.presentImageErrorAlert()
                     return
                 }
-                let data = image.TIFFRepresentation!
+                let data = image.tiffRepresentation!
                 self.textureData = data
-                tex = try GLKTextureLoader.textureWithContentsOfData(data, options: [GLKTextureLoaderOriginBottomLeft:true])
+                tex = try GLKTextureLoader.texture(withContentsOf: data, options: [GLKTextureLoaderOriginBottomLeft:true])
             } else {
-                guard let data = NSData(contentsOfURL: url) else {
+                guard let data = try? Data(contentsOf: url) else {
                     self.presentImageErrorAlert()
                     return
                 }
                 self.textureData = data
-                tex = try GLKTextureLoader.textureWithContentsOfData(data, options: [GLKTextureLoaderOriginBottomLeft:true])
+                tex = try GLKTextureLoader.texture(withContentsOf: data, options: [GLKTextureLoaderOriginBottomLeft:true])
             }
             self.texture = CCTexture(name: tex.name)
             self.delegate?.textureChanged(self.texture!, withData: self.textureData)
@@ -596,20 +597,20 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     
     func presentImageErrorAlert() {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.WarningAlertStyle
+        alert.alertStyle = NSAlertStyle.warning
         alert.messageText = "Could not load image. Sorry!"
-        alert.addButtonWithTitle("Ok")
+        alert.addButton(withTitle: "Ok")
         alert.runModal()
     }
     
-    func gradientChanged(gradientContainer: GradientContainer) {
+    func gradientChanged(_ gradientContainer: GradientContainer) {
         let gradient = gradientContainer.gradient.blendColor(gradientContainer.overlay.getVector4())
         self.gradientView.gradient = gradient
         self.delegate?.gradientChanged(gradient)
     }
     
     
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "GradientSegue"?:
             guard let dest = segue.destinationController as? GradientViewController else {
@@ -623,21 +624,21 @@ class MenuController: NSViewController, NSTextFieldDelegate, GradientContainerDe
     
     // MARK: - Undo
     
-    func registerUndo(closure:(MenuController) -> Void) {
+    func registerUndo(_ closure:@escaping (MenuController) -> Void) {
         guard self.undoingEnabled else {
             return
         }
         guard let undoManager = self.undoManager else {
             return
         }
-        undoManager.registerUndoWithTarget(self, handler: closure)
+        undoManager.registerUndo(withTarget: self, handler: closure)
     }
     
-    func undo(sender:AnyObject) {
+    func undo(_ sender:AnyObject) {
         self.undoManager?.undo()
     }
     
-    func redo(sender:AnyObject) {
+    func redo(_ sender:AnyObject) {
         self.undoManager?.redo()
     }
     

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import CoronaConvenience
 
 extension NSSlider {
     public var percent:CGFloat {
@@ -17,16 +18,16 @@ extension NSSlider {
 @IBDesignable
 class ColorTrackSlider: NSSlider {
     
-    @IBInspectable var minTrackTintColor:NSColor    = NSColor.cyanColor()
-    @IBInspectable var maxTrackTintColor:NSColor    = NSColor.grayColor()
-    @IBInspectable var thumbTrackTintColor:NSColor  = NSColor.whiteColor()
+    @IBInspectable var minTrackTintColor:NSColor    = NSColor.cyan
+    @IBInspectable var maxTrackTintColor:NSColor    = NSColor.gray
+    @IBInspectable var thumbTrackTintColor:NSColor  = NSColor.white
     
     var mouseDownExecutedHandler:((ColorTrackSlider) -> Void)? = nil
     
-    override func drawRect(dirtyRect: NSRect) {
+    override func draw(_ dirtyRect: NSRect) {
 //        super.drawRect(dirtyRect)
         
-        guard let context = NSGraphicsContext.currentContext() else {
+        guard let context = NSGraphicsContext.current() else {
             return
         }
         context.saveGraphicsState()
@@ -35,7 +36,16 @@ class ColorTrackSlider: NSSlider {
         
         let r:CGFloat = 16.0
         let thumbPoint:NSPoint
-        if self.vertical == 0 {
+        
+        let vertical:Bool
+        if #available(OSX 10.12, *) {
+            vertical = self.isVertical
+        } else if #available(OSX 10.11, *) {
+            vertical = (self.value(forKey: "vertical")! as! Int) == 1
+        } else {
+            vertical = false
+        }
+        if !vertical {
             //Horizontal
             let h = self.bounds.height * trackFactor
             let x = self.percent * self.bounds.width
@@ -67,14 +77,14 @@ class ColorTrackSlider: NSSlider {
         }
         
         self.thumbTrackTintColor.setFill()
-        CGContextSetShadowWithColor(context.CGContext, CGSize(width: 0.0, height: 0.0), 1.0, NSColor(white: 0.0, alpha: 0.75).CGColor)
-        CGContextFillEllipseInRect(context.CGContext, NSRect(center: thumbPoint, size: NSSize(square: r)))
+        context.cgContext.setShadow(offset: CGSize(width: 0.0, height: 0.0), blur: 1.0, color: NSColor(white: 0.0, alpha: 0.75).cgColor)
+        (context.cgContext).fillEllipse(in: NSRect(origin: thumbPoint - r / 2.0, size: NSSize(square: r)))
         
         context.restoreGraphicsState()
     }
     
-    override func mouseDown(theEvent: NSEvent) {
-        super.mouseDown(theEvent)
+    override func mouseDown(with theEvent: NSEvent) {
+        super.mouseDown(with: theEvent)
         self.mouseDownExecutedHandler?(self)
     }
 }

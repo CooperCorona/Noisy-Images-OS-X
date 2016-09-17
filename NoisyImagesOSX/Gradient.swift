@@ -22,7 +22,7 @@ struct ColorAnchor {
     }
     
     init(string:String) {
-        let comps = string.componentsSeparatedByString(", ")
+        let comps = string.components(separatedBy: ", ")
         self.color = NSColor(red: comps[0].getCGFloatValue(), green: comps[1].getCGFloatValue(), blue: comps[2].getCGFloatValue(), alpha: comps[3].getCGFloatValue())
         self.weight = comps[4].getCGFloatValue()
     }
@@ -164,7 +164,7 @@ class Gradient: NSManagedObject {
             return colors
         }
         set {
-            for (i, anchor) in newValue.enumerate() {
+            for (i, anchor) in newValue.enumerated() {
                 self[i] = anchor
             }
             for i in newValue.count..<Gradient.colorCount {
@@ -189,11 +189,11 @@ class Gradient: NSManagedObject {
         }
         set {
             self.colors = newValue.anchors.map() { ColorAnchor(color: NSColor(vector4: $0.0), weight: $0.1) }
-            self.smoothed = NSNumber(bool: newValue.isSmoothed)
+            self.smoothed = NSNumber(value: newValue.isSmoothed)
         }
     }
 
     func generateUUID() {
-        self.universalId = NSUUID().UUIDString
+        self.universalId = UUID().uuidString
     }
 }

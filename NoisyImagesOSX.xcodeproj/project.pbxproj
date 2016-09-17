@@ -40,7 +40,6 @@
 		DC3438041CA78BDB007EFEE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC3438031CA78BDB007EFEE8 /* Assets.xcassets */; };
 		DC3438071CA78BDB007EFEE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3438051CA78BDB007EFEE8 /* Main.storyboard */; };
 		DC343FA61CBB053A0052F46E /* NSMultiSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC343FA51CBB053A0052F46E /* NSMultiSlider.swift */; };
-		DC5F0B9C1CAB21E90055B6C9 /* OmniGLView2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F0B9B1CAB21E90055B6C9 /* OmniGLView2d.swift */; };
 		DC5F0B9F1CAB229A0055B6C9 /* Atlases.xml in Resources */ = {isa = PBXBuildFile; fileRef = DC5F0B9E1CAB229A0055B6C9 /* Atlases.xml */; };
 		DC8A946A1CA9BD9E00049118 /* ColorShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DC8A94691CA9BD9E00049118 /* ColorShader.vsh */; };
 		DC8A946C1CA9BDA700049118 /* ColorShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DC8A946B1CA9BDA700049118 /* ColorShader.fsh */; };
@@ -136,7 +135,6 @@
 		DC3438061CA78BDB007EFEE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC3438081CA78BDB007EFEE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC343FA51CBB053A0052F46E /* NSMultiSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMultiSlider.swift; sourceTree = "<group>"; };
-		DC5F0B9B1CAB21E90055B6C9 /* OmniGLView2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmniGLView2d.swift; sourceTree = "<group>"; };
 		DC5F0B9E1CAB229A0055B6C9 /* Atlases.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Atlases.xml; sourceTree = "<group>"; };
 		DC8A94691CA9BD9E00049118 /* ColorShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorShader.vsh; sourceTree = "<group>"; };
 		DC8A946B1CA9BDA700049118 /* ColorShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorShader.fsh; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 				DC0E5EA21CD696ED005CF255 /* NoiseDocumentWindowController.swift */,
 				DC33B7761CB2197C0085EC6E /* NoiseState.swift */,
 				DC343FA51CBB053A0052F46E /* NSMultiSlider.swift */,
-				DC5F0B9B1CAB21E90055B6C9 /* OmniGLView2d.swift */,
 				DC3438011CA78BDB007EFEE8 /* ViewController.swift */,
 				DC3438031CA78BDB007EFEE8 /* Assets.xcassets */,
 				DC0E5E821CD678EB005CF255 /* Document.storyboard */,
@@ -346,12 +343,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Cooper Knaak";
 				TargetAttributes = {
 					DC3437FB1CA78BDB007EFEE8 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = ULGC99Z6NQ;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -467,7 +465,6 @@
 				DCDBBFD61CDD9E3300212E20 /* ExportImageViewController.swift in Sources */,
 				DC343FA61CBB053A0052F46E /* NSMultiSlider.swift in Sources */,
 				DC0E5EA71CD6E882005CF255 /* GradientContainer.swift in Sources */,
-				DC5F0B9C1CAB21E90055B6C9 /* OmniGLView2d.swift in Sources */,
 				DCFC5E361CDFCF6C00094E30 /* SizeSetMember+CoreDataProperties.swift in Sources */,
 				DC18C1A61CDFEFEC00CABF1B /* AddSizeSetViewController.swift in Sources */,
 				DCFA23451CDC041D00669667 /* GLSCheckerSprite.swift in Sources */,
@@ -528,8 +525,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -573,8 +572,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -593,6 +594,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -606,6 +608,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "Corona-Corporation.NoisyImagesOSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -619,6 +622,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "Corona-Corporation.NoisyImagesOSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

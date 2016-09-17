@@ -12,20 +12,20 @@ class AddSizeSetViewController: NSViewController {
     
     var sizeSets:[SizeSet] = []
     @IBOutlet weak var nameTextField: NSTextField!
-    let managedObjectContext:NSManagedObjectContext = ((NSApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext)!
+    let managedObjectContext:NSManagedObjectContext = ((NSApplication.shared().delegate as? AppDelegate)?.managedObjectContext)!
     var dismissHandler:((String) -> Void)? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sizeSets = self.fetchSizeSets()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(nameTextFieldChanged), name: NSControlTextDidEndEditingNotification, object: self.nameTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(nameTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.nameTextField)
     }
     
     func fetchSizeSets() -> [SizeSet] {
         do {
-            let request = NSFetchRequest(entityName: "SizeSet")
-            let sizeSets = try self.managedObjectContext.executeFetchRequest(request) as! [SizeSet]
+            let request = NSFetchRequest<SizeSet>(entityName: "SizeSet")
+            let sizeSets = try self.managedObjectContext.fetch(request) as! [SizeSet]
             return sizeSets
         } catch {
             return []
@@ -34,10 +34,10 @@ class AddSizeSetViewController: NSViewController {
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func textIsValid(text:String) -> Bool {
+    func textIsValid(_ text:String) -> Bool {
         for sizeSet in self.sizeSets {
             if sizeSet.name == text {
                 return false
@@ -46,11 +46,11 @@ class AddSizeSetViewController: NSViewController {
         return true
     }
     
-    func nameTextFieldChanged(sender:NSTextField) {
+    func nameTextFieldChanged(_ sender:NSTextField) {
         self.addButtonPressed(sender)
     }
     
-    @IBAction func addButtonPressed(sender: AnyObject) {
+    @IBAction func addButtonPressed(_ sender: AnyObject) {
         if self.textIsValid(self.nameTextField.stringValue) {
             self.addSizeSet(self.nameTextField.stringValue)
         } else {
@@ -58,21 +58,21 @@ class AddSizeSetViewController: NSViewController {
         }
     }
     
-    @IBAction func cancelButtonPressed(sender: AnyObject) {
-        self.presentingViewController?.dismissViewController(self)
+    @IBAction func cancelButtonPressed(_ sender: AnyObject) {
+        self.presenting?.dismissViewController(self)
     }
     
     func presentNameTakenError() {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.WarningAlertStyle
+        alert.alertStyle = NSAlertStyle.warning
         alert.messageText = "That name is already taken!"
-        alert.addButtonWithTitle("Ok")
+        alert.addButton(withTitle: "Ok")
         alert.runModal()
     }
     
-    func addSizeSet(name:String) {
+    func addSizeSet(_ name:String) {
         do {
-            let sizeSet = NSEntityDescription.insertNewObjectForEntityForName("SizeSet", inManagedObjectContext: self.managedObjectContext) as! SizeSet
+            let sizeSet = NSEntityDescription.insertNewObject(forEntityName: "SizeSet", into: self.managedObjectContext) as! SizeSet
             sizeSet.name = name
             try self.managedObjectContext.save()
         } catch {
@@ -80,7 +80,7 @@ class AddSizeSetViewController: NSViewController {
         }
         
         self.dismissHandler?(name)
-        self.presentingViewController?.dismissViewController(self)
+        self.presenting?.dismissViewController(self)
     }
     
 }

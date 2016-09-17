@@ -27,7 +27,7 @@ class GLSCheckerSprite: GLSNode {
         self.offColor   = off
         self.onColor    = on
         super.init(position: NSPoint.zero, size: size)
-        self.vertices = [UVertex](count: TexturedQuad.verticesPerQuad, repeatedValue: UVertex())
+        self.vertices = [UVertex](repeating: UVertex(), count: TexturedQuad.verticesPerQuad)
         self.contentSizeChanged()
     }
     
@@ -45,14 +45,14 @@ class GLSCheckerSprite: GLSNode {
         self.vertices = quad.vertices
     }
     
-    override func render(model: SCMatrix4) {
+    override func render(_ model: SCMatrix4) {
         if self.hidden {
             return
         }
         let childModel = self.modelMatrix()
         
         self.program.use()
-        glBufferData(GLenum(GL_ARRAY_BUFFER), GLsizeiptr(self.vertices.count * sizeof(UVertex)), self.vertices, GLenum(GL_STREAM_DRAW))
+        glBufferData(GLenum(GL_ARRAY_BUFFER), GLsizeiptr(self.vertices.count * MemoryLayout<UVertex>.size), self.vertices, GLenum(GL_STREAM_DRAW))
         
         self.program.uniformMatrix4fv("u_Projection", matrix: self.projection)
         self.program.uniformMatrix4fv("u_ModelMatrix", matrix: childModel)
@@ -61,7 +61,7 @@ class GLSCheckerSprite: GLSNode {
         self.program.uniform4f("u_OnColor", value: self.onColor)
         
         self.program.enableAttributes()
-        self.program.bridgeAttributesWithSizes([2, 2], stride: sizeof(UVertex))
+        self.program.bridgeAttributesWithSizes([2, 2], stride: MemoryLayout<UVertex>.size)
         
         glDrawArrays(TexturedQuad.drawingMode, 0, GLsizei(self.vertices.count))
         

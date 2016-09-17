@@ -13,9 +13,9 @@ import CoronaGL
 
 class PNGSavePanelDelegate: NSObject, NSOpenSavePanelDelegate {
     
-    enum Error: ErrorType {
-        case InvalidPath
-        case InvalidExtension
+    enum SaveError: Error {
+        case invalidPath
+        case invalidExtension
     }
     
     let validExtensions:[String]
@@ -28,16 +28,19 @@ class PNGSavePanelDelegate: NSObject, NSOpenSavePanelDelegate {
         self.init(extensions: ["png"])
     }
     
-    func panel(sender: AnyObject, validateURL url: NSURL) throws {
+    func panel(_ sender: Any, validate url: URL) throws {
+        /*
         guard let path = url.path else {
-            throw Error.InvalidPath
+            throw SaveError.invalidPath
         }
+        */
+        let path = url.path
         for ext in self.validExtensions {
             if path.hasSuffix(ext) {
                 return
             }
         }
-        throw Error.InvalidExtension
+        throw SaveError.invalidExtension
     }
     
 }
@@ -45,18 +48,18 @@ class PNGSavePanelDelegate: NSObject, NSOpenSavePanelDelegate {
 class ViewController: NSViewController {
 
     @IBOutlet weak var glView: OmniGLView2d!
-    lazy var timer:NSTimer = NSTimer(timeInterval: 1.0 / 30.0, target: self, selector: #selector(timerMethod), userInfo: nil, repeats: true)
+    lazy var timer:Timer = Timer(timeInterval: 1.0 / 30.0, target: self, selector: #selector(timerMethod), userInfo: nil, repeats: true)
     var time:CGFloat = 0.0
     
     lazy var checkerSprite:GLSCheckerSprite = GLSCheckerSprite(off: SCVector4.lightGrayColor, on: SCVector4.whiteColor, size: self.glView.frame.size)
     lazy var noiseSprite:GLSPerlinNoiseSprite = GLSPerlinNoiseSprite(size: NSSize(square: 256.0), texture: "White Tile", noise: Noise3DTexture2D(), gradient: GLGradientTexture2D(gradient: ColorGradient1D.grayscaleGradient))
     
     weak var menuController:MenuController? = nil
-    private var isTiled = false
+    fileprivate var isTiled = false
     
-    private var zoomLevels:[CGFloat] = [1.0 / 16.0, 1.0 / 8.0, 1.0 / 4.0, 1.0 / 3.0, 1.0 / 2.0, 1.0, 2.0, 3.0, 4.0, 8.0, 16.0]
-    private var zoomLevelIndex = 5
-    private var zoomLevel:CGFloat { return self.zoomLevels[self.zoomLevelIndex] }
+    fileprivate var zoomLevels:[CGFloat] = [1.0 / 16.0, 1.0 / 8.0, 1.0 / 4.0, 1.0 / 3.0, 1.0 / 2.0, 1.0, 2.0, 3.0, 4.0, 8.0, 16.0]
+    fileprivate var zoomLevelIndex = 5
+    fileprivate var zoomLevel:CGFloat { return self.zoomLevels[self.zoomLevelIndex] }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,16 +78,16 @@ class ViewController: NSViewController {
         self.glView.addChild(self.noiseSprite)
         self.renderToTexture()
 
-        let menu = (self.parentViewController?.childViewControllers.first as? MenuController)
+        let menu = (self.parent?.childViewControllers.first as? MenuController)
         menu?.seed = self.noiseSprite.noiseTexture.noise.seed
         self.menuController = menu
         
-        NSNotificationCenter.defaultCenter().addObserver(self, name: NSViewGlobalFrameDidChangeNotification, selector: #selector(self.windowSizeChanged))
-        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ExportImageItemClickedNotification, selector: #selector(self.exportImageItemClicked(_:)))
-        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ExportImageAdvancedItemClickedNotification, selector: #selector(self.exportImagesAdvancedItemClicked(_:)))
-        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ZoomInItemClickedNotification, selector: #selector(self.zoomInItemClicked(_:)))
-        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ZoomOutItemClickedNotification, selector: #selector(self.zoomOutItemClicked(_:)))
-        NSNotificationCenter.defaultCenter().addObserver(self, name: AppDelegate.ResetZoomItemClickedNotification, selector: #selector(self.resetZoomItemClicked(_:)))
+        NotificationCenter.default.addObserver(self, name: NSNotification.Name.NSViewGlobalFrameDidChange.rawValue, selector: #selector(self.windowSizeChanged))
+        NotificationCenter.default.addObserver(self, name: AppDelegate.ExportImageItemClickedNotification, selector: #selector(self.exportImageItemClicked(_:)))
+        NotificationCenter.default.addObserver(self, name: AppDelegate.ExportImageAdvancedItemClickedNotification, selector: #selector(self.exportImagesAdvancedItemClicked(_:)))
+        NotificationCenter.default.addObserver(self, name: AppDelegate.ZoomInItemClickedNotification, selector: #selector(self.zoomInItemClicked(_:)))
+        NotificationCenter.default.addObserver(self, name: AppDelegate.ZoomOutItemClickedNotification, selector: #selector(self.zoomOutItemClicked(_:)))
+        NotificationCenter.default.addObserver(self, name: AppDelegate.ResetZoomItemClickedNotification, selector: #selector(self.resetZoomItemClicked(_:)))
     }
 
     override func viewDidAppear() {
@@ -94,13 +97,13 @@ class ViewController: NSViewController {
     
     override func viewDidDisappear() {
         super.viewDidDisappear()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func timerMethod(sender:NSTimer) {
+    func timerMethod(_ sender:Timer) {
         self.time += 1.0 / 30.0
         self.glView.clearColor = SCVector4(gray: sin(self.time * 2.0) * 0.5 + 0.5)
-        self.glView.setNeedsDisplayInRect(self.glView.frame)
+        self.glView.setNeedsDisplay(self.glView.frame)
         self.glView.container.update(1.0 / 30.0)
     }
 
@@ -108,12 +111,12 @@ class ViewController: NSViewController {
         self.glView.display()
     }
     
-    func windowSizeChanged(notification:NSNotification) {
+    func windowSizeChanged(_ notification:Notification) {
         self.checkerSprite.contentSize = self.glView.frame.size
         self.noiseSprite.position = self.glView.frame.size.center
     }
     
-    @IBAction func buttonPressed(sender: AnyObject) {
+    @IBAction func buttonPressed(_ sender: AnyObject) {
         let sprite = GLSSprite(size: NSSize(square: 128.0), texture: "White Tile")
         let x = Int(arc4random() % UInt32(self.glView.frame.width))
         let y = Int(arc4random() % UInt32(self.glView.frame.height))
@@ -137,7 +140,7 @@ class ViewController: NSViewController {
         ns2.renderToTexture()
     }
     
-    func exportImageItemClicked(sender:NSNotification) {
+    func exportImageItemClicked(_ sender:Notification) {
         /*
         let image = self.noiseSprite.buffer.getImage()
         
@@ -162,20 +165,20 @@ class ViewController: NSViewController {
             break
         }
         */
-        let exportController = NSStoryboard(name: "Document", bundle: nil).instantiateControllerWithIdentifier("exportImageViewController") as! ExportImageViewController
+        let exportController = NSStoryboard(name: "Document", bundle: nil).instantiateController(withIdentifier: "exportImageViewController") as! ExportImageViewController
         exportController.noiseSprite = self.noiseSprite
 //        self.presentViewControllerAsModalWindow(exportController)
         self.presentViewControllerAsSheet(exportController)
     }
     
-    func exportImagesAdvancedItemClicked(sender:NSNotification) {
-        let exportController = NSStoryboard(name: "Document", bundle: nil).instantiateControllerWithIdentifier("exportImageAdvancedViewController") as! ExportImageAdvancedViewController
+    func exportImagesAdvancedItemClicked(_ sender:Notification) {
+        let exportController = NSStoryboard(name: "Document", bundle: nil).instantiateController(withIdentifier: "exportImageAdvancedViewController") as! ExportImageAdvancedViewController
         exportController.noiseSprite = self.noiseSprite
 //        self.presentViewControllerAsModalWindow(exportController)
         self.presentViewControllerAsSheet(exportController)
     }
     
-    func zoomInItemClicked(notification:NSNotification?) {
+    func zoomInItemClicked(_ notification:Notification?) {
         guard self.zoomLevelIndex < self.zoomLevels.count - 1 else {
             return
         }
@@ -183,7 +186,7 @@ class ViewController: NSViewController {
         self.zoomChanged()
     }
     
-    func zoomOutItemClicked(notification:NSNotification?) {
+    func zoomOutItemClicked(_ notification:Notification?) {
         guard self.zoomLevelIndex > 0 else {
             return
         }
@@ -191,12 +194,12 @@ class ViewController: NSViewController {
         self.zoomChanged()
     }
     
-    func resetZoomItemClicked(notification:NSNotification?) {
+    func resetZoomItemClicked(_ notification:Notification?) {
         self.zoomLevelIndex = self.zoomLevels.count / 2
         self.zoomChanged()
     }
     
-    private func zoomChanged() {
+    fileprivate func zoomChanged() {
         self.noiseSprite.scale = self.zoomLevel
         self.checkerSprite.checkerSize = 32.0 * self.zoomLevel
         self.render()
@@ -206,61 +209,61 @@ class ViewController: NSViewController {
 
 extension ViewController: MenuControllerDelegate {
     
-    func widthChanged(width: CGFloat) {
+    func widthChanged(_ width: CGFloat) {
         self.noiseSprite.contentSize.width = width
         self.renderToTexture()
         self.resetZoomItemClicked(nil)
     }
     
-    func heightChanged(height: CGFloat) {
+    func heightChanged(_ height: CGFloat) {
         self.noiseSprite.contentSize.height = height
         self.renderToTexture()
         self.resetZoomItemClicked(nil)
     }
     
-    func noiseWidthChanged(noiseWidth: CGFloat) {
+    func noiseWidthChanged(_ noiseWidth: CGFloat) {
         self.noiseSprite.noiseSize.width = noiseWidth
         self.updateForTiled()
         self.renderToTexture()
     }
     
-    func noiseHeightChanged(noiseHeight: CGFloat) {
+    func noiseHeightChanged(_ noiseHeight: CGFloat) {
         self.noiseSprite.noiseSize.height = noiseHeight
         self.updateForTiled()
         self.renderToTexture()
     }
     
-    func xOffsetChanged(xOffset: CGFloat) {
+    func xOffsetChanged(_ xOffset: CGFloat) {
         self.noiseSprite.offset.x = xOffset
         self.renderToTexture()
     }
     
-    func yOffsetChanged(yOffset: CGFloat) {
+    func yOffsetChanged(_ yOffset: CGFloat) {
         self.noiseSprite.offset.y = yOffset
         self.renderToTexture()
     }
     
-    func zOffsetChanged(zOffset: CGFloat) {
+    func zOffsetChanged(_ zOffset: CGFloat) {
         self.noiseSprite.offset.z = zOffset
         self.renderToTexture()
     }
     
-    func noiseTypeChanged(noiseType: GLSPerlinNoiseSprite.NoiseType) {
+    func noiseTypeChanged(_ noiseType: GLSPerlinNoiseSprite.NoiseType) {
         self.noiseSprite.noiseType = noiseType
         self.renderToTexture()
     }
     
-    func seedChanged(seed: UInt32) {
+    func seedChanged(_ seed: UInt32) {
         self.noiseSprite.noiseTexture = Noise3DTexture2D(seed: seed)
         self.renderToTexture()
     }
     
-    func noiseDivisorChanged(noiseDivisor: CGFloat) {
+    func noiseDivisorChanged(_ noiseDivisor: CGFloat) {
         self.noiseSprite.noiseDivisor = noiseDivisor
         self.renderToTexture()
     }
     
-    func isTiledChanged(isTiled: Bool) {
+    func isTiledChanged(_ isTiled: Bool) {
         self.isTiled = isTiled
         self.updateForTiled()
         self.renderToTexture()
@@ -274,22 +277,22 @@ extension ViewController: MenuControllerDelegate {
         }
     }
     
-    func noiseAngleChanged(noiseAngle: CGFloat) {
+    func noiseAngleChanged(_ noiseAngle: CGFloat) {
         self.noiseSprite.noiseAngle = noiseAngle
         self.renderToTexture()
     }
     
-    func gradientChanged(gradient: ColorGradient1D) {
+    func gradientChanged(_ gradient: ColorGradient1D) {
         self.noiseSprite.gradient = GLGradientTexture2D(gradient: gradient)
         self.renderToTexture()
     }
     
-    func textureChanged(texture: CCTexture, withData data:NSData?) {
+    func textureChanged(_ texture: CCTexture, withData data:Data?) {
         self.noiseSprite.shadeTexture = texture
         self.renderToTexture()
     }
     
-    func setState(state:NoiseState) {
+    func setState(_ state:NoiseState) {
         self.noiseSprite.contentSize    = state.contentSize
         self.noiseSprite.noiseSize      = state.noiseSize
         self.noiseSprite.offset         = state.offset
@@ -302,13 +305,13 @@ extension ViewController: MenuControllerDelegate {
         self.updateForTiled()
     }
     
-    func stateChanged(state: NoiseState) {
+    func stateChanged(_ state: NoiseState) {
         self.setState(state)
         self.renderToTexture()
         self.resetZoomItemClicked(nil)
     }
     
-    class func setViewportTo(size:NSSize) {
+    class func setViewportTo(_ size:NSSize) {
         glViewport(0, 0, GLsizei(size.width), GLsizei(size.height))
         GLSNode.universalProjection = SCMatrix4(right: size.width, top: size.height)
     }

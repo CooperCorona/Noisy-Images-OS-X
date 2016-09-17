@@ -27,69 +27,69 @@ class NoiseDocumentWindowController: NSWindowController {
 
 extension NoiseDocumentWindowController: MenuControllerDelegate {
     
-    func widthChanged(width: CGFloat) {
+    func widthChanged(_ width: CGFloat) {
         self.noiseDocument.state.contentSize.width = width
 //        self.renderToTexture()
         self.viewController.widthChanged(width)
     }
     
-    func heightChanged(height: CGFloat) {
+    func heightChanged(_ height: CGFloat) {
         self.noiseDocument.state.contentSize.height = height
 //        self.renderToTexture()
         self.viewController.heightChanged(height)
     }
     
-    func noiseWidthChanged(noiseWidth: CGFloat) {
+    func noiseWidthChanged(_ noiseWidth: CGFloat) {
         self.noiseDocument.state.noiseSize.width = noiseWidth
 //        self.updateForTiled()
 //        self.renderToTexture()
         self.viewController.noiseWidthChanged(noiseWidth)
     }
     
-    func noiseHeightChanged(noiseHeight: CGFloat) {
+    func noiseHeightChanged(_ noiseHeight: CGFloat) {
         self.noiseDocument.state.noiseSize.height = noiseHeight
 //        self.updateForTiled()
 //        self.renderToTexture()
         self.viewController.noiseHeightChanged(noiseHeight)
     }
     
-    func xOffsetChanged(xOffset: CGFloat) {
+    func xOffsetChanged(_ xOffset: CGFloat) {
         self.noiseDocument.state.offset.x = xOffset
 //        self.renderToTexture()
         self.viewController.xOffsetChanged(xOffset)
     }
     
-    func yOffsetChanged(yOffset: CGFloat) {
+    func yOffsetChanged(_ yOffset: CGFloat) {
         self.noiseDocument.state.offset.y = yOffset
 //        self.renderToTexture()
         self.viewController.yOffsetChanged(yOffset)
     }
     
-    func zOffsetChanged(zOffset: CGFloat) {
+    func zOffsetChanged(_ zOffset: CGFloat) {
         self.noiseDocument.state.offset.z = zOffset
 //        self.renderToTexture()
         self.viewController.zOffsetChanged(zOffset)
     }
     
-    func noiseTypeChanged(noiseType: GLSPerlinNoiseSprite.NoiseType) {
+    func noiseTypeChanged(_ noiseType: GLSPerlinNoiseSprite.NoiseType) {
         self.noiseDocument.state.noiseType = noiseType
 //        self.renderToTexture()
         self.viewController.noiseTypeChanged(noiseType)
     }
     
-    func seedChanged(seed: UInt32) {
+    func seedChanged(_ seed: UInt32) {
         self.noiseDocument.state.seed = seed
 //        self.renderToTexture()
         self.viewController.seedChanged(seed)
     }
     
-    func noiseDivisorChanged(noiseDivisor: CGFloat) {
+    func noiseDivisorChanged(_ noiseDivisor: CGFloat) {
         self.noiseDocument.state.noiseDivisor = noiseDivisor
 //        self.renderToTexture()
         self.viewController.noiseDivisorChanged(noiseDivisor)
     }
     
-    func isTiledChanged(isTiled: Bool) {
+    func isTiledChanged(_ isTiled: Bool) {
 //        self.isTiled = isTiled
 //        self.updateForTiled()
 //        self.renderToTexture()
@@ -98,21 +98,21 @@ extension NoiseDocumentWindowController: MenuControllerDelegate {
     }
     
     
-    func noiseAngleChanged(noiseAngle: CGFloat) {
+    func noiseAngleChanged(_ noiseAngle: CGFloat) {
         self.noiseDocument.state.noiseAngle = noiseAngle
         self.viewController.noiseAngleChanged(noiseAngle)
     }
     
-    func gradientChanged(gradient: ColorGradient1D) {
+    func gradientChanged(_ gradient: ColorGradient1D) {
         self.viewController.gradientChanged(gradient)
     }
     
-    func textureChanged(texture: CCTexture, withData data:NSData?) {
+    func textureChanged(_ texture: CCTexture, withData data:Data?) {
         self.viewController.textureChanged(texture, withData: data)
         self.noiseDocument.imageData = data
     }
     
-    func stateChanged(state: NoiseState) {
+    func stateChanged(_ state: NoiseState) {
         self.noiseDocument.state = state
         self.viewController.stateChanged(state)
     }

@@ -14,24 +14,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - Computed Variables
     
-    private(set) lazy var applicationDocumentsDirectory: NSURL = {
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+    fileprivate(set) lazy var applicationDocumentsDirectory: URL = {
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return urls[urls.count-1]
     }()
     
-    private(set) lazy var managedObjectModel: NSManagedObjectModel = {
+    fileprivate(set) lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("NoisyImagesOSX", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle.main.url(forResource: "NoisyImagesOSX", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
-    private(set) lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+    fileprivate(set) lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         var coordinator:NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
 //        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("NoiseGenerator.sqlite")
-        let url = NSBundle.mainBundle().URLForResource("NoisyImagesOSX", withExtension: "momd")!.URLByAppendingPathComponent("NoiseGenerator.sqlite")
+        let url = Bundle.main.url(forResource: "NoisyImagesOSX", withExtension: "momd")!.appendingPathComponent("NoiseGenerator.sqlite")
         do {
-            try coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            try coordinator?.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
         } catch var error1 as NSError {
             coordinator = nil
             print("Error initializing persistent store: \(error1)")
@@ -43,11 +43,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return coordinator
     }()
     
-    private(set) lazy var managedObjectContext: NSManagedObjectContext? = {
+    fileprivate(set) lazy var managedObjectContext: NSManagedObjectContext? = {
         guard let coordinator = self.persistentStoreCoordinator else {
             return nil
         }
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
@@ -58,12 +58,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - App States
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
@@ -77,47 +77,47 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     static let ZoomOutItemClickedNotification               = "com.coopercorona.NoisyImagesOSX.ZoomOutItemClicked"
     static let ResetZoomItemClickedNotification             = "com.coopercorona.NoisyImagesOSX.ResetZoomItemClicked"
     
-    @IBAction func saveItemClicked(sender: AnyObject) {
+    @IBAction func saveItemClicked(_ sender: AnyObject) {
         print("Save item clicked...")
     }
     
-    @IBAction func saveGradientItemClicked(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.SaveGradientItemClickedNotification, object: self)
+    @IBAction func saveGradientItemClicked(_ sender: AnyObject) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: AppDelegate.SaveGradientItemClickedNotification), object: self)
     }
     
-    @IBAction func saveNewGradientItemClicked(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.SaveNewGradientItemClickedNotification, object: self)
+    @IBAction func saveNewGradientItemClicked(_ sender: AnyObject) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: AppDelegate.SaveNewGradientItemClickedNotification), object: self)
     }
     
-    @IBAction func exportImageItemClicked(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.ExportImageItemClickedNotification, object: nil)
+    @IBAction func exportImageItemClicked(_ sender: AnyObject) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: AppDelegate.ExportImageItemClickedNotification), object: nil)
     }
     
-    @IBAction func exportImageAdvancedItemClicked(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.ExportImageAdvancedItemClickedNotification, object: nil)
+    @IBAction func exportImageAdvancedItemClicked(_ sender: AnyObject) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: AppDelegate.ExportImageAdvancedItemClickedNotification), object: nil)
     }
     
     
-    @IBAction func editSizeSetsItemClicked(sender: AnyObject?) {
+    @IBAction func editSizeSetsItemClicked(_ sender: AnyObject?) {
         let window = NSStoryboard(name: "EditSizeSets", bundle: nil).instantiateInitialController() as! NSWindowController
         window.showWindow(self)
         self.editSizeSetsController = window
     }
     
     class func presentEditSizeSetsController() {
-        (NSApplication.sharedApplication().delegate! as! AppDelegate).editSizeSetsItemClicked(nil)
+        (NSApplication.shared().delegate! as! AppDelegate).editSizeSetsItemClicked(nil)
     }
     
-    @IBAction func zoomInItemClicked(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.ZoomInItemClickedNotification, object: self)
+    @IBAction func zoomInItemClicked(_ sender: AnyObject) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: AppDelegate.ZoomInItemClickedNotification), object: self)
     }
     
-    @IBAction func zoomOutItemClicked(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.ZoomOutItemClickedNotification, object: self)
+    @IBAction func zoomOutItemClicked(_ sender: AnyObject) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: AppDelegate.ZoomOutItemClickedNotification), object: self)
     }
     
-    @IBAction func resetZoomItemClicked(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName(AppDelegate.ResetZoomItemClickedNotification, object: self)
+    @IBAction func resetZoomItemClicked(_ sender: AnyObject) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: AppDelegate.ResetZoomItemClickedNotification), object: self)
     }
     
 }

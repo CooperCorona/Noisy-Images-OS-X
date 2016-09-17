@@ -12,7 +12,7 @@ import CoronaStructures
 import CoronaGL
 
 protocol GradientContainerDelegate: class {
-    func gradientChanged(gradientContainer:GradientContainer)
+    func gradientChanged(_ gradientContainer:GradientContainer)
 }
 
 class GradientContainer: NSObject {
@@ -41,14 +41,14 @@ class GradientContainer: NSObject {
         self.uuid = gradient.universalId ?? ""
     }
     
-    func toGradient(gradient:Gradient) {
+    func toGradient(_ gradient:Gradient) {
         gradient.gradient       = self.gradient
         gradient.universalId    = self.uuid
         gradient.overlay        = self.overlay.getString()
     }
     
     func generateUUID() {
-        self.uuid = NSUUID().UUIDString
+        self.uuid = UUID().uuidString
     }
     
 }

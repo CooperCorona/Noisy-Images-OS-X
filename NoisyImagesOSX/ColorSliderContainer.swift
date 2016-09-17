@@ -30,11 +30,11 @@ class ColorSliderContainer: NSObject {
         }
     }
     
-    private var animationDuration:NSTimeInterval = 0.33333
-    private var timer:NSTimer? = nil
-    private var time:NSTimeInterval = 0.0
-    private var startColor = SCVector4.blackColor
-    private var finalColor = SCVector4.whiteColor
+    fileprivate var animationDuration:TimeInterval = 0.33333
+    fileprivate var timer:Timer? = nil
+    fileprivate var time:TimeInterval = 0.0
+    fileprivate var startColor = SCVector4.blackColor
+    fileprivate var finalColor = SCVector4.whiteColor
     
     // MARK: - Setup
     
@@ -47,20 +47,20 @@ class ColorSliderContainer: NSObject {
     
     // MARK: - Logic
     
-    func setColor(color:NSColor, animated:Bool) {
+    func setColor(_ color:NSColor, animated:Bool) {
         if animated {
             self.timer?.invalidate()
             
             self.startColor = self.color.getVector4()
             self.finalColor = color.getVector4()
             self.time       = 0.0
-            self.timer      = NSTimer.scheduledTimerWithTimeInterval(1.0 / 60.0, target: self, selector: #selector(timerMethod), userInfo: nil, repeats: true)
+            self.timer      = Timer.scheduledTimer(timeInterval: 1.0 / 60.0, target: self, selector: #selector(timerMethod), userInfo: nil, repeats: true)
         } else {
             self.color = color
         }
     }
     
-    func timerMethod(timer:NSTimer) {
+    func timerMethod(_ timer:Timer) {
         self.time += 1.0 / 60.0
         if self.time >= self.animationDuration {
             timer.invalidate()

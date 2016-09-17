@@ -13,13 +13,13 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
 
     // MARK: - Properties
     
-    let request = NSFetchRequest(entityName: "SizeSet")
+    let request = NSFetchRequest<SizeSet>(entityName: "SizeSet")
     let editable:Bool
-    let managedObjectContext:NSManagedObjectContext = ((NSApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext)!
+    let managedObjectContext:NSManagedObjectContext = ((NSApplication.shared().delegate as? AppDelegate)?.managedObjectContext)!
     
-    private var sizeSets:[SizeSet] = []
-    private(set) var sizeSetMembers:[SizeSetMember] = []
-    private var currentSetName = ""
+    fileprivate var sizeSets:[SizeSet] = []
+    fileprivate(set) var sizeSetMembers:[SizeSetMember] = []
+    fileprivate var currentSetName = ""
 
     // MARK: - Setup
     
@@ -32,15 +32,15 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     func loadSizeSets() {
 //        let predicate = NSPredicate(format: "%K like %@", "name", setName)
         do {
-            let sizeSets = try self.managedObjectContext.executeFetchRequest(self.request) as! [SizeSet]
+            let sizeSets = try self.managedObjectContext.fetch(self.request) as! [SizeSet]
             self.sizeSets = sizeSets
         } catch {
             
         }
     }
     
-    func loadMembersForSet(setName:String) {
-        guard let index = self.sizeSets.indexOf({ $0.name == setName }), let sizeSetMembers = self.sizeSets[index].sizes else {
+    func loadMembersForSet(_ setName:String) {
+        guard let index = self.sizeSets.index(where: { $0.name == setName }), let sizeSetMembers = self.sizeSets[index].sizes else {
             return
         }
         self.currentSetName = setName
@@ -48,36 +48,36 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         self.sortMembers()
     }
     
-    private func sortMembers() {
-        self.sizeSetMembers = self.sizeSetMembers.sort() {
-            if $0.width!.integerValue == $1.width!.integerValue {
-                return $0.height!.integerValue < $1.height!.integerValue
+    fileprivate func sortMembers() {
+        self.sizeSetMembers = self.sizeSetMembers.sorted() {
+            if $0.width!.intValue == $1.width!.intValue {
+                return $0.height!.intValue < $1.height!.intValue
             } else {
-                return $0.width!.integerValue < $1.width!.integerValue
+                return $0.width!.intValue < $1.width!.intValue
             }
         }
     }
     
     // MARK: - Logic
     
-    func configurePopupButton(popupButton:NSPopUpButton, selectTitle:String?) {
+    func configurePopupButton(_ popupButton:NSPopUpButton, selectTitle:String?) {
         popupButton.removeAllItems()
         for sizeSet in self.sizeSets {
-            popupButton.addItemWithTitle(sizeSet.name!)
+            popupButton.addItem(withTitle: sizeSet.name!)
         }
         if let selectTitle = selectTitle {
-            popupButton.selectItemWithTitle(selectTitle)
+            popupButton.selectItem(withTitle: selectTitle)
         }
     }
     
-    func addMemberTo(setName:String, width:Int, height:Int, suffix:String) -> Bool {
+    func addMemberTo(_ setName:String, width:Int, height:Int, suffix:String) -> Bool {
         guard let set = self.sizeSets.findObject({ $0.name == setName }) else {
             return false
         }
         do {
-            let member = NSEntityDescription.insertNewObjectForEntityForName("SizeSetMember", inManagedObjectContext: self.managedObjectContext) as! SizeSetMember
-            member.width  = width
-            member.height = height
+            let member = NSEntityDescription.insertNewObject(forEntityName: "SizeSetMember", into: self.managedObjectContext) as! SizeSetMember
+            member.width  = width as NSNumber?
+            member.height = height as NSNumber?
             member.suffix = suffix
             set.sizes?.insert(member)
             try self.managedObjectContext.save()
@@ -88,11 +88,11 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         }
     }
     
-    func removeMemberAtIndex(index:Int) {
+    func removeMemberAtIndex(_ index:Int) {
         guard index >= 0 && index < self.sizeSetMembers.count else {
             return
         }
-        let member = self.sizeSetMembers.removeAtIndex(index)
+        let member = self.sizeSetMembers.remove(at: index)
         guard let sizeSet = self.sizeSets.findObject({ $0.name == self.currentSetName }) else {
             return
         }
@@ -101,7 +101,7 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
             print("Before: \(sizeSet.sizes?.count)")
             sizeSet.sizes?.remove(member)
             print("After: \(sizeSet.sizes?.count)")
-            self.managedObjectContext.deleteObject(member)
+            self.managedObjectContext.delete(member)
             try self.managedObjectContext.save()
         } catch {
             
@@ -110,19 +110,19 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     
     // MARK: - NSTableViewDelegate
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return self.sizeSetMembers.count
     }
 
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let view = tableView.makeViewWithIdentifier("EditSizeSetsTableViewCell", owner: self)!
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let view = tableView.make(withIdentifier: "EditSizeSetsTableViewCell", owner: self)!
         let label = view.subviews.first! as! NSTextField
         
         switch tableColumn?.identifier {
         case "AutomaticTableColumnIdentifier.0"?:
-            label.stringValue = "\(self.sizeSetMembers[row].width!.integerValue)"
+            label.stringValue = "\(self.sizeSetMembers[row].width!.intValue)"
         case "AutomaticTableColumnIdentifier.1"?:
-            label.stringValue = "\(self.sizeSetMembers[row].height!.integerValue)"
+            label.stringValue = "\(self.sizeSetMembers[row].height!.intValue)"
         case "AutomaticTableColumnIdentifier.2"?:
             label.stringValue = self.sizeSetMembers[row].suffix!
         default:

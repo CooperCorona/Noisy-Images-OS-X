@@ -13,34 +13,34 @@ import CoronaGL
 
 protocol NSMultiSliderDelegate: class {
     
-    func thumbSlider(slider:NSMultiSlider, selectedThumbAt thumbIndex:Int)
-    func thumbSlider(slider:NSMultiSlider, movedThumbAt thumbIndex:Int, to value:CGFloat)
-    func thumbSlider(slider:NSMultiSlider, stoppedMovingThumbAt thumbIndex:Int)
-    func colorOfThumbAtIndex(index:Int) -> NSColor
+    func thumbSlider(_ slider:NSMultiSlider, selectedThumbAt thumbIndex:Int)
+    func thumbSlider(_ slider:NSMultiSlider, movedThumbAt thumbIndex:Int, to value:CGFloat)
+    func thumbSlider(_ slider:NSMultiSlider, stoppedMovingThumbAt thumbIndex:Int)
+    func colorOfThumbAtIndex(_ index:Int) -> NSColor
     
 }
 
 @IBDesignable
-public class NSMultiSlider: NSControl {
+open class NSMultiSlider: NSControl {
 
     public enum OutlineStyle {
-        case Shadow
-        case Outline(NSColor, NSColor)
+        case shadow
+        case outline(NSColor, NSColor)
     }
     
     // MARK: - Properties
     
     ///The values of the thumbs.
-    private(set) var thumbs:[CGFloat]       = [0.5]
-    private(set) var thumbColors:[NSColor]  = [NSColor.whiteColor()]
+    fileprivate(set) var thumbs:[CGFloat]       = [0.5]
+    fileprivate(set) var thumbColors:[NSColor]  = [NSColor.white]
     
-    @IBInspectable public var thumbCount = 1 {
+    @IBInspectable open var thumbCount = 1 {
         didSet {
             if self.thumbCount < 1 {
                 self.thumbCount = 1
             }
             while self.thumbs.count < self.thumbCount {
-                self.thumbColors.append(self.delegate?.colorOfThumbAtIndex(self.thumbs.count) ?? NSColor.whiteColor())
+                self.thumbColors.append(self.delegate?.colorOfThumbAtIndex(self.thumbs.count) ?? NSColor.white)
                 self.thumbs.append(0.0)
             }
             while self.thumbs.count > self.thumbCount {
@@ -49,20 +49,20 @@ public class NSMultiSlider: NSControl {
             }
         }
     }
-    @IBInspectable public var vertical = false
-    @IBInspectable public var minValue:CGFloat = 0.0
-    @IBInspectable public var maxValue:CGFloat = 1.0
-    public var length:CGFloat { return self.maxValue - self.minValue }
+    @IBInspectable open var vertical = false
+    @IBInspectable open var minValue:CGFloat = 0.0
+    @IBInspectable open var maxValue:CGFloat = 1.0
+    open var length:CGFloat { return self.maxValue - self.minValue }
     
-    @IBInspectable public var trackColor:NSColor = NSColor.grayColor()
+    @IBInspectable open var trackColor:NSColor = NSColor.gray
     
-    public var outlineStyle:OutlineStyle = .Shadow
+    open var outlineStyle:OutlineStyle = .shadow
     
     weak var delegate:NSMultiSliderDelegate? = nil
     
-    private var movingIndex:Int? = nil
-    private var lastMouseLocation = NSPoint.zero
-    private(set) var selectedIndex:Int? = nil
+    fileprivate var movingIndex:Int? = nil
+    fileprivate var lastMouseLocation = NSPoint.zero
+    fileprivate(set) var selectedIndex:Int? = nil
     
     // MARK: - Setup
     
@@ -76,23 +76,23 @@ public class NSMultiSlider: NSControl {
     
     // MARK: - Logic
     
-    func addThumbAt(value:CGFloat) {
+    func addThumbAt(_ value:CGFloat) {
         self.thumbCount += 1
         self.thumbs[self.thumbs.count - 1] = value
     }
     
-    func removeThumbAtIndex(index:Int) {
+    func removeThumbAtIndex(_ index:Int) {
         guard index >= 0 && index < self.thumbs.count else {
             return
         }
-        self.thumbs.removeAtIndex(index)
-        self.thumbColors.removeAtIndex(index)
+        self.thumbs.remove(at: index)
+        self.thumbColors.remove(at: index)
         self.thumbCount -= 1
         self.colorsNeedDisplay()
         self.setNeedsDisplay()
     }
     
-    func setThumb(thumb:CGFloat, atIndex index:Int) {
+    func setThumb(_ thumb:CGFloat, atIndex index:Int) {
         guard 0 <= index && index < self.thumbs.count else {
             return
         }
@@ -112,18 +112,18 @@ public class NSMultiSlider: NSControl {
         self.colorsNeedDisplay(0..<self.thumbCount)
     }
     
-    func colorsNeedDisplay<T: SequenceType where T.Generator.Element == Int>(colorIndices:T) {
+    func colorsNeedDisplay<T: Sequence>(_ colorIndices:T) where T.Iterator.Element == Int {
         for i in colorIndices {
-            self.thumbColors[i] = self.delegate?.colorOfThumbAtIndex(i) ?? NSColor.whiteColor()
+            self.thumbColors[i] = self.delegate?.colorOfThumbAtIndex(i) ?? NSColor.white
         }
         self.setNeedsDisplay()
     }
     
-    func convertWindowCoordinatesToSliderValue(windowCoords:NSPoint) -> CGFloat {
+    func convertWindowCoordinatesToSliderValue(_ windowCoords:NSPoint) -> CGFloat {
         return (self.getLocation(windowCoords).x - self.bounds.height / 2.0) / (self.bounds.width - self.bounds.height) * self.length
     }
     
-    private func getLocation(location:NSPoint) -> NSPoint {
+    fileprivate func getLocation(_ location:NSPoint) -> NSPoint {
         var loc = location
         var superView:NSView? = self
         while let sView = superView {
@@ -133,15 +133,15 @@ public class NSMultiSlider: NSControl {
         return loc
     }
     
-    private func locationOfThumb(thumb:CGFloat) -> NSPoint {
+    fileprivate func locationOfThumb(_ thumb:CGFloat) -> NSPoint {
         let percent = (thumb - self.minValue) / (self.maxValue - self.minValue)
         return linearlyInterpolate(percent, left: self.frame.leftMiddle + NSPoint(x: self.bounds.height / 2.0), right: self.frame.rightMiddle - NSPoint(x: self.bounds.height / 2.0))
     }
     
-    private func thumbIndexAtLocation(location:NSPoint) -> Int? {
+    fileprivate func thumbIndexAtLocation(_ location:NSPoint) -> Int? {
         let r = self.bounds.height / 2.0
         //Iterate backwards so we check the topmost thumbs first.
-        for (i, thumb) in self.thumbs.enumerate().reverse() {
+        for (i, thumb) in self.thumbs.enumerated().reversed() {
             let loc = self.locationOfThumb(thumb)
             if loc.distanceFrom(location) <= r {
                 return i
@@ -150,8 +150,8 @@ public class NSMultiSlider: NSControl {
         return nil
     }
     
-    public override func mouseDown(theEvent: NSEvent) {
-        super.mouseDown(theEvent)
+    open override func mouseDown(with theEvent: NSEvent) {
+        super.mouseDown(with: theEvent)
         let location = theEvent.locationInWindow
         self.lastMouseLocation = location
         if let index = self.thumbIndexAtLocation(location) {
@@ -159,7 +159,7 @@ public class NSMultiSlider: NSControl {
             self.selectedIndex = index
             self.delegate?.thumbSlider(self, selectedThumbAt: index)
             switch self.outlineStyle {
-            case .Outline:
+            case .outline:
                 self.setNeedsDisplay()
             default:
                 break
@@ -168,8 +168,8 @@ public class NSMultiSlider: NSControl {
         
     }
     
-    public override func mouseDragged(theEvent: NSEvent) {
-        super.mouseDragged(theEvent)
+    open override func mouseDragged(with theEvent: NSEvent) {
+        super.mouseDragged(with: theEvent)
         guard let movingIndex = self.movingIndex else {
             return
         }
@@ -183,12 +183,12 @@ public class NSMultiSlider: NSControl {
         self.delegate?.thumbSlider(self, movedThumbAt: movingIndex, to: self.thumbs[movingIndex])
     }
     
-    public override func mouseExited(theEvent: NSEvent) {
-        super.mouseExited(theEvent)
+    open override func mouseExited(with theEvent: NSEvent) {
+        super.mouseExited(with: theEvent)
     }
     
-    public override func mouseUp(theEvent: NSEvent) {
-        super.mouseUp(theEvent)
+    open override func mouseUp(with theEvent: NSEvent) {
+        super.mouseUp(with: theEvent)
         guard let movingIndex = self.movingIndex else {
             return
         }
@@ -196,13 +196,13 @@ public class NSMultiSlider: NSControl {
         self.movingIndex = nil
     }
     
-    public override func drawRect(dirtyRect: NSRect) {
+    open override func draw(_ dirtyRect: NSRect) {
 
-        func percent(p:CGFloat) -> CGFloat {
+        func percent(_ p:CGFloat) -> CGFloat {
             return (p - self.minValue) / (self.maxValue - self.minValue)
         }
 
-        guard let context = NSGraphicsContext.currentContext() else {
+        guard let context = NSGraphicsContext.current() else {
             return
         }
         context.saveGraphicsState()
@@ -218,23 +218,23 @@ public class NSMultiSlider: NSControl {
         minPath.fill()
         
         let r = self.bounds.height / 2.0
-        for (i, value) in self.thumbs.enumerate() {
+        for (i, value) in self.thumbs.enumerated() {
             let percent = (value - self.minValue) / (self.maxValue - self.minValue)
-            let thumbPoint = CGPoint(x: percent * (self.frame.size.width - 2.0 * r) + r, y: self.bounds.height / 2.0)
+            let thumbPoint = CGPoint(x: percent * (self.frame.size.width - 2.0 * r) + r, y: self.bounds.height / 2.0) - r
             self.thumbColors[i].setFill()
             
             switch self.outlineStyle {
-            case .Shadow:
-                CGContextSetShadowWithColor(context.CGContext, CGSize(width: 0.0, height: 0.0), 1.0, NSColor(white: 0.0, alpha: 0.75).CGColor)
-                CGContextFillEllipseInRect(context.CGContext, NSRect(center: thumbPoint, size: NSSize(square: 2.0 * r - 2.0)))
-            case let .Outline(color, highlightColor):
-                CGContextFillEllipseInRect(context.CGContext, NSRect(center: thumbPoint, size: NSSize(square: 2.0 * r - 2.0)))
+            case .shadow:
+                context.cgContext.setShadow(offset: CGSize(width: 0.0, height: 0.0), blur: 1.0, color: NSColor(white: 0.0, alpha: 0.75).cgColor)
+                (context.cgContext).fillEllipse(in: NSRect(origin: thumbPoint, size: NSSize(square: 2.0 * r - 2.0)))
+            case let .outline(color, highlightColor):
+                (context.cgContext).fillEllipse(in: NSRect(origin: thumbPoint, size: NSSize(square: 2.0 * r - 2.0)))
                 if i == self.selectedIndex {
                     highlightColor.setStroke()
                 } else {
                     color.setStroke()
                 }
-                CGContextStrokeEllipseInRect(context.CGContext, NSRect(center: thumbPoint, size: NSSize(square: 2.0 * r - 2.0)))
+                (context.cgContext).strokeEllipse(in: NSRect(origin: thumbPoint, size: NSSize(square: 2.0 * r - 2.0)))
             }
             
         }

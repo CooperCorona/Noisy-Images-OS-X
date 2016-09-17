@@ -12,11 +12,11 @@ import CoronaStructures
 import CoronaGL
 import GLKit
 
-enum NoiseDocumentError: ErrorType {
-    case MissingData
+enum NoiseDocumentError: Error {
+    case missingData
 }
 
-public class NoiseDocument: NSDocument {
+open class NoiseDocument: NSDocument {
     
     var state = NoiseState()
     var uuid:String {
@@ -24,7 +24,7 @@ public class NoiseDocument: NSDocument {
         set { self.gradientContainer.uuid = newValue }
     }
     let gradientContainer = GradientContainer()
-    var imageData:NSData? = nil
+    var imageData:Data? = nil
     
     public override init() {
         super.init()
@@ -70,8 +70,8 @@ public class NoiseDocument: NSDocument {
     }
     */
     
-    private func getNoiseData() -> NSData {
-        var dict:[NSObject:AnyObject] = [:]
+    fileprivate func getNoiseData() -> Data {
+        var dict:[AnyHashable: Any] = [:]
         dict["Width"]           = self.state.width
         dict["Height"]          = self.state.height
         dict["Noise Width"]     = self.state.noiseWidth
@@ -79,30 +79,30 @@ public class NoiseDocument: NSDocument {
         dict["X Offset"]        = self.state.xOffset
         dict["Y Offset"]        = self.state.yOffset
         dict["Z Offset"]        = self.state.zOffset
-        dict["Seed"]            = NSNumber(unsignedInt: self.state.seed)
+        dict["Seed"]            = NSNumber(value: self.state.seed)
         dict["Noise Divisor"]   = self.state.noiseDivisor
         dict["Noise Type"]      = self.state.noiseType.rawValue
         dict["Tiled"]           = self.state.isTiled
         dict["Noise Angle"]     = self.state.noiseAngle
-        for (i, (color: color, weight: weight)) in self.gradientContainer.gradient.anchors.enumerate() {
+        for (i, (color: color, weight: weight)) in self.gradientContainer.gradient.anchors.enumerated() {
             dict["Anchor \(i)"] = ColorAnchor(color: NSColor(vector4: color), weight: weight).getString()
         }
         dict["Smoothed"]        = self.gradientContainer.gradient.isSmoothed
         dict["UUID"]            = self.uuid
-        return NSKeyedArchiver.archivedDataWithRootObject(dict)
+        return NSKeyedArchiver.archivedData(withRootObject: dict)
     }
     
-    public override func fileWrapperOfType(typeName: String) throws -> NSFileWrapper {
-        let noiseDataFile = NSFileWrapper(regularFileWithContents: self.getNoiseData())
+    open override func fileWrapper(ofType typeName: String) throws -> FileWrapper {
+        let noiseDataFile = FileWrapper(regularFileWithContents: self.getNoiseData())
         if let imageData = self.imageData {
-            let imageFile = NSFileWrapper(regularFileWithContents: imageData)
-            return NSFileWrapper(directoryWithFileWrappers: ["Noise Data.plist":noiseDataFile, "Image":imageFile])
+            let imageFile = FileWrapper(regularFileWithContents: imageData)
+            return FileWrapper(directoryWithFileWrappers: ["Noise Data.plist":noiseDataFile, "Image":imageFile])
         } else {
-            return NSFileWrapper(directoryWithFileWrappers: ["Noise Data.plist":noiseDataFile])
+            return FileWrapper(directoryWithFileWrappers: ["Noise Data.plist":noiseDataFile])
         }
     }
     
-    private func readNoiseData(dict:[NSObject:AnyObject]) {
+    fileprivate func readNoiseData(_ dict:[AnyHashable: Any]) {
         var anchors:[ColorAnchor] = []
         for i in 0..<16 {
             guard let str = dict["Anchor \(i)"] as? String else {
@@ -111,22 +111,22 @@ public class NoiseDocument: NSDocument {
             anchors.append(ColorAnchor(string: str))
         }
         let gradient = ColorGradient1D(colorsAndWeights: anchors.map() { $0.getTuple() }, smoothed: dict["Smoothed"] as! Bool)
-        self.state = NoiseState(width: dict["Width"] as! CGFloat, height: dict["Height"] as! CGFloat, noiseWidth: dict["Noise Width"] as! CGFloat, noiseHeight: dict["Noise Height"] as! CGFloat, xOffset: dict["X Offset"] as! CGFloat, yOffset: dict["Y Offset"] as! CGFloat, zOffset: dict["Z Offset"] as! CGFloat, seed: (dict["Seed"] as! NSNumber).unsignedIntValue, noiseDivisor: dict["Noise Divisor"] as! CGFloat, noiseType: GLSPerlinNoiseSprite.NoiseType(rawValue: dict["Noise Type"] as! String)!, isTiled: dict["Tiled"] as! Bool, noiseAngle: dict["Noise Angle"] as! CGFloat, gradient: gradient)
+        self.state = NoiseState(width: dict["Width"] as! CGFloat, height: dict["Height"] as! CGFloat, noiseWidth: dict["Noise Width"] as! CGFloat, noiseHeight: dict["Noise Height"] as! CGFloat, xOffset: dict["X Offset"] as! CGFloat, yOffset: dict["Y Offset"] as! CGFloat, zOffset: dict["Z Offset"] as! CGFloat, seed: (dict["Seed"] as! NSNumber).uint32Value, noiseDivisor: dict["Noise Divisor"] as! CGFloat, noiseType: GLSPerlinNoiseSprite.NoiseType(rawValue: dict["Noise Type"] as! String)!, isTiled: dict["Tiled"] as! Bool, noiseAngle: dict["Noise Angle"] as! CGFloat, gradient: gradient)
         self.uuid = dict["UUID"] as! String
         self.gradientContainer.gradient = gradient
     }
     
-    public override func readFromFileWrapper(fileWrapper: NSFileWrapper, ofType typeName: String) throws {
+    open override func read(from fileWrapper: FileWrapper, ofType typeName: String) throws {
         guard let noiseData = fileWrapper.fileWrappers?["Noise Data.plist"]?.regularFileContents else {
-            throw NoiseDocumentError.MissingData
+            throw NoiseDocumentError.missingData
         }
         
-        self.readNoiseData(NSKeyedUnarchiver.unarchiveObjectWithData(noiseData) as! [NSObject:AnyObject])
+        self.readNoiseData(NSKeyedUnarchiver.unarchiveObject(with: noiseData) as! [AnyHashable: Any])
         
         self.imageData = fileWrapper.fileWrappers?["Image"]?.regularFileContents
     }
     
-    public override func makeWindowControllers() {
+    open override func makeWindowControllers() {
         let wc = NSStoryboard(name: "Document", bundle: nil).instantiateInitialController()! as! NoiseDocumentWindowController
         wc.menuController.undoingEnabled = false
         wc.menuController.state = self.state
@@ -160,13 +160,13 @@ public class NoiseDocument: NSDocument {
         self.loadImageTexture(wc.menuController)
     }
     
-    func loadImageTexture(menuController:MenuController) {
+    func loadImageTexture(_ menuController:MenuController) {
         guard let imageData = self.imageData else {
             return
         }
         menuController.textureData = imageData
         do {
-            let tex = try GLKTextureLoader.textureWithContentsOfData(imageData, options: [GLKTextureLoaderOriginBottomLeft:true])
+            let tex = try GLKTextureLoader.texture(withContentsOf: imageData, options: [GLKTextureLoaderOriginBottomLeft:true])
             menuController.texture = CCTexture(name: tex.name)
             menuController.delegate?.textureChanged(menuController.texture!, withData: menuController.textureData)
         } catch {

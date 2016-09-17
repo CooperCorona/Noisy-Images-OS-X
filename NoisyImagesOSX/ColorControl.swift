@@ -14,12 +14,12 @@ import CoronaGL
 class ColorControl: NSControl {
 
     var colors = [
-        NSColor.redColor(),
+        NSColor.red,
         NSColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0),
-        NSColor.yellowColor(),
-        NSColor.greenColor(),
-        NSColor.cyanColor(),
-        NSColor.blueColor(),
+        NSColor.yellow,
+        NSColor.green,
+        NSColor.cyan,
+        NSColor.blue,
         NSColor(red: 0.4, green: 0.0, blue: 0.8, alpha: 1.0),
         NSColor(red: 0.4, green: 0.2, blue: 0.0, alpha: 1.0),
         NSColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0),
@@ -29,23 +29,23 @@ class ColorControl: NSControl {
         NSColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
     ]
     
-    override func drawRect(dirtyRect: NSRect) {
+    override func draw(_ dirtyRect: NSRect) {
         
-        guard let context = NSGraphicsContext.currentContext() else {
+        guard let context = NSGraphicsContext.current() else {
             return
         }
         context.saveGraphicsState()
         
         let w = self.bounds.width / CGFloat(self.colors.count)
-        for (i, color) in self.colors.enumerate() {
+        for (i, color) in self.colors.enumerated() {
             color.setFill()
             let x = CGFloat(i) / CGFloat(self.colors.count) * self.bounds.width
-            CGContextFillRect(context.CGContext, NSRect(x: x, y: 0.0, width: w, height: self.bounds.height))
+            context.cgContext.fill(NSRect(x: x, y: 0.0, width: w, height: self.bounds.height))
         }
         context.restoreGraphicsState()
     }
     
-    func handleClick(clickLocation:NSPoint) -> NSColor? {
+    func handleClick(_ clickLocation:NSPoint) -> NSColor? {
         guard self.frame.contains(clickLocation) else {
             return nil
         }

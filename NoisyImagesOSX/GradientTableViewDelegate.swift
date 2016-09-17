@@ -13,7 +13,7 @@ import CoronaGL
 import CoreData
 
 extension NSObject {
-    var appDelegate:AppDelegate { return NSApplication.sharedApplication().delegate! as! AppDelegate }
+    var appDelegate:AppDelegate { return NSApplication.shared().delegate! as! AppDelegate }
 }
 
 extension ColorGradient1D {
@@ -28,9 +28,9 @@ extension ColorGradient1D {
         self.init(colors: colors, weights: weights, smoothed: gradient.smoothed?.boolValue ?? false)
     }
     
-    func configureGradient(gradient:Gradient) {
+    func configureGradient(_ gradient:Gradient) {
         gradient.colors = self.anchors.map() { ColorAnchor(color: NSColor(vector4: $0.0), weight: $0.1) }
-        gradient.smoothed = self.isSmoothed
+        gradient.smoothed = self.isSmoothed as NSNumber?
     }
 
 }
@@ -41,14 +41,14 @@ class GradientTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
     
     static let GradientStoreChangedNotification = "com.coopercorona.GradientStoreChangedNotification"
     
-    let managedObjectContext:NSManagedObjectContext = ((NSApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext)!
-    let fetchRequest = NSFetchRequest(entityName: "Gradient")
+    let managedObjectContext:NSManagedObjectContext = ((NSApplication.shared().delegate as? AppDelegate)?.managedObjectContext)!
+    let fetchRequest = NSFetchRequest<Gradient>(entityName: "Gradient")
     
-    private(set) var gradientObjects:[Gradient] = []
-    private(set) var gradients:[ColorGradient1D] = []
+    fileprivate(set) var gradientObjects:[Gradient] = []
+    fileprivate(set) var gradients:[ColorGradient1D] = []
     
-    private var selectedGradientIndex:Int? = nil
-    private var selectedGradient:Gradient? {
+    fileprivate var selectedGradientIndex:Int? = nil
+    fileprivate var selectedGradient:Gradient? {
         if let index = self.selectedGradientIndex {
             return self.gradientObjects[index]
         } else {
@@ -67,30 +67,30 @@ class GradientTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         
         self.storeChanged(nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(storeChanged), name: GradientTableViewDelegate.GradientStoreChangedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(storeChanged), name: NSNotification.Name(rawValue: GradientTableViewDelegate.GradientStoreChangedNotification), object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return self.gradients.count
     }
     
-    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         return self.gradients[row]
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let view = tableView.makeViewWithIdentifier("GradientCell", owner: self) as! ColorGradientView
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let view = tableView.make(withIdentifier: "GradientCell", owner: self) as! ColorGradientView
         view.gradient = self.gradients[row]
         view.subviews.first?.wantsLayer = true
-        view.subviews.first?.layer?.backgroundColor = self.gradientObjects[row].overlayColor?.CGColor
+        view.subviews.first?.layer?.backgroundColor = self.gradientObjects[row].overlayColor?.cgColor
         return view
     }
     
-    func tableViewSelectionDidChange(notification: NSNotification) {
+    func tableViewSelectionDidChange(_ notification: Notification) {
         guard let tableView = notification.object as? NSTableView else {
             return
         }
@@ -102,26 +102,26 @@ class GradientTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
     
     // MARK: - Logic
 
-    func addGradient(gradient:GradientContainer) {
+    func addGradient(_ gradient:GradientContainer) {
         gradient.generateUUID()
-        let newGradient = NSEntityDescription.insertNewObjectForEntityForName("Gradient", inManagedObjectContext: self.managedObjectContext) as! Gradient
+        let newGradient = NSEntityDescription.insertNewObject(forEntityName: "Gradient", into: self.managedObjectContext) as! Gradient
         gradient.toGradient(newGradient)
         do {
             try self.managedObjectContext.save()
-            self.gradientObjects.insert(newGradient, atIndex: 0)
-            self.gradients.insert(gradient.gradient, atIndex: 0)
+            self.gradientObjects.insert(newGradient, at: 0)
+            self.gradients.insert(gradient.gradient, at: 0)
         } catch {
             Swift.print("Could not insert new gradient!")
         }
-        NSNotificationCenter.defaultCenter().postNotificationName(GradientTableViewDelegate.GradientStoreChangedNotification, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: GradientTableViewDelegate.GradientStoreChangedNotification), object: nil)
     }
 
     ///Overwrites the currently selected gradient with the new gradient
-    func saveGradient(gradient:GradientContainer) {
+    func saveGradient(_ gradient:GradientContainer) {
         //If the gradient container does not yet have a valid UUID,
         //then it should be empty, and thus should not exist in the
         //gradientObjects array, so addGradient should get invoked.
-        if let index = self.gradientObjects.indexOf({ $0.universalId == gradient.uuid }) {
+        if let index = self.gradientObjects.index(where: { $0.universalId == gradient.uuid }) {
             gradient.generateUUID()
             self.gradientObjects[index].universalId = gradient.uuid
             gradient.toGradient(self.gradientObjects[index])
@@ -131,22 +131,22 @@ class GradientTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
             } catch {
                 Swift.print("Failed to save gradient!")
             }
-            NSNotificationCenter.defaultCenter().postNotificationName(GradientTableViewDelegate.GradientStoreChangedNotification, object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: GradientTableViewDelegate.GradientStoreChangedNotification), object: nil)
         } else {
             self.addGradient(gradient)
         }
         
     }
     
-    func verifyGradient(gradient:GradientContainer) {
-        guard !self.gradientObjects.contains({ $0.universalId == gradient.uuid }) else {
+    func verifyGradient(_ gradient:GradientContainer) {
+        guard !self.gradientObjects.contains(where: { $0.universalId == gradient.uuid }) else {
             return
         }
         self.addGradient(gradient)
     }
     
     subscript(uuid:String) -> GradientContainer? {
-        guard let index = self.gradientObjects.indexOf({ $0.universalId == uuid }) else {
+        guard let index = self.gradientObjects.index(where: { $0.universalId == uuid }) else {
             return nil
         }
         let grad = GradientContainer()
@@ -155,16 +155,16 @@ class GradientTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         return grad
     }
  
-    func storeChanged(notification:NSNotification?) {
+    func storeChanged(_ notification:Notification?) {
         do {
-            self.gradientObjects = try self.managedObjectContext.executeFetchRequest(self.fetchRequest) as! [Gradient]
+            self.gradientObjects = try self.managedObjectContext.fetch(self.fetchRequest) as! [Gradient]
         } catch {
             self.gradientObjects = []
         }
         self.gradients = self.gradientObjects.map({ ColorGradient1D(gradient: $0) })
         if self.gradients.count == 0 {
             //Preload first gradient
-            let gradient = NSEntityDescription.insertNewObjectForEntityForName("Gradient", inManagedObjectContext: self.managedObjectContext) as! Gradient
+            let gradient = NSEntityDescription.insertNewObject(forEntityName: "Gradient", into: self.managedObjectContext) as! Gradient
             gradient.gradient = ColorGradient1D.grayscaleGradient
             gradient.overlay = NSColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0).getString()
             gradient.generateUUID()
