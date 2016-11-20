@@ -133,18 +133,18 @@ Instead of running Noisy Images OS X from Xcode, you can export it to your deskt
   * (Or Go -> Go to Folder)
 10. Enter ~/Library and click Go
 11. If the Frameworks folder does not exist, create it.
-12. Download [OmniSwiftX](https://github.com/CooperCorona/OmniSwiftX)
-13. Open OmniSwiftX in Xcode
+12. Download [CoronaConvenience](https://github.com/CooperCorona/CoronaConvenience), [CoronaStructures](https://github.com/CooperCorona/CoronaStructures), and [CoronaGL](https://github.com/CooperCorona/CoronaGL),
+13. Open each of those frameworks in Xcode
 14. Product -> Build (or Command+B)
 15. Open the Project Navigator (Command+1)
 16. Scroll to the Products Folder
-17. Control Click on OmniSwiftX.framework
+17. Control Click on CoronaConvenience.framework (or CoronaStructures.framework or CoronaGL.framework)
 18. Show in Finder
-19. Copy OmniSwiftX.framework to ~/Library/Frameworks
+19. Copy the .framework file to ~/Library/Frameworks
 20. NoisyImagesOSX should now open!
 
 ### Troubleshooting
-If you are getting a message that says Noisy Images OS X could not be opened (and prompts you to contact the developer or update it), make sure you have the OmniSwiftX.framework file in ~/Library/Frameworks directory.
+If you are getting a message that says Noisy Images OS X could not be opened (and prompts you to contact the developer or update it), make sure you have the CoronaConvenience.framework, CoronaStructures.framework, and CoronaGL.framework files in ~/Library/Frameworks directory.
 
 ## Conclusion
 Thank you for using Noisy Images OS X! If you'd like to contribute to the project, fork the repository and submit a pull request. Take a look at the [issues page](https://github.com/CooperCorona/Noisy-Images-OS-X/issues) to see what needs to be done, add an issue that's been missed, or request useful functionality.
