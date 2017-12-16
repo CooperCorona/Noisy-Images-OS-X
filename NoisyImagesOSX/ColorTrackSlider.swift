@@ -27,7 +27,7 @@ class ColorTrackSlider: NSSlider {
     override func draw(_ dirtyRect: NSRect) {
 //        super.drawRect(dirtyRect)
         
-        guard let context = NSGraphicsContext.current() else {
+        guard let context = NSGraphicsContext.current else {
             return
         }
         context.saveGraphicsState()

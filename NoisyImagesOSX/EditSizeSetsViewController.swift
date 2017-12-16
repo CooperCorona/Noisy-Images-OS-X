@@ -43,7 +43,7 @@ class EditSizeSetsViewController: NSViewController {
         self.widthTextField.formatter       = self.integerFormatter
         self.heightTextField.formatter      = self.integerFormatter
         
-        self.sizeTableView.register(NSNib(nibNamed: "EditSizeSetsTableViewCell", bundle: Bundle.main), forIdentifier: "EditSizeSetsTableViewCell")
+        self.sizeTableView.register(NSNib(nibNamed: NSNib.Name(rawValue: "EditSizeSetsTableViewCell"), bundle: Bundle.main), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: "EditSizeSetsTableViewCell"))
         
         self.tableDelegate.loadSizeSets()
         self.tableDelegate.configurePopupButton(self.sizeSetPopupButton, selectTitle: nil)
@@ -148,14 +148,14 @@ class EditSizeSetsViewController: NSViewController {
     
     func presentAlert(_ message:String) {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.warning
+        alert.alertStyle = NSAlert.Style.warning
         alert.messageText = message
         alert.addButton(withTitle: "Ok")
         alert.runModal()
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
+        switch segue.identifier?.rawValue {
         case "AddSizeSetSegue"?:
             guard let dest = segue.destinationController as? AddSizeSetViewController else {
                 return

@@ -60,7 +60,7 @@ class ColorSliderContainer: NSObject {
         }
     }
     
-    func timerMethod(_ timer:Timer) {
+    @objc func timerMethod(_ timer:Timer) {
         self.time += 1.0 / 60.0
         if self.time >= self.animationDuration {
             timer.invalidate()

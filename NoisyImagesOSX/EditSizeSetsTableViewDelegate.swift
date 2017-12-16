@@ -15,7 +15,7 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     
     let request = NSFetchRequest<SizeSet>(entityName: "SizeSet")
     let editable:Bool
-    let managedObjectContext:NSManagedObjectContext = ((NSApplication.shared().delegate as? AppDelegate)?.managedObjectContext)!
+    let managedObjectContext:NSManagedObjectContext = ((NSApplication.shared.delegate as? AppDelegate)?.managedObjectContext)!
     
     fileprivate var sizeSets:[SizeSet] = []
     fileprivate(set) var sizeSetMembers:[SizeSetMember] = []
@@ -32,7 +32,7 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     func loadSizeSets() {
 //        let predicate = NSPredicate(format: "%K like %@", "name", setName)
         do {
-            let sizeSets = try self.managedObjectContext.fetch(self.request) as! [SizeSet]
+            let sizeSets = try self.managedObjectContext.fetch(self.request) 
             self.sizeSets = sizeSets
         } catch {
             
@@ -70,7 +70,7 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         }
     }
     
-    func addMemberTo(_ setName:String, width:Int, height:Int, suffix:String) -> Bool {
+    @discardableResult func addMemberTo(_ setName:String, width:Int, height:Int, suffix:String) -> Bool {
         guard let set = self.sizeSets.findObject({ $0.name == setName }) else {
             return false
         }
@@ -98,9 +98,9 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         }
         
         do {
-            print("Before: \(sizeSet.sizes?.count)")
+            print("Before: \(String(describing: sizeSet.sizes?.count))")
             sizeSet.sizes?.remove(member)
-            print("After: \(sizeSet.sizes?.count)")
+            print("After: \(String(describing: sizeSet.sizes?.count))")
             self.managedObjectContext.delete(member)
             try self.managedObjectContext.save()
         } catch {
@@ -115,15 +115,15 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let view = tableView.make(withIdentifier: "EditSizeSetsTableViewCell", owner: self)!
+        let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "EditSizeSetsTableViewCell"), owner: self)!
         let label = view.subviews.first! as! NSTextField
         
         switch tableColumn?.identifier {
-        case "AutomaticTableColumnIdentifier.0"?:
+        case NSUserInterfaceItemIdentifier(rawValue: "AutomaticTableColumnIdentifier.0")?:
             label.stringValue = "\(self.sizeSetMembers[row].width!.intValue)"
-        case "AutomaticTableColumnIdentifier.1"?:
+        case NSUserInterfaceItemIdentifier(rawValue: "AutomaticTableColumnIdentifier.1")?:
             label.stringValue = "\(self.sizeSetMembers[row].height!.intValue)"
-        case "AutomaticTableColumnIdentifier.2"?:
+        case NSUserInterfaceItemIdentifier(rawValue: "AutomaticTableColumnIdentifier.2")?:
             label.stringValue = self.sizeSetMembers[row].suffix!
         default:
             break

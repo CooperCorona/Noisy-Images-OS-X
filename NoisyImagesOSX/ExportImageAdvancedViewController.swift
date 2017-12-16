@@ -18,7 +18,7 @@ class ExportImageAdvancedTableViewDelegate: NSObject, NSTableViewDelegate, NSTab
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let view = tableView.make(withIdentifier: "SizeCell", owner: self) as! NSTextField
+        let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SizeCell"), owner: self) as! NSTextField
         return view
     }
 
@@ -38,7 +38,7 @@ class ExportImageAdvancedViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.sizesTableView.register(NSNib(nibNamed: "EditSizeSetsTableViewCell", bundle: Bundle.main), forIdentifier: "EditSizeSetsTableViewCell")
+        self.sizesTableView.register(NSNib(nibNamed: NSNib.Name(rawValue: "EditSizeSetsTableViewCell"), bundle: Bundle.main), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: "EditSizeSetsTableViewCell"))
         self.sizesTableView.delegate = self.sizesDelegate
         self.sizesTableView.dataSource = self.sizesDelegate
         
@@ -55,7 +55,7 @@ class ExportImageAdvancedViewController: NSViewController {
         panel.canSelectHiddenExtension = true
         panel.allowedFileTypes = ["png"]
         switch panel.runModal() {
-        case NSModalResponseOK:
+        case NSApplication.ModalResponse.OK:
             guard let url = panel.url else {
                 return
             }

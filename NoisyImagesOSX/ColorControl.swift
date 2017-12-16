@@ -31,7 +31,7 @@ class ColorControl: NSControl {
     
     override func draw(_ dirtyRect: NSRect) {
         
-        guard let context = NSGraphicsContext.current() else {
+        guard let context = NSGraphicsContext.current else {
             return
         }
         context.saveGraphicsState()

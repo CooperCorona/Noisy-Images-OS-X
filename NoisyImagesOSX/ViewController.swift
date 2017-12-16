@@ -76,13 +76,14 @@ class ViewController: NSViewController {
         
         self.noiseSprite.position = self.glView.frame.size.center
         self.glView.addChild(self.noiseSprite)
+        self.noiseSprite.buffer.framebufferStack = self.noiseSprite.framebufferStack
         self.renderToTexture()
 
         let menu = (self.parent?.childViewControllers.first as? MenuController)
         menu?.seed = self.noiseSprite.noiseTexture.noise.seed
         self.menuController = menu
         
-        NotificationCenter.default.addObserver(self, name: NSNotification.Name.NSViewGlobalFrameDidChange.rawValue, selector: #selector(self.windowSizeChanged))
+        NotificationCenter.default.addObserver(self, name: NSView.globalFrameDidChangeNotification.rawValue, selector: #selector(self.windowSizeChanged))
         NotificationCenter.default.addObserver(self, name: AppDelegate.ExportImageItemClickedNotification, selector: #selector(self.exportImageItemClicked(_:)))
         NotificationCenter.default.addObserver(self, name: AppDelegate.ExportImageAdvancedItemClickedNotification, selector: #selector(self.exportImagesAdvancedItemClicked(_:)))
         NotificationCenter.default.addObserver(self, name: AppDelegate.ZoomInItemClickedNotification, selector: #selector(self.zoomInItemClicked(_:)))
@@ -100,7 +101,7 @@ class ViewController: NSViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func timerMethod(_ sender:Timer) {
+    @objc func timerMethod(_ sender:Timer) {
         self.time += 1.0 / 30.0
         self.glView.clearColor = SCVector4(gray: sin(self.time * 2.0) * 0.5 + 0.5)
         self.glView.setNeedsDisplay(self.glView.frame)
@@ -111,7 +112,7 @@ class ViewController: NSViewController {
         self.glView.display()
     }
     
-    func windowSizeChanged(_ notification:Notification) {
+    @objc func windowSizeChanged(_ notification:Notification) {
         self.checkerSprite.contentSize = self.glView.frame.size
         self.noiseSprite.position = self.glView.frame.size.center
     }
@@ -140,7 +141,7 @@ class ViewController: NSViewController {
         ns2.renderToTexture()
     }
     
-    func exportImageItemClicked(_ sender:Notification) {
+    @objc func exportImageItemClicked(_ sender:Notification) {
         /*
         let image = self.noiseSprite.buffer.getImage()
         
@@ -165,20 +166,20 @@ class ViewController: NSViewController {
             break
         }
         */
-        let exportController = NSStoryboard(name: "Document", bundle: nil).instantiateController(withIdentifier: "exportImageViewController") as! ExportImageViewController
+        let exportController = NSStoryboard(name: NSStoryboard.Name(rawValue: "Document"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "exportImageViewController")) as! ExportImageViewController
         exportController.noiseSprite = self.noiseSprite
 //        self.presentViewControllerAsModalWindow(exportController)
         self.presentViewControllerAsSheet(exportController)
     }
     
-    func exportImagesAdvancedItemClicked(_ sender:Notification) {
-        let exportController = NSStoryboard(name: "Document", bundle: nil).instantiateController(withIdentifier: "exportImageAdvancedViewController") as! ExportImageAdvancedViewController
+    @objc func exportImagesAdvancedItemClicked(_ sender:Notification) {
+        let exportController = NSStoryboard(name: NSStoryboard.Name(rawValue: "Document"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "exportImageAdvancedViewController")) as! ExportImageAdvancedViewController
         exportController.noiseSprite = self.noiseSprite
 //        self.presentViewControllerAsModalWindow(exportController)
         self.presentViewControllerAsSheet(exportController)
     }
     
-    func zoomInItemClicked(_ notification:Notification?) {
+    @objc func zoomInItemClicked(_ notification:Notification?) {
         guard self.zoomLevelIndex < self.zoomLevels.count - 1 else {
             return
         }
@@ -186,7 +187,7 @@ class ViewController: NSViewController {
         self.zoomChanged()
     }
     
-    func zoomOutItemClicked(_ notification:Notification?) {
+    @objc func zoomOutItemClicked(_ notification:Notification?) {
         guard self.zoomLevelIndex > 0 else {
             return
         }
@@ -194,7 +195,7 @@ class ViewController: NSViewController {
         self.zoomChanged()
     }
     
-    func resetZoomItemClicked(_ notification:Notification?) {
+    @objc func resetZoomItemClicked(_ notification:Notification?) {
         self.zoomLevelIndex = self.zoomLevels.count / 2
         self.zoomChanged()
     }

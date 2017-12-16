@@ -29,7 +29,7 @@ class ExportImageViewController: NSViewController {
         panel.canSelectHiddenExtension = true
         panel.allowedFileTypes = ["png"]
         switch panel.runModal() {
-        case NSModalResponseOK:
+        case NSApplication.ModalResponse.OK:
             guard let url = panel.url else {
                 return
             }
@@ -50,7 +50,7 @@ class ExportImageViewController: NSViewController {
         let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)!
         let bitmap = NSBitmapImageRep(cgImage: cgImage)
         bitmap.size = image.size
-        let data = bitmap.representation(using: NSBitmapImageFileType.PNG, properties: [:])
+        let data = bitmap.representation(using: NSBitmapImageRep.FileType.png, properties: [:])
         do {
             try data?.write(to: url, options: .atomic)
         } catch {

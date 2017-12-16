@@ -202,7 +202,7 @@ open class NSMultiSlider: NSControl {
             return (p - self.minValue) / (self.maxValue - self.minValue)
         }
 
-        guard let context = NSGraphicsContext.current() else {
+        guard let context = NSGraphicsContext.current else {
             return
         }
         context.saveGraphicsState()

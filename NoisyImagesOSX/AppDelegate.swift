@@ -99,13 +99,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     @IBAction func editSizeSetsItemClicked(_ sender: AnyObject?) {
-        let window = NSStoryboard(name: "EditSizeSets", bundle: nil).instantiateInitialController() as! NSWindowController
+        let window = NSStoryboard(name: NSStoryboard.Name(rawValue: "EditSizeSets"), bundle: nil).instantiateInitialController() as! NSWindowController
         window.showWindow(self)
         self.editSizeSetsController = window
     }
     
     class func presentEditSizeSetsController() {
-        (NSApplication.shared().delegate! as! AppDelegate).editSizeSetsItemClicked(nil)
+        (NSApplication.shared.delegate! as! AppDelegate).editSizeSetsItemClicked(nil)
     }
     
     @IBAction func zoomInItemClicked(_ sender: AnyObject) {

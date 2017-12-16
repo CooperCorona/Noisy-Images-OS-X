@@ -13,7 +13,7 @@ import CoronaGL
 import CoreData
 
 extension NSObject {
-    var appDelegate:AppDelegate { return NSApplication.shared().delegate! as! AppDelegate }
+    var appDelegate:AppDelegate { return NSApplication.shared.delegate! as! AppDelegate }
 }
 
 extension ColorGradient1D {
@@ -41,7 +41,7 @@ class GradientTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
     
     static let GradientStoreChangedNotification = "com.coopercorona.GradientStoreChangedNotification"
     
-    let managedObjectContext:NSManagedObjectContext = ((NSApplication.shared().delegate as? AppDelegate)?.managedObjectContext)!
+    let managedObjectContext:NSManagedObjectContext = ((NSApplication.shared.delegate as? AppDelegate)?.managedObjectContext)!
     let fetchRequest = NSFetchRequest<Gradient>(entityName: "Gradient")
     
     fileprivate(set) var gradientObjects:[Gradient] = []
@@ -83,7 +83,7 @@ class GradientTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let view = tableView.make(withIdentifier: "GradientCell", owner: self) as! ColorGradientView
+        let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "GradientCell"), owner: self) as! ColorGradientView
         view.gradient = self.gradients[row]
         view.subviews.first?.wantsLayer = true
         view.subviews.first?.layer?.backgroundColor = self.gradientObjects[row].overlayColor?.cgColor
@@ -155,9 +155,9 @@ class GradientTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         return grad
     }
  
-    func storeChanged(_ notification:Notification?) {
+    @objc func storeChanged(_ notification:Notification?) {
         do {
-            self.gradientObjects = try self.managedObjectContext.fetch(self.fetchRequest) as! [Gradient]
+            self.gradientObjects = try self.managedObjectContext.fetch(self.fetchRequest) 
         } catch {
             self.gradientObjects = []
         }

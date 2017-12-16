@@ -21,9 +21,6 @@
 		DC0E5EA71CD6E882005CF255 /* GradientContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5EA61CD6E882005CF255 /* GradientContainer.swift */; };
 		DC18C1A61CDFEFEC00CABF1B /* AddSizeSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18C1A51CDFEFEC00CABF1B /* AddSizeSetViewController.swift */; };
 		DC18C1A91CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC18C1A81CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib */; };
-		DC23CEA31D88BDA40094D475 /* CoronaConvenience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC23CE931D88BD9B0094D475 /* CoronaConvenience.framework */; };
-		DC23CEA41D88BDA40094D475 /* CoronaGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC23CEA21D88BDA10094D475 /* CoronaGL.framework */; };
-		DC23CEA51D88BDA40094D475 /* CoronaStructures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC23CE9A1D88BD9E0094D475 /* CoronaStructures.framework */; };
 		DC23CEAE1D88BE2D0094D475 /* PerlinAbsNoiseShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DC23CEA61D88BE2D0094D475 /* PerlinAbsNoiseShader.fsh */; };
 		DC23CEAF1D88BE2D0094D475 /* PerlinAbsNoiseShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DC23CEA71D88BE2D0094D475 /* PerlinAbsNoiseShader.vsh */; };
 		DC23CEB01D88BE2D0094D475 /* PerlinFractalNoiseShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DC23CEA81D88BE2D0094D475 /* PerlinFractalNoiseShader.fsh */; };
@@ -41,6 +38,9 @@
 		DC3438071CA78BDB007EFEE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3438051CA78BDB007EFEE8 /* Main.storyboard */; };
 		DC343FA61CBB053A0052F46E /* NSMultiSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC343FA51CBB053A0052F46E /* NSMultiSlider.swift */; };
 		DC5F0B9F1CAB229A0055B6C9 /* Atlases.xml in Resources */ = {isa = PBXBuildFile; fileRef = DC5F0B9E1CAB229A0055B6C9 /* Atlases.xml */; };
+		DC7DCC6C1DE25C0F00318212 /* CoronaConvenience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC7DCC5C1DE25C0000318212 /* CoronaConvenience.framework */; };
+		DC7DCC6D1DE25C0F00318212 /* CoronaGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC7DCC6B1DE25C0600318212 /* CoronaGL.framework */; };
+		DC7DCC6E1DE25C0F00318212 /* CoronaStructures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC7DCC631DE25C0300318212 /* CoronaStructures.framework */; };
 		DC8A946A1CA9BD9E00049118 /* ColorShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DC8A94691CA9BD9E00049118 /* ColorShader.vsh */; };
 		DC8A946C1CA9BDA700049118 /* ColorShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DC8A946B1CA9BDA700049118 /* ColorShader.fsh */; };
 		DCC9B7011CA8403A00743E2C /* WhiteTile.png in Resources */ = {isa = PBXBuildFile; fileRef = DCC9B7001CA8403A00743E2C /* WhiteTile.png */; };
@@ -76,23 +76,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DC23CE921D88BD9B0094D475 /* PBXContainerItemProxy */ = {
+		DC17C5FF1FE5E57800C7164E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = DC23CE8E1D88BD9B0094D475 /* CoronaConvenience.xcodeproj */;
+			containerPortal = DC7DCC571DE25BFF00318212 /* CoronaConvenience.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC6B68CA1EB59E7700B0FF92;
+			remoteInfo = CoronaConvenience.Tests;
+		};
+		DC17C6041FE5E57800C7164E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC7DCC5D1DE25C0300318212 /* CoronaStructures.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC66C0D51F43C9AB0097AB9C;
+			remoteInfo = "CoronaStructures-Tests";
+		};
+		DC7DCC5B1DE25C0000318212 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC7DCC571DE25BFF00318212 /* CoronaConvenience.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DC4D07951D7D233A00862432;
 			remoteInfo = CoronaConvenience;
 		};
-		DC23CE991D88BD9E0094D475 /* PBXContainerItemProxy */ = {
+		DC7DCC621DE25C0300318212 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = DC23CE941D88BD9E0094D475 /* CoronaStructures.xcodeproj */;
+			containerPortal = DC7DCC5D1DE25C0300318212 /* CoronaStructures.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DC7428CE1D7F4446001AF8E1;
 			remoteInfo = CoronaStructures;
 		};
-		DC23CEA11D88BDA10094D475 /* PBXContainerItemProxy */ = {
+		DC7DCC6A1DE25C0600318212 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = DC23CE9B1D88BDA10094D475 /* CoronaGL.xcodeproj */;
+			containerPortal = DC7DCC641DE25C0600318212 /* CoronaGL.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DC5CDC891D80B30F008C2A8D;
 			remoteInfo = CoronaGL;
@@ -114,9 +128,6 @@
 		DC0E5EA61CD6E882005CF255 /* GradientContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientContainer.swift; sourceTree = "<group>"; };
 		DC18C1A51CDFEFEC00CABF1B /* AddSizeSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSizeSetViewController.swift; sourceTree = "<group>"; };
 		DC18C1A81CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditSizeSetsTableViewCell.xib; sourceTree = "<group>"; };
-		DC23CE8E1D88BD9B0094D475 /* CoronaConvenience.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoronaConvenience.xcodeproj; path = "../Refactored Dependencies/CoronaConvenience/CoronaConvenience.xcodeproj"; sourceTree = "<group>"; };
-		DC23CE941D88BD9E0094D475 /* CoronaStructures.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoronaStructures.xcodeproj; path = "../Refactored Dependencies/CoronaStructures/CoronaStructures.xcodeproj"; sourceTree = "<group>"; };
-		DC23CE9B1D88BDA10094D475 /* CoronaGL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoronaGL.xcodeproj; path = "../Refactored Dependencies/CoronaGL/CoronaGL.xcodeproj"; sourceTree = "<group>"; };
 		DC23CEA61D88BE2D0094D475 /* PerlinAbsNoiseShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PerlinAbsNoiseShader.fsh; sourceTree = "<group>"; };
 		DC23CEA71D88BE2D0094D475 /* PerlinAbsNoiseShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PerlinAbsNoiseShader.vsh; sourceTree = "<group>"; };
 		DC23CEA81D88BE2D0094D475 /* PerlinFractalNoiseShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PerlinFractalNoiseShader.fsh; sourceTree = "<group>"; };
@@ -136,6 +147,9 @@
 		DC3438081CA78BDB007EFEE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC343FA51CBB053A0052F46E /* NSMultiSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMultiSlider.swift; sourceTree = "<group>"; };
 		DC5F0B9E1CAB229A0055B6C9 /* Atlases.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Atlases.xml; sourceTree = "<group>"; };
+		DC7DCC571DE25BFF00318212 /* CoronaConvenience.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoronaConvenience.xcodeproj; path = ../CoronaConvenience/CoronaConvenience.xcodeproj; sourceTree = "<group>"; };
+		DC7DCC5D1DE25C0300318212 /* CoronaStructures.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoronaStructures.xcodeproj; path = ../CoronaStructures/CoronaStructures.xcodeproj; sourceTree = "<group>"; };
+		DC7DCC641DE25C0600318212 /* CoronaGL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoronaGL.xcodeproj; path = ../CoronaGL/CoronaGL.xcodeproj; sourceTree = "<group>"; };
 		DC8A94691CA9BD9E00049118 /* ColorShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorShader.vsh; sourceTree = "<group>"; };
 		DC8A946B1CA9BDA700049118 /* ColorShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorShader.fsh; sourceTree = "<group>"; };
 		DCC9B7001CA8403A00743E2C /* WhiteTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteTile.png; sourceTree = "<group>"; };
@@ -175,9 +189,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC23CEA31D88BDA40094D475 /* CoronaConvenience.framework in Frameworks */,
-				DC23CEA41D88BDA40094D475 /* CoronaGL.framework in Frameworks */,
-				DC23CEA51D88BDA40094D475 /* CoronaStructures.framework in Frameworks */,
+				DC7DCC6C1DE25C0F00318212 /* CoronaConvenience.framework in Frameworks */,
+				DC7DCC6D1DE25C0F00318212 /* CoronaGL.framework in Frameworks */,
+				DC7DCC6E1DE25C0F00318212 /* CoronaStructures.framework in Frameworks */,
 				DCDCEB921CA873D0001FD451 /* CloudKit.framework in Frameworks */,
 				DCDCEB901CA873CC001FD451 /* AVFoundation.framework in Frameworks */,
 			);
@@ -186,36 +200,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DC23CE8F1D88BD9B0094D475 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DC23CE931D88BD9B0094D475 /* CoronaConvenience.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		DC23CE951D88BD9E0094D475 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DC23CE9A1D88BD9E0094D475 /* CoronaStructures.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		DC23CE9C1D88BDA10094D475 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DC23CEA21D88BDA10094D475 /* CoronaGL.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		DC3437F31CA78BDB007EFEE8 = {
 			isa = PBXGroup;
 			children = (
-				DC23CE8E1D88BD9B0094D475 /* CoronaConvenience.xcodeproj */,
-				DC23CE941D88BD9E0094D475 /* CoronaStructures.xcodeproj */,
-				DC23CE9B1D88BDA10094D475 /* CoronaGL.xcodeproj */,
+				DC7DCC571DE25BFF00318212 /* CoronaConvenience.xcodeproj */,
+				DC7DCC5D1DE25C0300318212 /* CoronaStructures.xcodeproj */,
+				DC7DCC641DE25C0600318212 /* CoronaGL.xcodeproj */,
 				DCDCEB911CA873D0001FD451 /* CloudKit.framework */,
 				DCDCEB8F1CA873CC001FD451 /* AVFoundation.framework */,
 				DC3437FE1CA78BDB007EFEE8 /* NoisyImagesOSX */,
@@ -288,6 +278,32 @@
 			path = NoisyImagesOSX;
 			sourceTree = "<group>";
 		};
+		DC7DCC581DE25BFF00318212 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC7DCC5C1DE25C0000318212 /* CoronaConvenience.framework */,
+				DC17C6001FE5E57800C7164E /* CoronaConvenience.Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC7DCC5E1DE25C0300318212 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC7DCC631DE25C0300318212 /* CoronaStructures.framework */,
+				DC17C6051FE5E57800C7164E /* CoronaStructures-Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC7DCC651DE25C0600318212 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC7DCC6B1DE25C0600318212 /* CoronaGL.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		DCC9B7021CA8403D00743E2C /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,13 +359,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Cooper Knaak";
 				TargetAttributes = {
 					DC3437FB1CA78BDB007EFEE8 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = ULGC99Z6NQ;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 					};
 				};
 			};
@@ -366,16 +382,16 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = DC23CE8F1D88BD9B0094D475 /* Products */;
-					ProjectRef = DC23CE8E1D88BD9B0094D475 /* CoronaConvenience.xcodeproj */;
+					ProductGroup = DC7DCC581DE25BFF00318212 /* Products */;
+					ProjectRef = DC7DCC571DE25BFF00318212 /* CoronaConvenience.xcodeproj */;
 				},
 				{
-					ProductGroup = DC23CE9C1D88BDA10094D475 /* Products */;
-					ProjectRef = DC23CE9B1D88BDA10094D475 /* CoronaGL.xcodeproj */;
+					ProductGroup = DC7DCC651DE25C0600318212 /* Products */;
+					ProjectRef = DC7DCC641DE25C0600318212 /* CoronaGL.xcodeproj */;
 				},
 				{
-					ProductGroup = DC23CE951D88BD9E0094D475 /* Products */;
-					ProjectRef = DC23CE941D88BD9E0094D475 /* CoronaStructures.xcodeproj */;
+					ProductGroup = DC7DCC5E1DE25C0300318212 /* Products */;
+					ProjectRef = DC7DCC5D1DE25C0300318212 /* CoronaStructures.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -386,25 +402,39 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		DC23CE931D88BD9B0094D475 /* CoronaConvenience.framework */ = {
+		DC17C6001FE5E57800C7164E /* CoronaConvenience.Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CoronaConvenience.Tests.xctest;
+			remoteRef = DC17C5FF1FE5E57800C7164E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC17C6051FE5E57800C7164E /* CoronaStructures-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "CoronaStructures-Tests.xctest";
+			remoteRef = DC17C6041FE5E57800C7164E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC7DCC5C1DE25C0000318212 /* CoronaConvenience.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CoronaConvenience.framework;
-			remoteRef = DC23CE921D88BD9B0094D475 /* PBXContainerItemProxy */;
+			remoteRef = DC7DCC5B1DE25C0000318212 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		DC23CE9A1D88BD9E0094D475 /* CoronaStructures.framework */ = {
+		DC7DCC631DE25C0300318212 /* CoronaStructures.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CoronaStructures.framework;
-			remoteRef = DC23CE991D88BD9E0094D475 /* PBXContainerItemProxy */;
+			remoteRef = DC7DCC621DE25C0300318212 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		DC23CEA21D88BDA10094D475 /* CoronaGL.framework */ = {
+		DC7DCC6B1DE25C0600318212 /* CoronaGL.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CoronaGL.framework;
-			remoteRef = DC23CEA11D88BDA10094D475 /* PBXContainerItemProxy */;
+			remoteRef = DC7DCC6A1DE25C0600318212 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -520,14 +550,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -567,14 +603,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -608,7 +650,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "Corona-Corporation.NoisyImagesOSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -622,7 +665,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "Corona-Corporation.NoisyImagesOSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

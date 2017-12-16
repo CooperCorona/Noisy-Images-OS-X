@@ -54,7 +54,7 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
         super.viewDidLoad()
         self.gradientTableView.delegate = self.delegate
         self.gradientTableView.dataSource = self.delegate
-        self.gradientTableView.register(NSNib(nibNamed: "GradientTableCellView", bundle: Bundle.main), forIdentifier: "GradientCell")
+        self.gradientTableView.register(NSNib(nibNamed: NSNib.Name(rawValue: "GradientTableCellView"), bundle: Bundle.main), forIdentifier: NSUserInterfaceItemIdentifier(rawValue: "GradientCell"))
         self.gradientTableView.reloadData()
         self.gradientView.gradient = ColorGradient1D.grayscaleGradient
 
@@ -277,13 +277,13 @@ class GradientViewController: NSViewController, NSMultiSliderDelegate {
         self.calculateGradient()
     }
     
-    func saveGradient(_ sender:Notification) {
+    @objc func saveGradient(_ sender:Notification) {
         self.delegate.saveGradient(self.gradientContainer)
         self.gradientTableView.reloadData()
         self.selectCurrentGradientWithHandler(false)
     }
     
-    func saveNewGradient(_ sender:Notification) {
+    @objc func saveNewGradient(_ sender:Notification) {
         self.delegate.addGradient(self.gradientContainer)
         self.gradientTableView.reloadData()
     }

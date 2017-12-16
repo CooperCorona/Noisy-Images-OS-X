@@ -22,7 +22,7 @@ class ColorGradientView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
 
-        if let context = NSGraphicsContext.current(), let gradient = self.gradient {
+        if let context = NSGraphicsContext.current, let gradient = self.gradient {
             context.saveGraphicsState()
             
             let w = dirtyRect.width / 256.0

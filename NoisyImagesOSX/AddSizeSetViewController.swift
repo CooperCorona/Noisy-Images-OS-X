@@ -12,20 +12,20 @@ class AddSizeSetViewController: NSViewController {
     
     var sizeSets:[SizeSet] = []
     @IBOutlet weak var nameTextField: NSTextField!
-    let managedObjectContext:NSManagedObjectContext = ((NSApplication.shared().delegate as? AppDelegate)?.managedObjectContext)!
+    let managedObjectContext:NSManagedObjectContext = ((NSApplication.shared.delegate as? AppDelegate)?.managedObjectContext)!
     var dismissHandler:((String) -> Void)? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sizeSets = self.fetchSizeSets()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(nameTextFieldChanged), name: NSNotification.Name.NSControlTextDidEndEditing, object: self.nameTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(nameTextFieldChanged), name: NSControl.textDidEndEditingNotification, object: self.nameTextField)
     }
     
     func fetchSizeSets() -> [SizeSet] {
         do {
             let request = NSFetchRequest<SizeSet>(entityName: "SizeSet")
-            let sizeSets = try self.managedObjectContext.fetch(request) as! [SizeSet]
+            let sizeSets = try self.managedObjectContext.fetch(request) 
             return sizeSets
         } catch {
             return []
@@ -46,7 +46,7 @@ class AddSizeSetViewController: NSViewController {
         return true
     }
     
-    func nameTextFieldChanged(_ sender:NSTextField) {
+    @objc func nameTextFieldChanged(_ sender:NSTextField) {
         self.addButtonPressed(sender)
     }
     
@@ -64,7 +64,7 @@ class AddSizeSetViewController: NSViewController {
     
     func presentNameTakenError() {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.warning
+        alert.alertStyle = NSAlert.Style.warning
         alert.messageText = "That name is already taken!"
         alert.addButton(withTitle: "Ok")
         alert.runModal()
