@@ -1,18 +1,19 @@
 //
-//  SizeSet.swift
+//  SizeSet+CoreDataClass.swift
 //  NoisyImagesOSX
 //
-//  Created by Cooper Knaak on 5/8/16.
-//  Copyright © 2016 Cooper Knaak. All rights reserved.
+//  Created by Cooper Knaak on 12/16/17.
+//  Copyright © 2017 Cooper Knaak. All rights reserved.
+//
 //
 
 import Foundation
 import CoreData
 
 
-class SizeSet: NSManagedObject {
+public class SizeSet: NSManagedObject {
 
-    var sizes:Set<SizeSetMember>? {
+    public var sizes:Set<SizeSetMember>? {
         get {
             if let members = self.members {
                 return (members as! Set<SizeSetMember>)

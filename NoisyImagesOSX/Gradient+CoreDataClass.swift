@@ -1,9 +1,10 @@
 //
-//  Gradient.swift
+//  Gradient+CoreDataClass.swift
 //  NoisyImagesOSX
 //
-//  Created by Cooper Knaak on 4/10/16.
-//  Copyright © 2016 Cooper Knaak. All rights reserved.
+//  Created by Cooper Knaak on 12/16/17.
+//  Copyright © 2017 Cooper Knaak. All rights reserved.
+//
 //
 
 import AppKit
@@ -192,8 +193,9 @@ class Gradient: NSManagedObject {
             self.smoothed = NSNumber(value: newValue.isSmoothed)
         }
     }
-
+    
     func generateUUID() {
         self.universalId = UUID().uuidString
     }
 }
+

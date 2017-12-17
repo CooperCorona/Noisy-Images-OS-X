@@ -19,6 +19,9 @@
 		DC0E5EA31CD696ED005CF255 /* NoiseDocumentWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5EA21CD696ED005CF255 /* NoiseDocumentWindowController.swift */; };
 		DC0E5EA51CD6B3EC005CF255 /* ColorControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5EA41CD6B3EC005CF255 /* ColorControl.swift */; };
 		DC0E5EA71CD6E882005CF255 /* GradientContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5EA61CD6E882005CF255 /* GradientContainer.swift */; };
+		DC17C61B1FE5EEDF00C7164E /* Gradient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC17C6181FE5EEDF00C7164E /* Gradient+CoreDataClass.swift */; };
+		DC17C61C1FE5EEDF00C7164E /* SizeSetMember+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC17C6191FE5EEDF00C7164E /* SizeSetMember+CoreDataClass.swift */; };
+		DC17C61D1FE5EEDF00C7164E /* SizeSet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC17C61A1FE5EEDF00C7164E /* SizeSet+CoreDataClass.swift */; };
 		DC18C1A61CDFEFEC00CABF1B /* AddSizeSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18C1A51CDFEFEC00CABF1B /* AddSizeSetViewController.swift */; };
 		DC18C1A91CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC18C1A81CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib */; };
 		DC23CEAE1D88BE2D0094D475 /* PerlinAbsNoiseShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DC23CEA61D88BE2D0094D475 /* PerlinAbsNoiseShader.fsh */; };
@@ -53,7 +56,6 @@
 		DCDCC04D1CB9D815008F6012 /* ColorSliderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC04C1CB9D815008F6012 /* ColorSliderContainer.swift */; };
 		DCDCC05A1CBA1473008F6012 /* NoisyImagesOSX.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC0581CBA1473008F6012 /* NoisyImagesOSX.xcdatamodeld */; };
 		DCDCC05D1CBA178A008F6012 /* Gradient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC05B1CBA178A008F6012 /* Gradient+CoreDataProperties.swift */; };
-		DCDCC05E1CBA178A008F6012 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC05C1CBA178A008F6012 /* Gradient.swift */; };
 		DCDCEB901CA873CC001FD451 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDCEB8F1CA873CC001FD451 /* AVFoundation.framework */; };
 		DCDCEB921CA873D0001FD451 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDCEB911CA873D0001FD451 /* CloudKit.framework */; };
 		DCDCEB951CA87700001FD451 /* BasicShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DCDCEB931CA87700001FD451 /* BasicShader.fsh */; };
@@ -65,9 +67,7 @@
 		DCFA23431CDC02A400669667 /* CheckerShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DCFA23421CDC02A400669667 /* CheckerShader.fsh */; };
 		DCFA23451CDC041D00669667 /* GLSCheckerSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFA23441CDC041D00669667 /* GLSCheckerSprite.swift */; };
 		DCFC5E361CDFCF6C00094E30 /* SizeSetMember+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E321CDFCF6C00094E30 /* SizeSetMember+CoreDataProperties.swift */; };
-		DCFC5E371CDFCF6C00094E30 /* SizeSetMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E331CDFCF6C00094E30 /* SizeSetMember.swift */; };
 		DCFC5E381CDFCF6C00094E30 /* SizeSet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E341CDFCF6C00094E30 /* SizeSet+CoreDataProperties.swift */; };
-		DCFC5E391CDFCF6C00094E30 /* SizeSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E351CDFCF6C00094E30 /* SizeSet.swift */; };
 		DCFC5E3C1CDFD1CE00094E30 /* EditSizeSetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E3A1CDFD1CE00094E30 /* EditSizeSetsViewController.swift */; };
 		DCFC5E3F1CDFD43600094E30 /* EditSizeSetsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC5E3E1CDFD43600094E30 /* EditSizeSetsTableViewDelegate.swift */; };
 		DCFC5E451CDFEB9B00094E30 /* EditSizeSets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCFC5E441CDFEB9B00094E30 /* EditSizeSets.storyboard */; };
@@ -126,6 +126,9 @@
 		DC0E5EA21CD696ED005CF255 /* NoiseDocumentWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseDocumentWindowController.swift; sourceTree = "<group>"; };
 		DC0E5EA41CD6B3EC005CF255 /* ColorControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorControl.swift; sourceTree = "<group>"; };
 		DC0E5EA61CD6E882005CF255 /* GradientContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientContainer.swift; sourceTree = "<group>"; };
+		DC17C6181FE5EEDF00C7164E /* Gradient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gradient+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DC17C6191FE5EEDF00C7164E /* SizeSetMember+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SizeSetMember+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DC17C61A1FE5EEDF00C7164E /* SizeSet+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SizeSet+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DC18C1A51CDFEFEC00CABF1B /* AddSizeSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSizeSetViewController.swift; sourceTree = "<group>"; };
 		DC18C1A81CE042AC00CABF1B /* EditSizeSetsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditSizeSetsTableViewCell.xib; sourceTree = "<group>"; };
 		DC23CEA61D88BE2D0094D475 /* PerlinAbsNoiseShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PerlinAbsNoiseShader.fsh; sourceTree = "<group>"; };
@@ -162,7 +165,6 @@
 		DCDCC04C1CB9D815008F6012 /* ColorSliderContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSliderContainer.swift; sourceTree = "<group>"; };
 		DCDCC0591CBA1473008F6012 /* NoisyImagesOSX.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoisyImagesOSX.xcdatamodel; sourceTree = "<group>"; };
 		DCDCC05B1CBA178A008F6012 /* Gradient+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gradient+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DCDCC05C1CBA178A008F6012 /* Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		DCDCEB8F1CA873CC001FD451 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DCDCEB911CA873D0001FD451 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		DCDCEB931CA87700001FD451 /* BasicShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BasicShader.fsh; sourceTree = "<group>"; };
@@ -174,9 +176,7 @@
 		DCFA23421CDC02A400669667 /* CheckerShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CheckerShader.fsh; sourceTree = "<group>"; };
 		DCFA23441CDC041D00669667 /* GLSCheckerSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLSCheckerSprite.swift; sourceTree = "<group>"; };
 		DCFC5E321CDFCF6C00094E30 /* SizeSetMember+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SizeSetMember+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DCFC5E331CDFCF6C00094E30 /* SizeSetMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeSetMember.swift; sourceTree = "<group>"; };
 		DCFC5E341CDFCF6C00094E30 /* SizeSet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SizeSet+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DCFC5E351CDFCF6C00094E30 /* SizeSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeSet.swift; sourceTree = "<group>"; };
 		DCFC5E3A1CDFD1CE00094E30 /* EditSizeSetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSizeSetsViewController.swift; sourceTree = "<group>"; };
 		DCFC5E3E1CDFD43600094E30 /* EditSizeSetsTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSizeSetsTableViewDelegate.swift; sourceTree = "<group>"; };
 		DCFC5E441CDFEB9B00094E30 /* EditSizeSets.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = EditSizeSets.storyboard; path = ../EditSizeSets.storyboard; sourceTree = "<group>"; };
@@ -322,12 +322,12 @@
 		DCFC5E201CDFCD8A00094E30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DC17C6181FE5EEDF00C7164E /* Gradient+CoreDataClass.swift */,
+				DC17C6191FE5EEDF00C7164E /* SizeSetMember+CoreDataClass.swift */,
+				DC17C61A1FE5EEDF00C7164E /* SizeSet+CoreDataClass.swift */,
 				DCFC5E321CDFCF6C00094E30 /* SizeSetMember+CoreDataProperties.swift */,
-				DCFC5E331CDFCF6C00094E30 /* SizeSetMember.swift */,
 				DCFC5E341CDFCF6C00094E30 /* SizeSet+CoreDataProperties.swift */,
-				DCFC5E351CDFCF6C00094E30 /* SizeSet.swift */,
 				DCDCC05B1CBA178A008F6012 /* Gradient+CoreDataProperties.swift */,
-				DCDCC05C1CBA178A008F6012 /* Gradient.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -487,11 +487,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCFC5E3F1CDFD43600094E30 /* EditSizeSetsTableViewDelegate.swift in Sources */,
+				DC17C61D1FE5EEDF00C7164E /* SizeSet+CoreDataClass.swift in Sources */,
 				DC2654B61CE172D20012A74B /* KeyInterceptingTableView.swift in Sources */,
 				DC24847C1CB1A92100F7946E /* MenuController.swift in Sources */,
 				DCDCC05A1CBA1473008F6012 /* NoisyImagesOSX.xcdatamodeld in Sources */,
 				DCDCC04D1CB9D815008F6012 /* ColorSliderContainer.swift in Sources */,
-				DCDCC05E1CBA178A008F6012 /* Gradient.swift in Sources */,
+				DC17C61B1FE5EEDF00C7164E /* Gradient+CoreDataClass.swift in Sources */,
+				DC17C61C1FE5EEDF00C7164E /* SizeSetMember+CoreDataClass.swift in Sources */,
 				DCDBBFD61CDD9E3300212E20 /* ExportImageViewController.swift in Sources */,
 				DC343FA61CBB053A0052F46E /* NSMultiSlider.swift in Sources */,
 				DC0E5EA71CD6E882005CF255 /* GradientContainer.swift in Sources */,
@@ -500,10 +502,8 @@
 				DCFA23451CDC041D00669667 /* GLSCheckerSprite.swift in Sources */,
 				DC0E5EA31CD696ED005CF255 /* NoiseDocumentWindowController.swift in Sources */,
 				DCFC5E3C1CDFD1CE00094E30 /* EditSizeSetsViewController.swift in Sources */,
-				DCFC5E391CDFCF6C00094E30 /* SizeSet.swift in Sources */,
 				DC33B7771CB2197C0085EC6E /* NoiseState.swift in Sources */,
 				DC3438021CA78BDB007EFEE8 /* ViewController.swift in Sources */,
-				DCFC5E371CDFCF6C00094E30 /* SizeSetMember.swift in Sources */,
 				DC3438001CA78BDB007EFEE8 /* AppDelegate.swift in Sources */,
 				DC021A461CB83A7500070B5A /* GradientViewController.swift in Sources */,
 				DCEBACD81CDE70CF00487CD8 /* ExportImageAdvancedViewController.swift in Sources */,
@@ -644,12 +644,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = NoisyImagesOSX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "Corona-Corporation.NoisyImagesOSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -659,6 +661,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = NoisyImagesOSX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

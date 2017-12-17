@@ -79,7 +79,11 @@ class EditSizeSetsTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewD
             member.width  = width as NSNumber?
             member.height = height as NSNumber?
             member.suffix = suffix
-            set.sizes?.insert(member)
+            if set.sizes == nil {
+                set.sizes = Set<SizeSetMember>(array: [member])
+            } else {
+                set.sizes?.insert(member)
+            }
             try self.managedObjectContext.save()
             self.loadMembersForSet(setName)
             return true
