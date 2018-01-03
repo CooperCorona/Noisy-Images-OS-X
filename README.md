@@ -116,32 +116,14 @@ Gradients can be saved and reloaded later. File -> Save New Gradient to store a 
 ## Size Sets
 Before exporting an image, you have the opportunity to define size sets. Size sets lets you export the same image at multiple different sizes in a single export. Each size has a defined suffix that is appended to the name of the exported file. Use this to generate retina-sized images, just specify 2x and 3x sized images with the specified @2x and @3x suffixes. To edit size sets, choose File -> Edit Size Sets.
 
-## Export the Application
+## Export the Application (New instructions)
 Instead of running Noisy Images OS X from Xcode, you can export it to your desktop.
 
-1. Open Noisy Images OS X in Xcode
-2. Product -> Archive
-3. Export
-4. Export as a Mac Application
-5. Next
-6. Choose where you want the folder exported to
-  * The folder will contain the application
-7. Drag the application wherever you want it
-  * If you want it on your launchpad, drag it to your launchpad
-8. Open Finder
-9. Shift+Command+G
-  * (Or Go -> Go to Folder)
-10. Enter ~/Library and click Go
-11. If the Frameworks folder does not exist, create it.
-12. Download [CoronaConvenience](https://github.com/CooperCorona/CoronaConvenience), [CoronaStructures](https://github.com/CooperCorona/CoronaStructures), and [CoronaGL](https://github.com/CooperCorona/CoronaGL),
-13. Open each of those frameworks in Xcode
-14. Product -> Build (or Command+B)
-15. Open the Project Navigator (Command+1)
-16. Scroll to the Products Folder
-17. Control Click on CoronaConvenience.framework (or CoronaStructures.framework or CoronaGL.framework)
-18. Show in Finder
-19. Copy the .framework file to ~/Library/Frameworks
-20. NoisyImagesOSX should now open!
+1. Open Terminal
+2. Navigate to the directory containing Noisy-Images-OS-X (not Noisy-Images-OS-X, but the directory containing it)
+3. ```curl https://gist.githubusercontent.com/CooperCorona/fb483eee4b7bac446c914de45ee85a3f/raw/00e352c427dfc80e7e78fa4436ef65b244ae6e5d/exportNoise.sh > exportNoise.sh; chmod 700 exportNoise.sh; ./exportNoise.sh```
+
+Whenever you want to re-export or update Noisy Images OS X, navigate to the directory and run ```./exportNoise.sh```. This automatically builds the dependencies, copies the frameworks to ```~/Library/Frameworks/```, and exports the Mac application.
 
 ### Troubleshooting
 If you are getting a message that says Noisy Images OS X could not be opened (and prompts you to contact the developer or update it), make sure you have the CoronaConvenience.framework, CoronaStructures.framework, and CoronaGL.framework files in ~/Library/Frameworks directory.
